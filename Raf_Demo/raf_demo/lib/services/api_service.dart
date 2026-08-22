@@ -15,8 +15,8 @@ class ApiService {
   ApiService()
       : _dio = Dio(BaseOptions(
           baseUrl: BASE_URL,
-          connectTimeout: const Duration(milliseconds: 5000),
-          receiveTimeout: const Duration(milliseconds: 3000),
+          connectTimeout: const Duration(seconds: 30),
+          receiveTimeout: const Duration(seconds: 30),
           headers: {
             'Content-Type': 'application/json',
             'Bypass-Tunnel-Reminder': 'true',

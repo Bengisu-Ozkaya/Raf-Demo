@@ -57,6 +57,19 @@ function authenticateMerchant(req, res, next) {
 app.use(cors());
 app.use(express.json());
 
+// Ana Sayfa & Sağlık Kontrolü Endpoint'i
+app.get('/', (req, res) => {
+    res.json({
+        success: true,
+        message: 'Raf Demo Backend API başarıyla çalışıyor!',
+        timestamp: new Date().toISOString()
+    });
+});
+
+app.get('/api/health', (req, res) => {
+    res.json({ status: 'ok', uptime: process.uptime() });
+});
+
 const httpServer = http.createServer(app);
 const io = new Server(httpServer, {
     cors: {
