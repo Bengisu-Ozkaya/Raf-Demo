@@ -16,7 +16,7 @@ class CartItem {
   CartItem({
     required this.id,
     required this.name,
-    required this.price,
+    this.price = 0.0,
     this.imageUrl,
     this.weightVolume,
     required this.quantity,

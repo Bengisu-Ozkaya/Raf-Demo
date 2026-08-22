@@ -225,15 +225,6 @@ class _AddProductFromCatalogScreenState
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
-                  if (masterProduct.unitPrice != null && masterProduct.unitPrice! > 0)
-                    Text(
-                      'Birim Fiyat: ${masterProduct.unitPrice!.toStringAsFixed(2)} TL',
-                      style: TextStyle(
-                        color: Colors.blueGrey.shade800,
-                        fontWeight: FontWeight.w600,
-                        fontSize: 11,
-                      ),
-                    ),
                 ],
               ),
             ),
@@ -263,22 +254,16 @@ class _AddProductFromCatalogScreenState
     );
   }
 
-  /// Fiyat ve Stok girmek için diyalog penceresini gösterir.
+  /// Stok girmek için diyalog penceresini gösterir.
   void _showAddProductDialog(Product masterProduct, Product shopProduct) {
-    final priceController = TextEditingController();
     final stockController = TextEditingController();
     final formKey = GlobalKey<FormState>();
     final isAdded = shopProduct.id != 0;
 
     if (isAdded) {
-      priceController.text =
-          shopProduct.price?.toString() ?? '';
       stockController.text =
-          shopProduct.stock?.toString() ?? '';
-    } else if (masterProduct.unitPrice != null && masterProduct.unitPrice! > 0) {
-      // Varsayılan olarak %25 kâr marjı ile fiyat öner
-      final suggestedPrice = (masterProduct.unitPrice! * 1.25).toStringAsFixed(2);
-      priceController.text = suggestedPrice;
+          shopProduct.stock?.toString() ?? '10';
+    } else {
       stockController.text = '10';
     }
 
@@ -294,40 +279,6 @@ class _AddProductFromCatalogScreenState
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                if (masterProduct.unitPrice != null && masterProduct.unitPrice! > 0)
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 12.0),
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-                      decoration: BoxDecoration(
-                        color: Colors.blueGrey.shade50,
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          const Text('Geliş Birim Fiyatı:', style: TextStyle(fontSize: 12)),
-                          Text(
-                            '${masterProduct.unitPrice!.toStringAsFixed(2)} TL',
-                            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                TextFormField(
-                  controller: priceController,
-                  decoration: const InputDecoration(
-                      labelText: 'Satış Fiyatı (TL)',
-                      prefixIcon: Icon(Icons.price_change_outlined)),
-                  keyboardType:
-                      const TextInputType.numberWithOptions(decimal: true),
-                  validator: (v) =>
-                      (v == null || v.isEmpty || double.tryParse(v) == null)
-                          ? 'Geçerli bir fiyat girin'
-                          : null,
-                ),
-                const SizedBox(height: 16),
                 TextFormField(
                   controller: stockController,
                   decoration: const InputDecoration(
@@ -350,7 +301,6 @@ class _AddProductFromCatalogScreenState
               onPressed: () {
                 if (!formKey.currentState!.validate()) return;
 
-                final price = double.parse(priceController.text);
                 final stock = int.parse(stockController.text);
 
                 Navigator.of(context).pop(); // Diyalogu hemen kapat
@@ -363,7 +313,7 @@ class _AddProductFromCatalogScreenState
                 shopProvider
                     .addProduct(
                   masterProductId: masterProduct.id,
-                  price: price,
+                  price: 0.0,
                   stock: stock,
                   shopId: authProvider.shopId,
                 )

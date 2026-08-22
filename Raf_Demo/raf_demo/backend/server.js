@@ -125,22 +125,26 @@ async function setupDatabase() {
                 id SERIAL PRIMARY KEY,
                 shop_id INTEGER NOT NULL REFERENCES merchants(id) ON DELETE CASCADE,
                 master_product_id INTEGER NOT NULL REFERENCES master_products(id) ON DELETE CASCADE,
-                price NUMERIC(10, 2) NOT NULL,
+                price NUMERIC(10, 2) DEFAULT 0,
                 stock INTEGER NOT NULL,
                 is_active INTEGER DEFAULT 1,
                 UNIQUE(shop_id, master_product_id)
             );
+            ALTER TABLE shop_products ALTER COLUMN price DROP NOT NULL;
+            ALTER TABLE shop_products ALTER COLUMN price SET DEFAULT 0;
 
             CREATE TABLE IF NOT EXISTS orders (
                 id SERIAL PRIMARY KEY,
                 customer_id INTEGER NOT NULL REFERENCES customers(id),
                 merchant_id INTEGER NOT NULL REFERENCES merchants(id),
-                total_price NUMERIC(10, 2) NOT NULL,
+                total_price NUMERIC(10, 2) DEFAULT 0,
                 status TEXT NOT NULL DEFAULT 'Bekleniyor',
                 payment_method TEXT NOT NULL,
                 shipping_address TEXT,
                 order_date TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP
             );
+            ALTER TABLE orders ALTER COLUMN total_price DROP NOT NULL;
+            ALTER TABLE orders ALTER COLUMN total_price SET DEFAULT 0;
             CREATE INDEX IF NOT EXISTS idx_orders_customer_id ON orders(customer_id);
             CREATE INDEX IF NOT EXISTS idx_orders_merchant_id ON orders(merchant_id);
 
@@ -149,8 +153,10 @@ async function setupDatabase() {
                 order_id INTEGER NOT NULL REFERENCES orders(id) ON DELETE CASCADE,
                 shop_product_id INTEGER NOT NULL REFERENCES shop_products(id),
                 quantity INTEGER NOT NULL CHECK(quantity > 0),
-                price_at_purchase NUMERIC(10, 2) NOT NULL
+                price_at_purchase NUMERIC(10, 2) DEFAULT 0
             );
+            ALTER TABLE order_items ALTER COLUMN price_at_purchase DROP NOT NULL;
+            ALTER TABLE order_items ALTER COLUMN price_at_purchase SET DEFAULT 0;
 
             CREATE TABLE IF NOT EXISTS carts (
                 id SERIAL PRIMARY KEY,
@@ -173,20 +179,24 @@ async function setupDatabase() {
                 shop_id INTEGER NOT NULL REFERENCES merchants(id) ON DELETE CASCADE,
                 name TEXT NOT NULL,
                 package_size TEXT NOT NULL,
-                total_price NUMERIC(10, 2) NOT NULL,
+                total_price NUMERIC(10, 2) DEFAULT 0,
                 stock INTEGER NOT NULL DEFAULT 10,
                 is_active INTEGER DEFAULT 1,
                 created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
             );
+            ALTER TABLE shop_packages ALTER COLUMN total_price DROP NOT NULL;
+            ALTER TABLE shop_packages ALTER COLUMN total_price SET DEFAULT 0;
             CREATE INDEX IF NOT EXISTS idx_shop_packages_shop_id ON shop_packages(shop_id);
 
             CREATE TABLE IF NOT EXISTS shop_package_items (
                 id SERIAL PRIMARY KEY,
                 package_id INTEGER NOT NULL REFERENCES shop_packages(id) ON DELETE CASCADE,
                 master_product_id INTEGER NOT NULL REFERENCES master_products(id) ON DELETE CASCADE,
-                price NUMERIC(10, 2) NOT NULL,
+                price NUMERIC(10, 2) DEFAULT 0,
                 quantity INTEGER NOT NULL DEFAULT 1
             );
+            ALTER TABLE shop_package_items ALTER COLUMN price DROP NOT NULL;
+            ALTER TABLE shop_package_items ALTER COLUMN price SET DEFAULT 0;
             CREATE INDEX IF NOT EXISTS idx_shop_package_items_pkg ON shop_package_items(package_id);
         `);
 
@@ -525,7 +535,7 @@ app.post('/api/packages', authenticateMerchant, async (req, res) => {
         return res.status(401).json({ success: false, message: 'Yetkisiz işlem.' });
     }
 
-    if (!name || !package_size || total_price === undefined || !Array.isArray(items) || items.length === 0) {
+    if (!name || !package_size || !Array.isArray(items) || items.length === 0) {
         return res.status(400).json({ success: false, message: 'Eksik veya geçersiz paket bilgisi.' });
     }
 
@@ -543,7 +553,7 @@ app.post('/api/packages', authenticateMerchant, async (req, res) => {
             merchantId,
             name.trim(),
             package_size,
-            parseFloat(total_price),
+            parseFloat(total_price || 0),
             parseInt(stock || 10, 10)
         ]);
         const packageId = pkgResult.rows[0].id;
@@ -551,7 +561,7 @@ app.post('/api/packages', authenticateMerchant, async (req, res) => {
         // 2. shop_package_items tablosuna ürünleri ekle
         for (const item of items) {
             const masterProductId = item.master_product_id || item.masterProductId;
-            const price = parseFloat(item.price);
+            const price = parseFloat(item.price || 0);
             const quantity = parseInt(item.quantity || 1, 10);
 
             const itemSql = `
@@ -669,11 +679,11 @@ app.post('/api/products', authenticateMerchant, async (req, res) => {
     const { master_product_id, price, stock } = req.body;
     const merchantId = req.merchant?.merchantId;
 
-    if (merchantId === undefined || master_product_id === undefined || price === undefined || stock === undefined) {
-        return res.status(400).json({ success: false, message: 'Eksik parametreler: master_product_id, price, stock ve merchant bilgisi zorunludur.' });
+    if (merchantId === undefined || master_product_id === undefined || stock === undefined) {
+        return res.status(400).json({ success: false, message: 'Eksik parametreler: master_product_id, stock ve merchant bilgisi zorunludur.' });
     }
 
-    const numPrice = parseFloat(price);
+    const numPrice = price !== undefined ? parseFloat(price) : 0;
     const numStock = parseInt(stock, 10);
 
     if (isNaN(numPrice) || isNaN(numStock) || numPrice < 0 || numStock < 0) {
@@ -1029,7 +1039,7 @@ app.post('/api/orders', authenticateCustomer, async (req, res) => {
             const items = Array.isArray(cart?.items) ? cart.items : [];
             if (items.length === 0) continue;
 
-            const totalPrice = items.reduce((sum, item) => sum + (parseFloat(item.price) * parseInt(item.quantity, 10)), 0);
+            const totalPrice = items.reduce((sum, item) => sum + ((parseFloat(item.price) || 0) * parseInt(item.quantity || 1, 10)), 0);
 
             // 1. Sipariş kaydı aç
             const orderRes = await client.query(
@@ -1041,37 +1051,39 @@ app.post('/api/orders', authenticateCustomer, async (req, res) => {
             // 2. Her bir ürünü ekle ve stok düş
             for (const item of items) {
                 const shopProductId = item.id;
-                const quantity = parseInt(item.quantity, 10);
-                const price = parseFloat(item.price);
-                const name = item.name;
+                const quantity = parseInt(item.quantity || 1, 10);
+                const price = parseFloat(item.price || 0);
+                const name = item.name || 'Ürün';
 
-                if (!shopProductId || !quantity || isNaN(price)) {
-                    throw new Error('Sipariş kaleminde eksik bilgi: id, quantity, price zorunludur.');
+                if (!shopProductId || !quantity) {
+                    throw new Error('Sipariş kaleminde eksik bilgi: id ve quantity zorunludur.');
                 }
 
-                // Atomik stok düşme kontrolü
-                const stockUpdateRes = await client.query(
-                    `UPDATE shop_products SET stock = stock - $1 WHERE id = $2 AND stock >= $1 RETURNING stock`,
-                    [quantity, shopProductId]
-                );
+                // Atomik stok düşme kontrolü (sadece shopProductId pozitifse yani gerçek shop_product ise)
+                if (shopProductId > 0) {
+                    const stockUpdateRes = await client.query(
+                        `UPDATE shop_products SET stock = stock - $1 WHERE id = $2 AND stock >= $1 RETURNING stock`,
+                        [quantity, shopProductId]
+                    );
 
-                if (stockUpdateRes.rowCount === 0) {
-                    throw new Error(`Yetersiz stok: ${name}`);
+                    if (stockUpdateRes.rowCount === 0) {
+                        throw new Error(`Yetersiz stok: ${name}`);
+                    }
+
+                    const newStock = stockUpdateRes.rows[0].stock;
+
+                    // Sipariş kalemini ekle
+                    await client.query(
+                        `INSERT INTO order_items (order_id, shop_product_id, quantity, price_at_purchase) VALUES ($1, $2, $3, $4)`,
+                        [orderId, shopProductId, quantity, price]
+                    );
+
+                    stockUpdateEvents.push({
+                        merchantId: merchantId,
+                        shopProductId: shopProductId,
+                        newStock: newStock,
+                    });
                 }
-
-                const newStock = stockUpdateRes.rows[0].stock;
-
-                // Sipariş kalemini ekle
-                await client.query(
-                    `INSERT INTO order_items (order_id, shop_product_id, quantity, price_at_purchase) VALUES ($1, $2, $3, $4)`,
-                    [orderId, shopProductId, quantity, price]
-                );
-
-                stockUpdateEvents.push({
-                    merchantId: merchantId,
-                    shopProductId: shopProductId,
-                    newStock: newStock,
-                });
             }
 
             // 3. WhatsApp bildirimi için satıcı bilgisi al

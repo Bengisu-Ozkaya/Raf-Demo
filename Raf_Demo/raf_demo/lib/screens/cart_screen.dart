@@ -47,7 +47,7 @@ class CartScreen extends StatelessWidget {
               itemBuilder: (ctx, i) {
                 final shop = cartShops[i];
                 final shopItems = shop.items.values.toList();
-                final shopTotal = shop.items.values.fold(0.0, (sum, item) => sum + item.totalPrice);
+                final int shopTotalItems = shop.items.values.fold(0, (sum, item) => sum + item.quantity);
 
                 return Card(
                   margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
@@ -79,12 +79,19 @@ class CartScreen extends StatelessWidget {
                                 ),
                               ],
                             ),
-                            Text(
-                              '${shopTotal.toStringAsFixed(2)} TL',
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                                color: Theme.of(context).primaryColor,
+                            Container(
+                              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                              decoration: BoxDecoration(
+                                color: Theme.of(context).primaryColor.withValues(alpha: 0.12),
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              child: Text(
+                                '$shopTotalItems Adet Ürün',
+                                style: TextStyle(
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.bold,
+                                  color: Theme.of(context).primaryColor,
+                                ),
                               ),
                             ),
                           ],
@@ -132,13 +139,15 @@ class CartScreen extends StatelessWidget {
                             ),
                             subtitle: item.isPackage
                                 ? Text(
-                                    '📦 ${item.packageSize ?? 'Paket'} (${item.packageItemCount ?? ''} Ürün) • ${item.price.toStringAsFixed(2)} TL',
+                                    '📦 ${item.packageSize ?? 'Paket'} (${item.packageItemCount ?? ''} Çeşit Ürün)',
                                     style: TextStyle(color: Colors.orange.shade900, fontSize: 12),
                                   )
-                                : Text(
-                                    '${item.weightVolume != null ? '${item.weightVolume} • ' : ''}${item.price.toStringAsFixed(2)} TL',
-                                    style: TextStyle(color: Colors.grey.shade700, fontSize: 12),
-                                  ),
+                                : (item.weightVolume != null && item.weightVolume!.isNotEmpty)
+                                    ? Text(
+                                        item.weightVolume!,
+                                        style: TextStyle(color: Colors.grey.shade700, fontSize: 12),
+                                      )
+                                    : null,
                             trailing: Row(
                               mainAxisSize: MainAxisSize.min,
                               children: [
@@ -201,8 +210,6 @@ class CartScreen extends StatelessWidget {
     final packages = cartShop.items.values.where((i) => i.isPackage).toList();
     final singleItems = cartShop.items.values.where((i) => !i.isPackage).toList();
 
-    final double total = cartShop.items.values.fold(0.0, (sum, i) => sum + i.totalPrice);
-
     final buffer = StringBuffer();
     buffer.writeln('Merhaba ${cartShop.shopName}! Raf uygulamasından sepetimdeki ürünler için sipariş vermek / iletişime geçmek istiyorum.');
     buffer.writeln('');
@@ -212,7 +219,7 @@ class CartScreen extends StatelessWidget {
       buffer.writeln('');
       buffer.writeln('📦 *Paketler:*');
       for (final pkg in packages) {
-        buffer.writeln('• ${pkg.name} (${pkg.packageSize ?? 'Paket'}) x${pkg.quantity} = ${pkg.totalPrice.toStringAsFixed(2)} TL');
+        buffer.writeln('• ${pkg.name} (${pkg.packageSize ?? 'Paket'}) x${pkg.quantity}');
       }
     }
 
@@ -220,13 +227,10 @@ class CartScreen extends StatelessWidget {
       buffer.writeln('');
       buffer.writeln('🛍️ *Tekli Ürünler:*');
       for (final item in singleItems) {
-        final wv = item.weightVolume != null ? ' (${item.weightVolume})' : '';
-        buffer.writeln('• ${item.name}$wv x${item.quantity} = ${item.totalPrice.toStringAsFixed(2)} TL');
+        final wv = item.weightVolume != null && item.weightVolume!.isNotEmpty ? ' (${item.weightVolume})' : '';
+        buffer.writeln('• ${item.name}$wv x${item.quantity}');
       }
     }
-
-    buffer.writeln('');
-    buffer.writeln('💰 *Toplam Tutar:* ${total.toStringAsFixed(2)} TL');
 
     String rawPhone = cartShop.shopPhone ?? '';
     String cleanPhone = rawPhone.replaceAll(RegExp(r'[^0-9]'), '');

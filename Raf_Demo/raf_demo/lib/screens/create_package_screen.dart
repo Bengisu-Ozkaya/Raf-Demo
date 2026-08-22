@@ -44,7 +44,6 @@ class _CreatePackageScreenState extends State<CreatePackageScreen> {
 
   String _selectedCategory = 'Tümü';
   String _searchQuery = '';
-  double _profitMarginPercent = 25.0;
 
   final List<String> _categories = [
     'Tümü',
@@ -127,10 +126,6 @@ class _CreatePackageScreenState extends State<CreatePackageScreen> {
     final filteredProducts = _getFilteredProducts(masterProducts);
 
     final selectedProducts = masterProducts.where((p) => _selectedMasterProductIds.contains(p.id)).toList();
-    final double totalCost = selectedProducts.fold(0.0, (sum, p) => sum + (p.unitPrice ?? 0.0));
-    final double averageUnitCost = selectedProducts.isNotEmpty ? totalCost / selectedProducts.length : 0.0;
-    final double totalSellingPrice = totalCost * (1 + _profitMarginPercent / 100);
-    final double averageSellingPrice = selectedProducts.isNotEmpty ? totalSellingPrice / selectedProducts.length : 0.0;
 
     final bool isCountValid = selectedProducts.length >= _selectedPackage.minItems &&
         selectedProducts.length <= _selectedPackage.maxItems;
@@ -170,7 +165,7 @@ class _CreatePackageScreenState extends State<CreatePackageScreen> {
                     ],
                   ),
                 ),
-                // Sağ Kolon: Sabit Hesaplama ve Özet Paneli
+                // Sağ Kolon: Sabit Özet Paneli
                 Container(
                   width: 360,
                   decoration: BoxDecoration(
@@ -179,10 +174,6 @@ class _CreatePackageScreenState extends State<CreatePackageScreen> {
                   ),
                   child: _buildWideSidebar(
                     selectedCount: selectedProducts.length,
-                    totalCost: totalCost,
-                    averageUnitCost: averageUnitCost,
-                    totalSellingPrice: totalSellingPrice,
-                    averageSellingPrice: averageSellingPrice,
                     isValid: isCountValid,
                     selectedProducts: selectedProducts,
                   ),
@@ -208,10 +199,6 @@ class _CreatePackageScreenState extends State<CreatePackageScreen> {
                 ),
                 _buildMobileBottomCalculatorSheet(
                   selectedCount: selectedProducts.length,
-                  totalCost: totalCost,
-                  averageUnitCost: averageUnitCost,
-                  totalSellingPrice: totalSellingPrice,
-                  averageSellingPrice: averageSellingPrice,
                   isValid: isCountValid,
                   selectedProducts: selectedProducts,
                 ),
@@ -440,8 +427,6 @@ class _CreatePackageScreenState extends State<CreatePackageScreen> {
   }
 
   Widget _buildProductListTile(Product product, bool isSelected) {
-    final unitPrice = product.unitPrice ?? 0.0;
-
     return Card(
       margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
       elevation: isSelected ? 2 : 0.5,
@@ -506,30 +491,25 @@ class _CreatePackageScreenState extends State<CreatePackageScreen> {
                   ],
                 ),
               ),
-              const SizedBox(width: 8),
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                decoration: BoxDecoration(
-                  color: Colors.blueGrey.shade50,
-                  borderRadius: BorderRadius.circular(8),
-                  border: Border.all(color: Colors.blueGrey.shade200),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    const Text('Birim Fiyat', style: TextStyle(fontSize: 9, color: Colors.blueGrey)),
-                    Text(
-                      '${unitPrice.toStringAsFixed(2)} TL',
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 12,
-                        color: Colors.blueGrey,
-                      ),
+              if (product.weightVolume != null && product.weightVolume!.isNotEmpty) ...[
+                const SizedBox(width: 8),
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  decoration: BoxDecoration(
+                    color: Colors.grey.shade100,
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(color: Colors.grey.shade300),
+                  ),
+                  child: Text(
+                    product.weightVolume!,
+                    style: TextStyle(
+                      fontWeight: FontWeight.w600,
+                      fontSize: 11,
+                      color: Colors.grey.shade700,
                     ),
-                  ],
+                  ),
                 ),
-              ),
+              ],
             ],
           ),
         ),
@@ -540,10 +520,6 @@ class _CreatePackageScreenState extends State<CreatePackageScreen> {
   // Geniş Ekranlar için Sağ Sidebar
   Widget _buildWideSidebar({
     required int selectedCount,
-    required double totalCost,
-    required double averageUnitCost,
-    required double totalSellingPrice,
-    required double averageSellingPrice,
     required bool isValid,
     required List<Product> selectedProducts,
   }) {
@@ -588,91 +564,16 @@ class _CreatePackageScreenState extends State<CreatePackageScreen> {
               style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
             ),
           ),
-          const SizedBox(height: 12),
-
-          // Maliyet Kutusu
-          Container(
-            padding: const EdgeInsets.all(12),
-            decoration: BoxDecoration(
-              color: Colors.grey.shade50,
-              borderRadius: BorderRadius.circular(10),
-              border: Border.all(color: Colors.grey.shade200),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text('Toplam Geliş Maliyeti', style: TextStyle(fontSize: 11, color: Colors.grey)),
-                Text(
-                  '${totalCost.toStringAsFixed(2)} TL',
-                  style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                ),
-                Text(
-                  'Ortalama Ürün Başı: ${averageUnitCost.toStringAsFixed(2)} TL',
-                  style: TextStyle(fontSize: 11, color: Colors.grey.shade600),
-                ),
-              ],
-            ),
-          ),
           const SizedBox(height: 16),
 
-          // Kâr Marjı Seçimi
-          const Text('Kâr Marjı Seçin:', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12)),
+          // Seçilen Ürünler Başlığı
+          Text(
+            'Seçilen Ürünler ($selectedCount)',
+            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
+          ),
           const SizedBox(height: 8),
-          Row(
-            children: [15, 20, 25, 30, 40].map((margin) {
-              final isSelected = _profitMarginPercent == margin;
-              return Expanded(
-                child: GestureDetector(
-                  onTap: () => setState(() => _profitMarginPercent = margin.toDouble()),
-                  child: Container(
-                    margin: const EdgeInsets.symmetric(horizontal: 2),
-                    padding: const EdgeInsets.symmetric(vertical: 8),
-                    decoration: BoxDecoration(
-                      color: isSelected ? _selectedPackage.color : Colors.grey.shade100,
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    alignment: Alignment.center,
-                    child: Text(
-                      '%$margin',
-                      style: TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.bold,
-                        color: isSelected ? Colors.white : Colors.black87,
-                      ),
-                    ),
-                  ),
-                ),
-              );
-            }).toList(),
-          ),
-          const SizedBox(height: 16),
 
-          // Satış Fiyatı Kutusu
-          Container(
-            padding: const EdgeInsets.all(12),
-            decoration: BoxDecoration(
-              color: Colors.green.shade50,
-              borderRadius: BorderRadius.circular(10),
-              border: Border.all(color: Colors.green.shade200),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text('Tavsiye Edilen Satış Tutarı', style: TextStyle(fontSize: 11, color: Colors.green)),
-                Text(
-                  '${totalSellingPrice.toStringAsFixed(2)} TL',
-                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.green.shade900),
-                ),
-                Text(
-                  'Ortalama Ürün Satış Fiyatı: ${averageSellingPrice.toStringAsFixed(2)} TL',
-                  style: TextStyle(fontSize: 11, color: Colors.green.shade800),
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(height: 12),
-
-          // Seçilen Ürünler Mini Listesi
+          // Seçilen Ürünler Listesi
           Expanded(
             child: selectedProducts.isEmpty
                 ? Center(
@@ -701,7 +602,7 @@ class _CreatePackageScreenState extends State<CreatePackageScreen> {
 
           // Ekleme Butonu
           ElevatedButton.icon(
-            onPressed: isValid ? () => _submitPackage(selectedProducts, totalSellingPrice) : null,
+            onPressed: isValid ? () => _submitPackage(selectedProducts) : null,
             icon: const Icon(Icons.add_shopping_cart),
             label: Text(
               isValid
@@ -724,10 +625,6 @@ class _CreatePackageScreenState extends State<CreatePackageScreen> {
   // Mobil Cihazlar için Alt Panel
   Widget _buildMobileBottomCalculatorSheet({
     required int selectedCount,
-    required double totalCost,
-    required double averageUnitCost,
-    required double totalSellingPrice,
-    required double averageSellingPrice,
     required bool isValid,
     required List<Product> selectedProducts,
   }) {
@@ -767,112 +664,33 @@ class _CreatePackageScreenState extends State<CreatePackageScreen> {
               ),
             ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Flexible(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text('Geliş Maliyeti', style: TextStyle(fontSize: 10, color: Colors.grey)),
-                      FittedBox(
-                        fit: BoxFit.scaleDown,
-                        child: Text(
-                          '${totalCost.toStringAsFixed(2)} TL',
-                          style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold, color: Colors.black87),
-                        ),
-                      ),
-                      Text(
-                        'Ort: ${averageUnitCost.toStringAsFixed(2)} TL',
-                        style: TextStyle(fontSize: 9, color: Colors.grey.shade600),
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(width: 8),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    const Text('Kâr Marjı:', style: TextStyle(fontSize: 10, color: Colors.grey)),
-                    const SizedBox(height: 2),
-                    Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [15, 20, 25, 30].map((margin) {
-                        final isSelected = _profitMarginPercent == margin;
-                        return GestureDetector(
-                          onTap: () => setState(() => _profitMarginPercent = margin.toDouble()),
-                          child: Container(
-                            margin: const EdgeInsets.only(left: 3),
-                            padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 3),
-                            decoration: BoxDecoration(
-                              color: isSelected ? _selectedPackage.color : Colors.grey.shade100,
-                              borderRadius: BorderRadius.circular(6),
-                            ),
-                            child: Text(
-                              '%$margin',
-                              style: TextStyle(
-                                fontSize: 10,
-                                fontWeight: FontWeight.bold,
-                                color: isSelected ? Colors.white : Colors.black87,
-                              ),
-                            ),
-                          ),
-                        );
-                      }).toList(),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-            const Divider(height: 12),
-            Row(
               children: [
                 Expanded(
-                  flex: 3,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text('Tavsiye Satış', style: TextStyle(fontSize: 9, color: Colors.grey)),
-                      FittedBox(
-                        fit: BoxFit.scaleDown,
-                        child: Text(
-                          '${totalSellingPrice.toStringAsFixed(2)} TL',
-                          style: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.green.shade700,
-                          ),
-                        ),
-                      ),
-                      Text(
-                        'Ort: ${averageSellingPrice.toStringAsFixed(2)} TL',
-                        style: TextStyle(fontSize: 9, color: Colors.green.shade800),
-                      ),
-                    ],
+                  child: Text(
+                    '${_selectedPackage.name}: $selectedCount / ${_selectedPackage.maxItems} Ürün',
+                    style: TextStyle(
+                      fontSize: 13,
+                      fontWeight: FontWeight.bold,
+                      color: isValid ? Colors.green.shade800 : Colors.black87,
+                    ),
                   ),
                 ),
-                const SizedBox(width: 8),
-                Expanded(
-                  flex: 4,
-                  child: ElevatedButton.icon(
-                    onPressed: isValid ? () => _submitPackage(selectedProducts, totalSellingPrice) : null,
-                    icon: const Icon(Icons.add_shopping_cart, size: 16),
-                    label: FittedBox(
-                      fit: BoxFit.scaleDown,
-                      child: Text(
-                        isValid
-                            ? 'Paketi Ekle ($selectedCount)'
-                            : '${_selectedPackage.minItems}-${_selectedPackage.maxItems} Ürün Seçin',
-                        style: const TextStyle(fontSize: 11, fontWeight: FontWeight.bold),
-                      ),
-                    ),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: _selectedPackage.color,
-                      foregroundColor: Colors.white,
-                      disabledBackgroundColor: Colors.grey.shade300,
-                      disabledForegroundColor: Colors.grey.shade600,
-                      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 8),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                    ),
+                ElevatedButton.icon(
+                  onPressed: isValid ? () => _submitPackage(selectedProducts) : null,
+                  icon: const Icon(Icons.add_shopping_cart, size: 16),
+                  label: Text(
+                    isValid
+                        ? 'Paketi Ekle ($selectedCount)'
+                        : '${_selectedPackage.minItems}-${_selectedPackage.maxItems} Ürün Seçin',
+                    style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: _selectedPackage.color,
+                    foregroundColor: Colors.white,
+                    disabledBackgroundColor: Colors.grey.shade300,
+                    disabledForegroundColor: Colors.grey.shade600,
+                    padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 12),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                   ),
                 ),
               ],
@@ -883,7 +701,7 @@ class _CreatePackageScreenState extends State<CreatePackageScreen> {
     );
   }
 
-  Future<void> _submitPackage(List<Product> selectedProducts, double totalSellingPrice) async {
+  Future<void> _submitPackage(List<Product> selectedProducts) async {
     final authProvider = Provider.of<AuthProvider>(context, listen: false);
     final shopProvider = Provider.of<ShopProvider>(context, listen: false);
     final shopId = authProvider.shopId;
@@ -896,11 +714,9 @@ class _CreatePackageScreenState extends State<CreatePackageScreen> {
     }
 
     final productsPayload = selectedProducts.map((p) {
-      final unitCost = p.unitPrice ?? 10.0;
-      final calculatedSellingPrice = double.parse((unitCost * (1 + _profitMarginPercent / 100)).toStringAsFixed(2));
       return {
         'master_product_id': p.id,
-        'price': calculatedSellingPrice > 0 ? calculatedSellingPrice : 10.0,
+        'price': 0.0,
         'quantity': 1,
       };
     }).toList();
@@ -933,7 +749,7 @@ class _CreatePackageScreenState extends State<CreatePackageScreen> {
       shopId: shopId,
       name: packageName,
       packageSize: _selectedPackage.name,
-      totalPrice: totalSellingPrice,
+      totalPrice: 0.0,
       stock: 999,
       items: productsPayload,
     );

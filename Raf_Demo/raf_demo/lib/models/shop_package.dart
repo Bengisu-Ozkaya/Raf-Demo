@@ -21,7 +21,7 @@ class ShopPackage {
     this.shopPhone,
     required this.name,
     required this.packageSize,
-    required this.totalPrice,
+    this.totalPrice = 0.0,
     required this.stock,
     this.isActive = 1,
     this.createdAt,

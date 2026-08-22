@@ -453,7 +453,6 @@ class _ShopDetailScreenState extends State<ShopDetailScreen> {
                             final product = filtered[i];
                             final itemInCart = cart.shops[shop.id]?.items[product.id];
                             final quantityInCart = itemInCart?.quantity ?? 0;
-                            final price = product.price ?? product.unitPrice ?? 0.0;
 
                             return Card(
                               margin: const EdgeInsets.symmetric(vertical: 4),
@@ -506,17 +505,6 @@ class _ShopDetailScreenState extends State<ShopDetailScreen> {
                                             '${product.brand ?? ''} ${product.weightVolume != null ? '• ${product.weightVolume}' : ''}',
                                             style: TextStyle(fontSize: 11, color: Colors.grey.shade600),
                                           ),
-                                          if (price > 0) ...[
-                                            const SizedBox(height: 2),
-                                            Text(
-                                              '${price.toStringAsFixed(2)} TL',
-                                              style: TextStyle(
-                                                fontSize: 12,
-                                                fontWeight: FontWeight.bold,
-                                                color: Theme.of(context).primaryColor,
-                                              ),
-                                            ),
-                                          ],
                                         ],
                                       ),
                                     ),

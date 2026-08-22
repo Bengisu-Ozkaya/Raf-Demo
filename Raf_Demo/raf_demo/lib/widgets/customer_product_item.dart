@@ -71,14 +71,15 @@ class CustomerProductItem extends StatelessWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          '${product.price?.toStringAsFixed(2) ?? '0.00'} TL', // Null kontrolü eklendi
-                          style: TextStyle(
-                            color: Theme.of(context).primaryColor,
-                            fontWeight: FontWeight.w600,
-                            fontSize: 16,
+                        if (product.weightVolume != null && product.weightVolume!.isNotEmpty)
+                          Text(
+                            product.weightVolume!,
+                            style: TextStyle(
+                              color: Colors.grey.shade700,
+                              fontSize: 13,
+                              fontWeight: FontWeight.w500,
+                            ),
                           ),
-                        ),
                         const SizedBox(height: 2),
                         Text(
                           (product.stock ?? 0) > 0 // Null kontrolü eklendi

@@ -282,10 +282,17 @@ class _MerchantOrderItemCard extends StatelessWidget {
             _StatusUpdateWidget(order: order),
           ],
         ),
-        trailing: Text(
-          '${order.totalPrice.toStringAsFixed(2)} TL',
-          style: const TextStyle(
-              fontWeight: FontWeight.bold, fontSize: 14, color: Colors.teal),
+        trailing: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+          decoration: BoxDecoration(
+            color: Colors.teal.shade50,
+            borderRadius: BorderRadius.circular(6),
+          ),
+          child: Text(
+            '${order.items.fold(0, (sum, i) => sum + i.quantity)} Ürün',
+            style: TextStyle(
+                fontWeight: FontWeight.bold, fontSize: 13, color: Colors.teal.shade800),
+          ),
         ),
         children: [
           Container(
@@ -309,8 +316,8 @@ class _MerchantOrderItemCard extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Expanded(
-                              child: Text('${item.quantity}x  ${item.name}')),
-                          Text('${item.price.toStringAsFixed(2)} TL'),
+                              child: Text('• ${item.quantity}x  ${item.name}',
+                                  style: const TextStyle(fontWeight: FontWeight.w500))),
                         ],
                       ),
                     )),
@@ -481,31 +488,22 @@ class _ShopPackageCard extends StatelessWidget {
                       ],
                     ),
                   ),
-                  // Fiyat
+                  // Sağ Kısım: İçeriği Gör Butonu
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      Text(
-                        '${package.totalPrice.toStringAsFixed(2)} TL',
-                        style: TextStyle(
-                          fontSize: 17,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.green.shade800,
-                        ),
-                      ),
-                      const SizedBox(height: 2),
                       Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Text(
                             'İçeriği Gör',
                             style: TextStyle(
-                              fontSize: 11,
+                              fontSize: 12,
                               fontWeight: FontWeight.w600,
                               color: Colors.blue.shade700,
                             ),
                           ),
-                          Icon(Icons.chevron_right, size: 14, color: Colors.blue.shade700),
+                          Icon(Icons.chevron_right, size: 16, color: Colors.blue.shade700),
                         ],
                       ),
                     ],

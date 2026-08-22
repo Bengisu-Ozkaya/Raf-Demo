@@ -174,10 +174,17 @@ class OrderItemCard extends StatelessWidget {
             ),
           ],
         ),
-        trailing: Text(
-          '${order.totalAmount.toStringAsFixed(2)} TL',
-          style: const TextStyle(
-              fontWeight: FontWeight.bold, fontSize: 14, color: Colors.teal),
+        trailing: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+          decoration: BoxDecoration(
+            color: Colors.teal.shade50,
+            borderRadius: BorderRadius.circular(6),
+          ),
+          child: Text(
+            '${order.items.fold(0, (sum, i) => sum + i.quantity)} Ürün',
+            style: TextStyle(
+                fontWeight: FontWeight.bold, fontSize: 13, color: Colors.teal.shade800),
+          ),
         ),
         // Kart açıldığında görünecek olan ürün detayları
         children: [
@@ -204,9 +211,8 @@ class OrderItemCard extends StatelessWidget {
                         children: [
                           // Ürün adı ve adedi
                           Expanded(
-                              child: Text('${item.quantity}x  ${item.name}')),
-                          // Ürünün o anki fiyatı
-                          Text('${item.price.toStringAsFixed(2)} TL'),
+                              child: Text('• ${item.quantity}x  ${item.name}',
+                                  style: const TextStyle(fontWeight: FontWeight.w500))),
                         ],
                       ),
                     )),

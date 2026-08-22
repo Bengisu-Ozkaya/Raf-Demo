@@ -44,20 +44,23 @@ class ProductGridItem extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
           ),
-          // Fiyat ve Stok
+          // Stok ve Bilgi
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  '${product.price?.toStringAsFixed(2) ?? '0.00'} TL',
-                  style: TextStyle(
-                    color: Theme.of(context).primaryColor,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16,
-                  ),
-                ),
+                if (product.weightVolume != null && product.weightVolume!.isNotEmpty)
+                  Text(
+                    product.weightVolume!,
+                    style: TextStyle(
+                      color: Colors.grey.shade700,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  )
+                else
+                  const SizedBox(),
                 Text(
                   'Stok: ${product.stock ?? 0}',
                   style: TextStyle(

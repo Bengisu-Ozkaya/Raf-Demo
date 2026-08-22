@@ -169,20 +169,6 @@ class _PackageDetailScreenState extends State<PackageDetailScreen> {
                                     ],
                                   ),
                                 ),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  children: [
-                                    const Text('Paket Fiyatı', style: TextStyle(fontSize: 11, color: Colors.grey)),
-                                    Text(
-                                      '${_package.totalPrice.toStringAsFixed(2)} TL',
-                                      style: const TextStyle(
-                                        fontSize: 22,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.green,
-                                      ),
-                                    ),
-                                  ],
-                                ),
                               ],
                             ),
                           ],
@@ -208,9 +194,6 @@ class _PackageDetailScreenState extends State<PackageDetailScreen> {
 
                     // 3. Ürün Listesi
                     ...items.map((item) {
-                      final unitPrice = item.unitPrice ?? 0.0;
-                      final price = item.price ?? 0.0;
-
                       return Card(
                         margin: const EdgeInsets.symmetric(vertical: 4),
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
@@ -254,26 +237,6 @@ class _PackageDetailScreenState extends State<PackageDetailScreen> {
                                     ),
                                   ],
                                 ),
-                              ),
-
-                              // Fiyat Bilgileri
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                children: [
-                                  if (isMerchant && unitPrice > 0)
-                                    Text(
-                                      'Maliyet: ${unitPrice.toStringAsFixed(2)} TL',
-                                      style: TextStyle(fontSize: 10, color: Colors.grey.shade600),
-                                    ),
-                                  Text(
-                                    '${price.toStringAsFixed(2)} TL',
-                                    style: const TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 13,
-                                      color: Colors.black87,
-                                    ),
-                                  ),
-                                ],
                               ),
                             ],
                           ),
