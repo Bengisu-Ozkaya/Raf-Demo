@@ -1,0 +1,4052 @@
+[
+  {
+    "sap_code": "100000529",
+    "product_name": "PİYALE BUĞDAY NİŞASTASI 200 G",
+    "category": "Temel Gıda",
+    "brand": "Piyale",
+    "weight_volume": "200 G",
+    "unit_price": 18.108,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007268",
+    "product_name": "AMİGO KAJU CEVİZİ 150 G",
+    "category": "Atıştırmalık",
+    "brand": "Amigo",
+    "weight_volume": "150 G",
+    "unit_price": 93,
+    "image_url": null
+  },
+  {
+    "sap_code": "100019014",
+    "product_name": "PEKİ MUZLU GOFRET 350 GR",
+    "category": "Atıştırmalık",
+    "brand": "Peki",
+    "weight_volume": "350 G",
+    "unit_price": 44.5,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007147",
+    "product_name": "BİZİM VATAN BARBUNYA PİLAKİ 400 G",
+    "category": "Ev & Yaşam",
+    "brand": "Bizim Vatan",
+    "weight_volume": "400 G",
+    "unit_price": 39.1883,
+    "image_url": null
+  },
+  {
+    "sap_code": "100019004",
+    "product_name": "SAKURA LED AMPÜL SARI ISIK 15W",
+    "category": "Ev & Yaşam",
+    "brand": "SAKURA",
+    "weight_volume": null,
+    "unit_price": 57.759,
+    "image_url": null
+  },
+  {
+    "sap_code": "100010187",
+    "product_name": "TUTTAZE BUZDOLABI POŞETİ ORTA BOY 100'LÜ",
+    "category": "Ev & Yaşam",
+    "brand": "TUTTAZE",
+    "weight_volume": null,
+    "unit_price": 44.305,
+    "image_url": null
+  },
+  {
+    "sap_code": "100010186",
+    "product_name": "TUTTAZE BUZDOLABI POŞETİ BÜYÜK BOY 70'Lİ",
+    "category": "Ev & Yaşam",
+    "brand": "TUTTAZE",
+    "weight_volume": "70'Lİ",
+    "unit_price": 44.305,
+    "image_url": null
+  },
+  {
+    "sap_code": "100009719",
+    "product_name": "BİSTO TAHİNLİ ÇITIR KURABİYE 300 G",
+    "category": "Atıştırmalık",
+    "brand": "Bisto",
+    "weight_volume": "300 G",
+    "unit_price": 82,
+    "image_url": null
+  },
+  {
+    "sap_code": "100008180",
+    "product_name": "MİNTAX TEMİZLİK ELDİVENİ S-M-L ADET",
+    "category": "Temizlik",
+    "brand": "Mintax",
+    "weight_volume": null,
+    "unit_price": 41.8481,
+    "image_url": null
+  },
+  {
+    "sap_code": "100008912",
+    "product_name": "YUMAK MAKYAJ TEMİZLEME MENDİLİ 20'Lİ",
+    "category": "Temel Gıda",
+    "brand": "YUMAK",
+    "weight_volume": "20'Lİ",
+    "unit_price": 38,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007602",
+    "product_name": "EBRU LİMON KOLONYASI 400 ML",
+    "category": "Kişisel Bakım",
+    "brand": "Ebru",
+    "weight_volume": "400 ML",
+    "unit_price": 55,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007641",
+    "product_name": "ANADOLU MUTFAĞI NOHUT 1 KG",
+    "category": "Temel Gıda",
+    "brand": "Anadolu MutfağıAĞI",
+    "weight_volume": "1 KG",
+    "unit_price": 56,
+    "image_url": null
+  },
+  {
+    "sap_code": "100003662",
+    "product_name": "DERBY LADY TIRAŞ BIÇAĞI 5'Lİ",
+    "category": "Kişisel Bakım",
+    "brand": "DERBY",
+    "weight_volume": "5'Lİ",
+    "unit_price": 64,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007718",
+    "product_name": "ANADOLU MUTFAĞI KURU FASULYE 1 KG",
+    "category": "Temel Gıda",
+    "brand": "Anadolu MutfağıAĞI",
+    "weight_volume": "1 KG",
+    "unit_price": 69.008,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007441",
+    "product_name": "CONFORT KAĞIT HAVLU 6'LI",
+    "category": "Ev & Yaşam",
+    "brand": "CONFORT",
+    "weight_volume": null,
+    "unit_price": 85,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007510",
+    "product_name": "BOLTANE EKSTRA GEL ÇİLEK REÇELİ 2 KG",
+    "category": "Kahvaltılık & Soslar",
+    "brand": "BOLTANE",
+    "weight_volume": "2 KG",
+    "unit_price": 214.885,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007504",
+    "product_name": "BOLTANE EKSTRA GEL.ÇİLEK REÇELİ 380 G",
+    "category": "Kahvaltılık & Soslar",
+    "brand": "BOLTANE",
+    "weight_volume": "380 G",
+    "unit_price": 62.6267,
+    "image_url": null
+  },
+  {
+    "sap_code": "100019666",
+    "product_name": "ARKO MEN KLASİK TIRAŞ JELİ 200 ML",
+    "category": "Kişisel Bakım",
+    "brand": "ARKO",
+    "weight_volume": "200 ML",
+    "unit_price": 170,
+    "image_url": null
+  },
+  {
+    "sap_code": "100001878",
+    "product_name": "NESCAFE XPRESS VANİLLA 250 ML",
+    "category": "Temel Gıda",
+    "brand": "NESCAFE",
+    "weight_volume": "250 ML",
+    "unit_price": 60,
+    "image_url": null
+  },
+  {
+    "sap_code": "100016125",
+    "product_name": "ETİ HOŞBEŞ KAKAO KREMALI KAK. GOF. 142 G",
+    "category": "Kişisel Bakım",
+    "brand": "Eti",
+    "weight_volume": "142 G",
+    "unit_price": 45,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007307",
+    "product_name": "PEKİ MOZAİK KEK 200 GR 200 G",
+    "category": "Atıştırmalık",
+    "brand": "Peki",
+    "weight_volume": "200 G",
+    "unit_price": 31.5,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007199",
+    "product_name": "LİO RİVİERA ZEYTİNYAĞI 2 L",
+    "category": "Sıvı Yağ & Margarin",
+    "brand": "Lio",
+    "weight_volume": "2 L",
+    "unit_price": 468.64,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007373",
+    "product_name": "BİZİM VATAN HAŞLANMIŞ KURU FASULYE 800 G",
+    "category": "Temel Gıda",
+    "brand": "Bizim Vatan",
+    "weight_volume": "800 G",
+    "unit_price": 36.4158,
+    "image_url": null
+  },
+  {
+    "sap_code": "100018139",
+    "product_name": "PİYALE PUDİNG MUZ AROMALI 125 G",
+    "category": "Temel Gıda",
+    "brand": "Piyale",
+    "weight_volume": "125 G",
+    "unit_price": 14.8442,
+    "image_url": null
+  },
+  {
+    "sap_code": "100014775",
+    "product_name": "FANTA PORTAKAL PET 2,5 L",
+    "category": "İçecek",
+    "brand": "FANTA",
+    "weight_volume": "2,5 L",
+    "unit_price": 71.5,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007663",
+    "product_name": "ANADOLU MUTFAĞI KÖFTELİK BULGUR 1 KG",
+    "category": "Temel Gıda",
+    "brand": "Anadolu MutfağıAĞI",
+    "weight_volume": "1 KG",
+    "unit_price": 31.6347,
+    "image_url": null
+  },
+  {
+    "sap_code": "100017225",
+    "product_name": "ETİ KARAM GURME ÇİK. KREM. GOFRET 50 G",
+    "category": "Kişisel Bakım",
+    "brand": "Eti",
+    "weight_volume": "50 G",
+    "unit_price": 22.5,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007084",
+    "product_name": "TUTTAZE FIRIN TORBASI 25 GR ADET",
+    "category": "Ev & Yaşam",
+    "brand": "TUTTAZE",
+    "weight_volume": "25 G",
+    "unit_price": 32.3529,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007953",
+    "product_name": "SOFTY KLASİK PED KANATLI NORMAL 10'LU",
+    "category": "Kişisel Bakım",
+    "brand": "SOFTY",
+    "weight_volume": "10'LU",
+    "unit_price": 22.5,
+    "image_url": null
+  },
+  {
+    "sap_code": "100001245",
+    "product_name": "PİYALE PUDİNG KAKAOLU 150 G",
+    "category": "Temel Gıda",
+    "brand": "Piyale",
+    "weight_volume": "150 G",
+    "unit_price": 23.2533,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007721",
+    "product_name": "ANADOLU MUTFAĞI YEŞİL MERCİMEK 1 KG",
+    "category": "Temel Gıda",
+    "brand": "Anadolu MutfağıAĞI",
+    "weight_volume": "1 KG",
+    "unit_price": 59,
+    "image_url": null
+  },
+  {
+    "sap_code": "100028352",
+    "product_name": "RUFFLES PEY. SOG. SÜPER BOY 125 G",
+    "category": "Temel Gıda",
+    "brand": "RUFFLES",
+    "weight_volume": "125 G",
+    "unit_price": 48.5,
+    "image_url": null
+  },
+  {
+    "sap_code": "100028361",
+    "product_name": "DORİTOS NACHO SÜPER BOY 130 G",
+    "category": "Temel Gıda",
+    "brand": "DORİTOS",
+    "weight_volume": "130 G",
+    "unit_price": 46.5,
+    "image_url": null
+  },
+  {
+    "sap_code": "100021344",
+    "product_name": "BIZIM VATAN KORNISON TURSUSU 670 GR",
+    "category": "Temel Gıda",
+    "brand": "Bizim Vatan",
+    "weight_volume": "670 G",
+    "unit_price": 74.2383,
+    "image_url": null
+  },
+  {
+    "sap_code": "100008806",
+    "product_name": "ADAM TEK BIÇAKLI 6 LI TIRAŞ BIÇAĞI ADET",
+    "category": "Kişisel Bakım",
+    "brand": "ADAM",
+    "weight_volume": "6 L",
+    "unit_price": 54,
+    "image_url": null
+  },
+  {
+    "sap_code": "100008805",
+    "product_name": "ADAM 6 LI BANYO TIRAŞ BIÇAĞI ADET",
+    "category": "Kişisel Bakım",
+    "brand": "ADAM",
+    "weight_volume": "6 L",
+    "unit_price": 54,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007309",
+    "product_name": "PEKİ MEYVELİ KEK 200GR 200 G",
+    "category": "Atıştırmalık",
+    "brand": "Peki",
+    "weight_volume": "200G",
+    "unit_price": 31.5,
+    "image_url": null
+  },
+  {
+    "sap_code": "100003602",
+    "product_name": "PEKİ MUFFIN KEK MOZAİK 40 G",
+    "category": "Atıştırmalık",
+    "brand": "Peki",
+    "weight_volume": "40 G",
+    "unit_price": 7,
+    "image_url": null
+  },
+  {
+    "sap_code": "100017993",
+    "product_name": "PİYALE MAKARNA SPAGHETTİ 500 G",
+    "category": "Temel Gıda",
+    "brand": "Piyale",
+    "weight_volume": "500 G",
+    "unit_price": 14.75,
+    "image_url": null
+  },
+  {
+    "sap_code": "100019005",
+    "product_name": "SAKURA LED AMPÜL BEYAZ ISIK 15W",
+    "category": "Ev & Yaşam",
+    "brand": "SAKURA",
+    "weight_volume": null,
+    "unit_price": 57.7593,
+    "image_url": null
+  },
+  {
+    "sap_code": "100008149",
+    "product_name": "EBRU MEYVE RÜYASI SIVI SABUN 750 ML",
+    "category": "Kişisel Bakım",
+    "brand": "Ebru",
+    "weight_volume": "750 ML",
+    "unit_price": 45,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007332",
+    "product_name": "CROWN MANDALINA PET 1,5 L",
+    "category": "Temel Gıda",
+    "brand": "CROWN",
+    "weight_volume": "1,5 L",
+    "unit_price": 39,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007324",
+    "product_name": "KARMEN I BADEMLİ BAR ÇİKOLATA 25 G",
+    "category": "İçecek",
+    "brand": "Karmen",
+    "weight_volume": "25 G",
+    "unit_price": 7.9,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007139",
+    "product_name": "PIYALE YAŞ MAYA 4*42 GR 4*42 G",
+    "category": "Temel Gıda",
+    "brand": "Piyale",
+    "weight_volume": "42 G",
+    "unit_price": 11.0967,
+    "image_url": null
+  },
+  {
+    "sap_code": "100017778",
+    "product_name": "EXPERDENT DIS IPI 50M ADET",
+    "category": "Temel Gıda",
+    "brand": "EXPERDENT",
+    "weight_volume": "50M",
+    "unit_price": 55,
+    "image_url": null
+  },
+  {
+    "sap_code": "100009727",
+    "product_name": "EXPERDENT NANELİ DİŞ MACUNU 125 ML",
+    "category": "Kişisel Bakım",
+    "brand": "EXPERDENT",
+    "weight_volume": "125 ML",
+    "unit_price": 36.5,
+    "image_url": null
+  },
+  {
+    "sap_code": "100009749",
+    "product_name": "SÖĞÜTLÜÇEŞME LİMON ARO.MAD. SU.6*200 ML",
+    "category": "Temel Gıda",
+    "brand": "SÖĞÜTLÜÇEŞME",
+    "weight_volume": "200 ML",
+    "unit_price": 56,
+    "image_url": null
+  },
+  {
+    "sap_code": "100017607",
+    "product_name": "BEBELAC 2 DEVAM SÜTÜ 6-9 AY 400 G",
+    "category": "İçecek",
+    "brand": "BEBELAC",
+    "weight_volume": "400 G",
+    "unit_price": 351.745,
+    "image_url": null
+  },
+  {
+    "sap_code": "100013963",
+    "product_name": "ANADOLU MUTF.YERLİ PİLAVLIK PİRİNÇ 1 KG",
+    "category": "Ev & Yaşam",
+    "brand": "Anadolu Mutfağı",
+    "weight_volume": "1 KG",
+    "unit_price": 57.5,
+    "image_url": null
+  },
+  {
+    "sap_code": "100009355",
+    "product_name": "PİYALE MANTI 500 G",
+    "category": "Temel Gıda",
+    "brand": "Piyale",
+    "weight_volume": "500 G",
+    "unit_price": 35.2708,
+    "image_url": null
+  },
+  {
+    "sap_code": "100017994",
+    "product_name": "PİYALE MAKARNA BURGU 500 G",
+    "category": "Temel Gıda",
+    "brand": "Piyale",
+    "weight_volume": "500 G",
+    "unit_price": 14.75,
+    "image_url": null
+  },
+  {
+    "sap_code": "100008272",
+    "product_name": "CHANTALE ERKEK ATLET ADET",
+    "category": "Kişisel Bakım",
+    "brand": "CHANTALE",
+    "weight_volume": null,
+    "unit_price": 75.91,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007677",
+    "product_name": "EROS CASANOVA PREZERVATİF 12'Lİ",
+    "category": "Kişisel Bakım",
+    "brand": "EROS",
+    "weight_volume": "12'Lİ",
+    "unit_price": 71,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007269",
+    "product_name": "AMİGO SARI LEBLEBİ 200 G",
+    "category": "Atıştırmalık",
+    "brand": "Amigo",
+    "weight_volume": "200 G",
+    "unit_price": 47,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007198",
+    "product_name": "LİO RİVİERA ZEYTİNYAĞI 1 L",
+    "category": "Sıvı Yağ & Margarin",
+    "brand": "Lio",
+    "weight_volume": "1 L",
+    "unit_price": 245.6892,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007320",
+    "product_name": "KARMEN FINDIKLI ÇİKOLATA 80GR",
+    "category": "İçecek",
+    "brand": "Karmen",
+    "weight_volume": "80G",
+    "unit_price": 49.9,
+    "image_url": null
+  },
+  {
+    "sap_code": "100010722",
+    "product_name": "EBRU ODA KUMAŞ TEMİZLEYİCİ 1 L",
+    "category": "Temizlik",
+    "brand": "Ebru",
+    "weight_volume": "1 L",
+    "unit_price": 84.2733,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007507",
+    "product_name": "TAŞKALE TAHİN 600 G",
+    "category": "Kahvaltılık & Soslar",
+    "brand": "Taşkale",
+    "weight_volume": "600 G",
+    "unit_price": 91.1225,
+    "image_url": null
+  },
+  {
+    "sap_code": "100029320",
+    "product_name": "ANADOLU MUTF HİNDİS CEVİZİ 50 GR*16",
+    "category": "Atıştırmalık",
+    "brand": "Anadolu Mutfağı",
+    "weight_volume": "50 G",
+    "unit_price": 24,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007590",
+    "product_name": "ALTINKÜPÜ TOZ ŞEKER 5 KG",
+    "category": "Atıştırmalık",
+    "brand": "ALTINKÜPÜ",
+    "weight_volume": "5 KG",
+    "unit_price": 219,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007613",
+    "product_name": "ANADOLU MUTFAĞI CİN MISIR 500 G",
+    "category": "Temel Gıda",
+    "brand": "Anadolu MutfağıAĞI",
+    "weight_volume": "500 G",
+    "unit_price": 16.108,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007622",
+    "product_name": "ANADOLU MUTFAĞI OSMANCIK PİRİNÇ 2,5 KG",
+    "category": "Temel Gıda",
+    "brand": "Anadolu MutfağıAĞI",
+    "weight_volume": "2,5 KG",
+    "unit_price": 159,
+    "image_url": null
+  },
+  {
+    "sap_code": "100000132",
+    "product_name": "PİYALE İRMİK 500 G",
+    "category": "Temel Gıda",
+    "brand": "Piyale",
+    "weight_volume": "500 G",
+    "unit_price": 17.0293,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007954",
+    "product_name": "BEYAZ GÜVERCİN PEÇETE 50'Lİ",
+    "category": "Ev & Yaşam",
+    "brand": "BEYAZ GÜVERCİN",
+    "weight_volume": "50'Lİ",
+    "unit_price": 26,
+    "image_url": null
+  },
+  {
+    "sap_code": "100008106",
+    "product_name": "MİNTAX MUTFAK TEMİZLEYİCİ 1 L",
+    "category": "Temizlik",
+    "brand": "Mintax",
+    "weight_volume": "1 L",
+    "unit_price": 69,
+    "image_url": null
+  },
+  {
+    "sap_code": "100009937",
+    "product_name": "ETİ BİDOLU YER FISTIKLI 81 G",
+    "category": "Atıştırmalık",
+    "brand": "Eti",
+    "weight_volume": "81 G",
+    "unit_price": 30,
+    "image_url": null
+  },
+  {
+    "sap_code": "100016126",
+    "product_name": "ETİ HOŞBEŞ ÇİLEK KREMALI GOFRET 142 G",
+    "category": "Kişisel Bakım",
+    "brand": "Eti",
+    "weight_volume": "142 G",
+    "unit_price": 45,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007767",
+    "product_name": "BİZİM VATAN MISIR KONSERVESI 400 G",
+    "category": "Temel Gıda",
+    "brand": "Bizim Vatan",
+    "weight_volume": "400 G",
+    "unit_price": 43.6525,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007667",
+    "product_name": "MİNTAX BULAŞIK MAKİNESİ KOKUSU ADET",
+    "category": "Temizlik",
+    "brand": "Mintax",
+    "weight_volume": null,
+    "unit_price": 61,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007837",
+    "product_name": "DEREN LİMON ICE TEA 1 L",
+    "category": "İçecek",
+    "brand": "Deren",
+    "weight_volume": "1 L",
+    "unit_price": 26.5,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007915",
+    "product_name": "PİYALE HAMUR KABARTMA TOZU PAKET 15'Lİ",
+    "category": "Temel Gıda",
+    "brand": "Piyale",
+    "weight_volume": "15'Lİ",
+    "unit_price": 19.4321,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007932",
+    "product_name": "PİYALE SAKIZLI MUHALLEBİ 150 G",
+    "category": "Temel Gıda",
+    "brand": "Piyale",
+    "weight_volume": "150 G",
+    "unit_price": 16.3167,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007638",
+    "product_name": "ANADOLU MUTFAĞI BALDO PİRİNÇ 2,5 KG",
+    "category": "Temel Gıda",
+    "brand": "Anadolu MutfağıAĞI",
+    "weight_volume": "2,5 KG",
+    "unit_price": 189,
+    "image_url": null
+  },
+  {
+    "sap_code": "100021109",
+    "product_name": "MON AMOUR LIPCARE BÖĞÜRTLEN ADET",
+    "category": "Kişisel Bakım",
+    "brand": "MON AMOUR",
+    "weight_volume": null,
+    "unit_price": 34,
+    "image_url": null
+  },
+  {
+    "sap_code": "100014728",
+    "product_name": "COCA COLA PET 1 L",
+    "category": "İçecek",
+    "brand": "COCA COLA",
+    "weight_volume": "1 L",
+    "unit_price": 52,
+    "image_url": null
+  },
+  {
+    "sap_code": "100028793",
+    "product_name": "PATOS ROLLS ACI BAHARATLI SÜPER 135 G",
+    "category": "Temel Gıda",
+    "brand": "PATOS",
+    "weight_volume": "135 G",
+    "unit_price": 42.5,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007467",
+    "product_name": "BİZİM VATAN ELMA SİRKESİ 750 ML",
+    "category": "Temel Gıda",
+    "brand": "Bizim Vatan",
+    "weight_volume": "750 ML",
+    "unit_price": 28.3683,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007790",
+    "product_name": "BİZİM VATAN MAYONEZ 1 KG",
+    "category": "Kahvaltılık & Soslar",
+    "brand": "Bizim Vatan",
+    "weight_volume": "1 KG",
+    "unit_price": 122.939,
+    "image_url": null
+  },
+  {
+    "sap_code": "100028351",
+    "product_name": "RUFFLES KETÇAP SÜPER BOY 125 G",
+    "category": "Kahvaltılık & Soslar",
+    "brand": "RUFFLES",
+    "weight_volume": "125 G",
+    "unit_price": 48.5,
+    "image_url": null
+  },
+  {
+    "sap_code": "100021370",
+    "product_name": "OZMO COOL 30 GR",
+    "category": "Temel Gıda",
+    "brand": "OZMO",
+    "weight_volume": "30 G",
+    "unit_price": 15.4,
+    "image_url": null
+  },
+  {
+    "sap_code": "100017241",
+    "product_name": "ETİ CANGA ÇİKOLATA 45 G",
+    "category": "İçecek",
+    "brand": "Eti",
+    "weight_volume": "45 G",
+    "unit_price": 18.75,
+    "image_url": null
+  },
+  {
+    "sap_code": "100029326",
+    "product_name": "ANADOLU MUTFAĞI LİMON TUZU 50 GR* 12",
+    "category": "Temel Gıda",
+    "brand": "Anadolu MutfağıAĞI",
+    "weight_volume": "50 G",
+    "unit_price": 18,
+    "image_url": null
+  },
+  {
+    "sap_code": "100009968",
+    "product_name": "TUTTAZE HAZIR KESİLMİŞ PŞR.KAĞ 16'LI",
+    "category": "Temel Gıda",
+    "brand": "TUTTAZE",
+    "weight_volume": null,
+    "unit_price": 33.2163,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007941",
+    "product_name": "MİNTAX YÜZEY TEMİZLEYİCİ 2,5 L",
+    "category": "Temizlik",
+    "brand": "Mintax",
+    "weight_volume": "2,5 L",
+    "unit_price": 95,
+    "image_url": null
+  },
+  {
+    "sap_code": "100009343",
+    "product_name": "TAŞKALE KAĞIT HELVA SADE 45 G",
+    "category": "Kahvaltılık & Soslar",
+    "brand": "Taşkale",
+    "weight_volume": "45 G",
+    "unit_price": 13,
+    "image_url": null
+  },
+  {
+    "sap_code": "100032652",
+    "product_name": "ANADOLU MUTFAĞI İSOT 100 G",
+    "category": "Temel Gıda",
+    "brand": "Anadolu MutfağıAĞI",
+    "weight_volume": "100 G",
+    "unit_price": 46.7794,
+    "image_url": null
+  },
+  {
+    "sap_code": "100000781",
+    "product_name": "POLO ORIGINAL NANELİ DELİKLİ ŞEKR 33,4 G",
+    "category": "Temel Gıda",
+    "brand": "POLO",
+    "weight_volume": "33,4 G",
+    "unit_price": 18,
+    "image_url": null
+  },
+  {
+    "sap_code": "100023205",
+    "product_name": "PİYALE EKŞİ MAYA 35 GR",
+    "category": "Temel Gıda",
+    "brand": "Piyale",
+    "weight_volume": "35 G",
+    "unit_price": 13.4987,
+    "image_url": null
+  },
+  {
+    "sap_code": "100002596",
+    "product_name": "FUSE TEA ICE TEA KARPUZ ARO. KUTU 330 ML",
+    "category": "İçecek",
+    "brand": "FUSE TEA",
+    "weight_volume": "330 ML",
+    "unit_price": 41,
+    "image_url": null
+  },
+  {
+    "sap_code": "100000198",
+    "product_name": "LİNK VİŞNE AROMALI İÇECEK 200 ML",
+    "category": "İçecek",
+    "brand": "LİNK",
+    "weight_volume": "200 ML",
+    "unit_price": 10.5,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007279",
+    "product_name": "MİS ŞEFTALİ MEYVE NEKTARI 200 ML",
+    "category": "İçecek",
+    "brand": "Mis",
+    "weight_volume": "200 ML",
+    "unit_price": 11,
+    "image_url": null
+  },
+  {
+    "sap_code": "100003610",
+    "product_name": "AMİGO KURUYEMİŞ KARIŞIK 150 G",
+    "category": "Atıştırmalık",
+    "brand": "Amigo",
+    "weight_volume": "150 G",
+    "unit_price": 99,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007282",
+    "product_name": "KARMEN SÜT ÇİK.KAPLI TANE FIND. GOF 33 G",
+    "category": "İçecek",
+    "brand": "Karmen",
+    "weight_volume": "33 G",
+    "unit_price": 15.5,
+    "image_url": null
+  },
+  {
+    "sap_code": "100010751",
+    "product_name": "SAROZ KARTON TABAK 10'LU ADET",
+    "category": "Ev & Yaşam",
+    "brand": "SAROZ",
+    "weight_volume": "10'LU",
+    "unit_price": 21.7833,
+    "image_url": null
+  },
+  {
+    "sap_code": "100013832",
+    "product_name": "MİNTAX SİHİRLİ SÜNGER ADET",
+    "category": "Temizlik",
+    "brand": "Mintax",
+    "weight_volume": null,
+    "unit_price": 15.0211,
+    "image_url": null
+  },
+  {
+    "sap_code": "100015537",
+    "product_name": "NİĞDE GAZOZU CAM ŞİŞE 250 ML",
+    "category": "İçecek",
+    "brand": "NİĞDE",
+    "weight_volume": "250 ML",
+    "unit_price": 128,
+    "image_url": null
+  },
+  {
+    "sap_code": "100008734",
+    "product_name": "BİZİM VATAN JALAPENO TURŞUSU 340 G",
+    "category": "Kahvaltılık & Soslar",
+    "brand": "Bizim Vatan",
+    "weight_volume": "340 G",
+    "unit_price": 40.525,
+    "image_url": null
+  },
+  {
+    "sap_code": "100014267",
+    "product_name": "MON AMOUR KAJAL EYELINER ADET",
+    "category": "Kişisel Bakım",
+    "brand": "MON AMOUR",
+    "weight_volume": null,
+    "unit_price": 56,
+    "image_url": null
+  },
+  {
+    "sap_code": "100017808",
+    "product_name": "SÖĞÜTLÜÇEŞME KARPUZ&ÇİLEK 6X200ML",
+    "category": "Temel Gıda",
+    "brand": "SÖĞÜTLÜÇEŞME",
+    "weight_volume": "200ML",
+    "unit_price": 56,
+    "image_url": null
+  },
+  {
+    "sap_code": "100014121",
+    "product_name": "CHEETOS FIRINDAN 3*20 G",
+    "category": "Temel Gıda",
+    "brand": "CHEETOS",
+    "weight_volume": "20 G",
+    "unit_price": 33.9,
+    "image_url": null
+  },
+  {
+    "sap_code": "100016567",
+    "product_name": "ETİ MAXİMUS LOADING ÇİKOLATA 50 G",
+    "category": "İçecek",
+    "brand": "Eti",
+    "weight_volume": "50 G",
+    "unit_price": 16.9,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007180",
+    "product_name": "DEREN HARMAN ÇAY 1 KG",
+    "category": "İçecek",
+    "brand": "Deren",
+    "weight_volume": "1 KG",
+    "unit_price": 179.0208,
+    "image_url": null
+  },
+  {
+    "sap_code": "100009345",
+    "product_name": "LOESS SİYAH NOKTA BURUN BANDI 6'LI",
+    "category": "Temel Gıda",
+    "brand": "LOESS",
+    "weight_volume": null,
+    "unit_price": 46,
+    "image_url": null
+  },
+  {
+    "sap_code": "100009171",
+    "product_name": "ADAM SPORT DEOSPREY 150 ML",
+    "category": "Kişisel Bakım",
+    "brand": "ADAM",
+    "weight_volume": "150 ML",
+    "unit_price": 66,
+    "image_url": null
+  },
+  {
+    "sap_code": "100003689",
+    "product_name": "DERBY SAMURAI PLATINUM 3 BIÇ KARTELA",
+    "category": "Temel Gıda",
+    "brand": "DERBY",
+    "weight_volume": null,
+    "unit_price": 32,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007694",
+    "product_name": "MİNTAX SIVI ARAP SABUNU 1 L",
+    "category": "Kişisel Bakım",
+    "brand": "Mintax",
+    "weight_volume": "1 L",
+    "unit_price": 59,
+    "image_url": null
+  },
+  {
+    "sap_code": "100009374",
+    "product_name": "MİNTAX YUMUŞATICI KONSANTRE 1,44 L",
+    "category": "Temizlik",
+    "brand": "Mintax",
+    "weight_volume": "1,44 L",
+    "unit_price": 96.5,
+    "image_url": null
+  },
+  {
+    "sap_code": "100008175",
+    "product_name": "LIO YAĞLI SİYAH ZEYTİN 321-380 500 G",
+    "category": "Kahvaltılık & Soslar",
+    "brand": "Lio",
+    "weight_volume": "500 G",
+    "unit_price": 99.88,
+    "image_url": null
+  },
+  {
+    "sap_code": "100008261",
+    "product_name": "CHUPA CHUPS DÜDÜKLÜ ÇİLEKLİ ŞEKER 15 G",
+    "category": "Atıştırmalık",
+    "brand": "CHUPA CHUPS",
+    "weight_volume": "15 G",
+    "unit_price": 9.9,
+    "image_url": null
+  },
+  {
+    "sap_code": "100017809",
+    "product_name": "SÖĞÜTLÜÇEŞME LİMON C VİTAMİNLİ 6X200ML",
+    "category": "Temel Gıda",
+    "brand": "SÖĞÜTLÜÇEŞME",
+    "weight_volume": "200ML",
+    "unit_price": 56,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007167",
+    "product_name": "ALTINKÜP TOZ ŞEKER 2 KG",
+    "category": "Atıştırmalık",
+    "brand": "ALTINKÜP",
+    "weight_volume": "2 KG",
+    "unit_price": 93.398,
+    "image_url": null
+  },
+  {
+    "sap_code": "100018529",
+    "product_name": "ETİ HOŞBEŞ FINDIKLI GOFRET 142 G",
+    "category": "Atıştırmalık",
+    "brand": "Eti",
+    "weight_volume": "142 G",
+    "unit_price": 45,
+    "image_url": null
+  },
+  {
+    "sap_code": "100014877",
+    "product_name": "PEPSI COLA PET 1 L",
+    "category": "İçecek",
+    "brand": "PEPSI",
+    "weight_volume": "1 L",
+    "unit_price": 38,
+    "image_url": null
+  },
+  {
+    "sap_code": "100014118",
+    "product_name": "BİSTO SELANİK GEVREĞİ 200 GR",
+    "category": "Temel Gıda",
+    "brand": "Bisto",
+    "weight_volume": "200 G",
+    "unit_price": 80,
+    "image_url": null
+  },
+  {
+    "sap_code": "100010740",
+    "product_name": "MİS DİLİMLİ TOST PEYNİRİ 1,2 KG",
+    "category": "Kahvaltılık & Soslar",
+    "brand": "Mis",
+    "weight_volume": "1,2 KG",
+    "unit_price": 433.55,
+    "image_url": null
+  },
+  {
+    "sap_code": "100009821",
+    "product_name": "MİS ÇİKOLATALI SÜT 200 ML",
+    "category": "İçecek",
+    "brand": "Mis",
+    "weight_volume": "200 ML",
+    "unit_price": 13.95,
+    "image_url": null
+  },
+  {
+    "sap_code": "100014275",
+    "product_name": "PİYALE TAM BUĞDAY UNU 2 KG",
+    "category": "Temel Gıda",
+    "brand": "Piyale",
+    "weight_volume": "2 KG",
+    "unit_price": 64.2033,
+    "image_url": null
+  },
+  {
+    "sap_code": "100009599",
+    "product_name": "MİNTAX LATEKS ELDİVEN PUDRALI 50 ADET",
+    "category": "Temizlik",
+    "brand": "Mintax",
+    "weight_volume": null,
+    "unit_price": 125.116,
+    "image_url": null
+  },
+  {
+    "sap_code": "100008233",
+    "product_name": "MİNTAX COMFORT SÜNGER OLUKLU 2 Lİ ADET",
+    "category": "Temizlik",
+    "brand": "Mintax",
+    "weight_volume": "2 L",
+    "unit_price": 45.7992,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007661",
+    "product_name": "YUMAK DİSK PAMUK 70'Lİ",
+    "category": "Kişisel Bakım",
+    "brand": "YUMAK",
+    "weight_volume": "70'Lİ",
+    "unit_price": 21,
+    "image_url": null
+  },
+  {
+    "sap_code": "100009172",
+    "product_name": "ADAM COOL DEOSPREY 150 ML",
+    "category": "Kişisel Bakım",
+    "brand": "ADAM",
+    "weight_volume": "150 ML",
+    "unit_price": 66,
+    "image_url": null
+  },
+  {
+    "sap_code": "100009284",
+    "product_name": "MİNTAX LİLYUM YUM. KONSANTRE 1,44 L",
+    "category": "Temel Gıda",
+    "brand": "Mintax",
+    "weight_volume": "1,44 L",
+    "unit_price": 96.5,
+    "image_url": null
+  },
+  {
+    "sap_code": "100008868",
+    "product_name": "KARMEN BANDIR FINDIK KREM&GRİSSİNİ 52 G",
+    "category": "Kişisel Bakım",
+    "brand": "Karmen",
+    "weight_volume": "52 G",
+    "unit_price": 15.9,
+    "image_url": null
+  },
+  {
+    "sap_code": "100001555",
+    "product_name": "ÜNAL OLGUNLAŞTIRILMIŞ BEYAZ PEYNIR 600 G",
+    "category": "Temel Gıda",
+    "brand": "ÜNAL",
+    "weight_volume": "600 G",
+    "unit_price": 367.9,
+    "image_url": null
+  },
+  {
+    "sap_code": "100010148",
+    "product_name": "KARMEN HİNDİSTAN CEV. TOPLARI BAD. 150 G",
+    "category": "Temel Gıda",
+    "brand": "Karmen",
+    "weight_volume": "150 G",
+    "unit_price": 79,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007249",
+    "product_name": "BEYAZ GÜVERCİN PEÇETE 200 YAPRAK ADET",
+    "category": "Ev & Yaşam",
+    "brand": "BEYAZ GÜVERCİN",
+    "weight_volume": null,
+    "unit_price": 49.9,
+    "image_url": null
+  },
+  {
+    "sap_code": "100029302",
+    "product_name": "ANADOLU MUTFAĞI KEKİK 20 GR* 16 ADET",
+    "category": "Atıştırmalık",
+    "brand": "Anadolu MutfağıAĞI",
+    "weight_volume": "20 G",
+    "unit_price": 18,
+    "image_url": null
+  },
+  {
+    "sap_code": "100032316",
+    "product_name": "PIYALE TOZ KAKAO 100 G",
+    "category": "Temel Gıda",
+    "brand": "Piyale",
+    "weight_volume": "100 G",
+    "unit_price": 52.9121,
+    "image_url": null
+  },
+  {
+    "sap_code": "100031238",
+    "product_name": "DEREN PAPATYA 20'LI 29 G",
+    "category": "Temel Gıda",
+    "brand": "Deren",
+    "weight_volume": "29 G",
+    "unit_price": 38.1317,
+    "image_url": null
+  },
+  {
+    "sap_code": "100010716",
+    "product_name": "BİSTO UN KURABİYESİ 500 G",
+    "category": "Atıştırmalık",
+    "brand": "Bisto",
+    "weight_volume": "500 G",
+    "unit_price": 87.5,
+    "image_url": null
+  },
+  {
+    "sap_code": "100018067",
+    "product_name": "PİYALE MAKARNA İNCE UZUN 500 G",
+    "category": "Temel Gıda",
+    "brand": "Piyale",
+    "weight_volume": "500 G",
+    "unit_price": 15.1085,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007606",
+    "product_name": "LİO NATUREL SIZMA ZEYTİNYAĞI 1 L",
+    "category": "Sıvı Yağ & Margarin",
+    "brand": "Lio",
+    "weight_volume": "1 L",
+    "unit_price": 287.6075,
+    "image_url": null
+  },
+  {
+    "sap_code": "100008378",
+    "product_name": "BİZİM VATAN TATLI BİBER SALÇASI 650 G",
+    "category": "Kahvaltılık & Soslar",
+    "brand": "Bizim Vatan",
+    "weight_volume": "650 G",
+    "unit_price": 66.6633,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007611",
+    "product_name": "ANADOLU MUTFAĞI AŞURELİK BUĞDAY 1 KG",
+    "category": "Temel Gıda",
+    "brand": "Anadolu MutfağıAĞI",
+    "weight_volume": "1 KG",
+    "unit_price": 32.41,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007642",
+    "product_name": "ANADOLU MUTFAĞI OSMANCIK PİRİNÇ 1 KG",
+    "category": "Temel Gıda",
+    "brand": "Anadolu MutfağıAĞI",
+    "weight_volume": "1 KG",
+    "unit_price": 69.4993,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007836",
+    "product_name": "TUTTAZE STREÇ FİLM ADET",
+    "category": "Temel Gıda",
+    "brand": "TUTTAZE",
+    "weight_volume": null,
+    "unit_price": 66.3525,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007819",
+    "product_name": "ANADOLU MUTFAGI KIRMIZI PUL BIBER 250 G",
+    "category": "Temel Gıda",
+    "brand": "Anadolu Mutfağı",
+    "weight_volume": "250 G",
+    "unit_price": 90,
+    "image_url": null
+  },
+  {
+    "sap_code": "100030202",
+    "product_name": "ANADOLU MUTFAGI KÖRI 35 G",
+    "category": "Temel Gıda",
+    "brand": "Anadolu Mutfağı",
+    "weight_volume": "35 G",
+    "unit_price": 18.5,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007875",
+    "product_name": "ANADOLU MUTFAĞI KABUKLU TARÇIN 45 G",
+    "category": "Temel Gıda",
+    "brand": "Anadolu MutfağıAĞI",
+    "weight_volume": "45 G",
+    "unit_price": 34,
+    "image_url": null
+  },
+  {
+    "sap_code": "100010633",
+    "product_name": "CROWN PORTAKAL PET 250 ML",
+    "category": "Temel Gıda",
+    "brand": "CROWN",
+    "weight_volume": "250 ML",
+    "unit_price": 11.9,
+    "image_url": null
+  },
+  {
+    "sap_code": "100017795",
+    "product_name": "MİNTAX MIKROFIBER DESENLI BEZ 3 LÜ ADET",
+    "category": "Temizlik",
+    "brand": "Mintax",
+    "weight_volume": "3 L",
+    "unit_price": 72.51,
+    "image_url": null
+  },
+  {
+    "sap_code": "100023186",
+    "product_name": "MİNTAX ULTRA GÜÇ KİREÇ VE PAS ÇÖZ 1 LT",
+    "category": "Temizlik",
+    "brand": "Mintax",
+    "weight_volume": "1 L",
+    "unit_price": 70,
+    "image_url": null
+  },
+  {
+    "sap_code": "100023789",
+    "product_name": "MON AMOUR EL KREMİ 75 ML",
+    "category": "Kişisel Bakım",
+    "brand": "MON AMOUR",
+    "weight_volume": "75 ML",
+    "unit_price": 35.5,
+    "image_url": null
+  },
+  {
+    "sap_code": "100030201",
+    "product_name": "ANADOLU MUTFAGI KARANFIL 15 G",
+    "category": "Temel Gıda",
+    "brand": "Anadolu Mutfağı",
+    "weight_volume": "15 G",
+    "unit_price": 21,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007298",
+    "product_name": "AMİGO DÜZ SADE PATATES CİPSİ 150 G",
+    "category": "Atıştırmalık",
+    "brand": "Amigo",
+    "weight_volume": "150 G",
+    "unit_price": 42.9,
+    "image_url": null
+  },
+  {
+    "sap_code": "100003584",
+    "product_name": "MINTAX AHŞAP TEMİZLİYİCİ 1 L",
+    "category": "Temel Gıda",
+    "brand": "Mintax",
+    "weight_volume": "1 L",
+    "unit_price": 66,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007094",
+    "product_name": "MİNTAX HEPSİ BİRARADA B.MAK. TAB. 50'Lİ",
+    "category": "Temel Gıda",
+    "brand": "Mintax",
+    "weight_volume": "50'Lİ",
+    "unit_price": 158,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007277",
+    "product_name": "MİS KARIŞIK MEYVE NEKTARI 200 ML",
+    "category": "İçecek",
+    "brand": "Mis",
+    "weight_volume": "200 ML",
+    "unit_price": 11,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007322",
+    "product_name": "KARMEN FINDIKLI ÇİKOLATA 40 GR",
+    "category": "İçecek",
+    "brand": "Karmen",
+    "weight_volume": "40 G",
+    "unit_price": 24.3,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007317",
+    "product_name": "KARMEN SÜTLÜ ÇİK. SANDVİÇ BİSKÜVİ 30 G",
+    "category": "İçecek",
+    "brand": "Karmen",
+    "weight_volume": "30 G",
+    "unit_price": 6.75,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007184",
+    "product_name": "DEREN BARDAK POŞET ÇAY 25*2 G",
+    "category": "İçecek",
+    "brand": "Deren",
+    "weight_volume": "2 G",
+    "unit_price": 29.7867,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007182",
+    "product_name": "DEREN FİLİZ ÇAY 500 G",
+    "category": "İçecek",
+    "brand": "Deren",
+    "weight_volume": "500 G",
+    "unit_price": 94.4017,
+    "image_url": null
+  },
+  {
+    "sap_code": "100014266",
+    "product_name": "MON AMOUR BB KREM ADET",
+    "category": "Kişisel Bakım",
+    "brand": "MON AMOUR",
+    "weight_volume": null,
+    "unit_price": 79,
+    "image_url": null
+  },
+  {
+    "sap_code": "100000528",
+    "product_name": "PİYALE MISIR NİŞASTASI 200 G",
+    "category": "Temel Gıda",
+    "brand": "Piyale",
+    "weight_volume": "200 G",
+    "unit_price": 14.454,
+    "image_url": null
+  },
+  {
+    "sap_code": "100029301",
+    "product_name": "ANADOLU MUTFAĞI KIRMIZI PUL BİBER75GR*16",
+    "category": "Temel Gıda",
+    "brand": "Anadolu MutfağıAĞI",
+    "weight_volume": "75G",
+    "unit_price": 27,
+    "image_url": null
+  },
+  {
+    "sap_code": "100023161",
+    "product_name": "ANADOLU MUTFAĞI MAVİ HAŞHAŞ 100 GR",
+    "category": "Temel Gıda",
+    "brand": "Anadolu MutfağıAĞI",
+    "weight_volume": "100 G",
+    "unit_price": 46.6153,
+    "image_url": null
+  },
+  {
+    "sap_code": "100032650",
+    "product_name": "BIZIM VATAN LIMON SUYU 750 ML",
+    "category": "İçecek",
+    "brand": "Bizim Vatan",
+    "weight_volume": "750 ML",
+    "unit_price": 46.7483,
+    "image_url": null
+  },
+  {
+    "sap_code": "100019669",
+    "product_name": "CHEETOS MEGA PEY ARO MIS ÇER 80 GR",
+    "category": "Temel Gıda",
+    "brand": "Mis",
+    "weight_volume": "80 G",
+    "unit_price": 32.5,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007300",
+    "product_name": "AMİGO YERFISTIKLI MISIR ÇEREZİ 55 G",
+    "category": "Atıştırmalık",
+    "brand": "Amigo",
+    "weight_volume": "55 G",
+    "unit_price": 14.3,
+    "image_url": null
+  },
+  {
+    "sap_code": "100017991",
+    "product_name": "PİYALE MAKARNA TEL ŞEHRİYE 500 G",
+    "category": "Temel Gıda",
+    "brand": "Piyale",
+    "weight_volume": "500 G",
+    "unit_price": 15.1145,
+    "image_url": null
+  },
+  {
+    "sap_code": "100000530",
+    "product_name": "PİYALE UN 5 KG",
+    "category": "Temel Gıda",
+    "brand": "Piyale",
+    "weight_volume": "5 KG",
+    "unit_price": 126,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007085",
+    "product_name": "TUTTAZE PİŞİRME KAĞIDI 8 MT. 120 GR ADET",
+    "category": "Temel Gıda",
+    "brand": "TUTTAZE",
+    "weight_volume": "8 M",
+    "unit_price": 39.6106,
+    "image_url": null
+  },
+  {
+    "sap_code": "100003609",
+    "product_name": "AMİGO YER FISTIĞI TUZLU 200 G",
+    "category": "Temel Gıda",
+    "brand": "Amigo",
+    "weight_volume": "200 G",
+    "unit_price": 36.5,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007316",
+    "product_name": "TEMPO TUZLU ÇUBUK KRAKER 150 G",
+    "category": "Atıştırmalık",
+    "brand": "TEMPO",
+    "weight_volume": "150 G",
+    "unit_price": 13.5,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007181",
+    "product_name": "DEREN RİZE ÇAY 1 KG",
+    "category": "İçecek",
+    "brand": "Deren",
+    "weight_volume": "1 KG",
+    "unit_price": 181.4208,
+    "image_url": null
+  },
+  {
+    "sap_code": "100017817",
+    "product_name": "AMİGO NACHO PEY ÇEŞ MISIR CİPSİ 130GR",
+    "category": "Atıştırmalık",
+    "brand": "Amigo",
+    "weight_volume": "130G",
+    "unit_price": 33,
+    "image_url": null
+  },
+  {
+    "sap_code": "100032653",
+    "product_name": "PIYALE BITTER DAMLA ÇIKOLATA 250 G",
+    "category": "İçecek",
+    "brand": "Piyale",
+    "weight_volume": "250 G",
+    "unit_price": 121.5142,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007468",
+    "product_name": "BİZİM VATAN ÜZÜM SİRKESİ 750 ML",
+    "category": "Temel Gıda",
+    "brand": "Bizim Vatan",
+    "weight_volume": "750 ML",
+    "unit_price": 28.3683,
+    "image_url": null
+  },
+  {
+    "sap_code": "100028350",
+    "product_name": "LAY S YOĞURT MEVSİM YEŞİL. SÜPER 125 G",
+    "category": "Temel Gıda",
+    "brand": "LAY S",
+    "weight_volume": "125 G",
+    "unit_price": 48.5,
+    "image_url": null
+  },
+  {
+    "sap_code": "100019016",
+    "product_name": "PEKİ ÇİLEK KREMALI GOFRET 142 GR",
+    "category": "Kişisel Bakım",
+    "brand": "Peki",
+    "weight_volume": "142 G",
+    "unit_price": 32.3521,
+    "image_url": null
+  },
+  {
+    "sap_code": "100014994",
+    "product_name": "DALİN BEBEK ŞAMPUANI 700 ML",
+    "category": "Kişisel Bakım",
+    "brand": "DALİN",
+    "weight_volume": "700 ML",
+    "unit_price": 180,
+    "image_url": null
+  },
+  {
+    "sap_code": "100014405",
+    "product_name": "VEET KLASİK TÜY DÖKÜCÜ KREM 100 ML",
+    "category": "Kişisel Bakım",
+    "brand": "VEET",
+    "weight_volume": "100 ML",
+    "unit_price": 165,
+    "image_url": null
+  },
+  {
+    "sap_code": "100014403",
+    "product_name": "MİNTAX ULTRA GÜÇ SPREY 1000 ML",
+    "category": "Temel Gıda",
+    "brand": "Mintax",
+    "weight_volume": "1000 ML",
+    "unit_price": 70,
+    "image_url": null
+  },
+  {
+    "sap_code": "100010162",
+    "product_name": "CROWN COLA PET 250 ML",
+    "category": "İçecek",
+    "brand": "CROWN",
+    "weight_volume": "250 ML",
+    "unit_price": 12.5,
+    "image_url": null
+  },
+  {
+    "sap_code": "100019017",
+    "product_name": "LIONESSE CIMBIZ 4000",
+    "category": "Temel Gıda",
+    "brand": "Lio",
+    "weight_volume": null,
+    "unit_price": 41.3639,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007100",
+    "product_name": "MİNTAX YOĞUN ÇAMAŞIR SUYU ULTRA 1 L",
+    "category": "Temizlik",
+    "brand": "Mintax",
+    "weight_volume": "1 L",
+    "unit_price": 47,
+    "image_url": null
+  },
+  {
+    "sap_code": "100002593",
+    "product_name": "FUSE TEA ICE TEA MANGO VE ANANAS 1 L",
+    "category": "İçecek",
+    "brand": "FUSE TEA",
+    "weight_volume": "1 L",
+    "unit_price": 52,
+    "image_url": null
+  },
+  {
+    "sap_code": "100014259",
+    "product_name": "HOTLINE MULTİ VİTAMİN 250 ML",
+    "category": "Temel Gıda",
+    "brand": "HOTLINE",
+    "weight_volume": "250 ML",
+    "unit_price": 21,
+    "image_url": null
+  },
+  {
+    "sap_code": "100003612",
+    "product_name": "AMİGO BADEM İÇİ 150 G",
+    "category": "Atıştırmalık",
+    "brand": "Amigo",
+    "weight_volume": "150 G",
+    "unit_price": 97.5,
+    "image_url": null
+  },
+  {
+    "sap_code": "100017764",
+    "product_name": "AMİGO SİYAH TUZSUZ AYÇEK 400GR",
+    "category": "Temel Gıda",
+    "brand": "Amigo",
+    "weight_volume": "400G",
+    "unit_price": 49.9,
+    "image_url": null
+  },
+  {
+    "sap_code": "100017763",
+    "product_name": "AMİGO TUZLU AYÇEKİRDEĞİ 400 GR",
+    "category": "Temel Gıda",
+    "brand": "Amigo",
+    "weight_volume": "400 G",
+    "unit_price": 49.5,
+    "image_url": null
+  },
+  {
+    "sap_code": "100003601",
+    "product_name": "PEKİ MUFFIN KEK KAKAOLU 40 G",
+    "category": "Atıştırmalık",
+    "brand": "Peki",
+    "weight_volume": "40 G",
+    "unit_price": 7,
+    "image_url": null
+  },
+  {
+    "sap_code": "100017772",
+    "product_name": "DEREN TİRYAKİ SİYAH ÇAY 1KG",
+    "category": "İçecek",
+    "brand": "Deren",
+    "weight_volume": "1KG",
+    "unit_price": 183.42,
+    "image_url": null
+  },
+  {
+    "sap_code": "100009386",
+    "product_name": "SAROZ KARTON BARDAK 20 Lİ ADET",
+    "category": "Ev & Yaşam",
+    "brand": "SAROZ",
+    "weight_volume": "20 L",
+    "unit_price": 19.0024,
+    "image_url": null
+  },
+  {
+    "sap_code": "100009810",
+    "product_name": "CHANTALE BAMBU KADIN ÇORAP ADET",
+    "category": "Kişisel Bakım",
+    "brand": "CHANTALE",
+    "weight_volume": null,
+    "unit_price": 30.0775,
+    "image_url": null
+  },
+  {
+    "sap_code": "100009377",
+    "product_name": "TEN TÜY DÖKÜCÜ KREM 100 ML",
+    "category": "Kişisel Bakım",
+    "brand": "Diğer",
+    "weight_volume": "100 ML",
+    "unit_price": 64,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007660",
+    "product_name": "YUMAK PAMUKLU ÇUBUK 200'LÜ",
+    "category": "Kişisel Bakım",
+    "brand": "YUMAK",
+    "weight_volume": null,
+    "unit_price": 29.5,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007890",
+    "product_name": "MİNTAX OLUKLU SÜNGER 5'Lİ",
+    "category": "Temizlik",
+    "brand": "Mintax",
+    "weight_volume": "5'Lİ",
+    "unit_price": 29.318,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007775",
+    "product_name": "ADAM COOL TIRAŞ KÖPÜĞÜ 250 ML",
+    "category": "Kişisel Bakım",
+    "brand": "ADAM",
+    "weight_volume": "250 ML",
+    "unit_price": 54,
+    "image_url": null
+  },
+  {
+    "sap_code": "100009255",
+    "product_name": "MİNTAX ÇAM. MAK. TEM. 250 ML",
+    "category": "Temel Gıda",
+    "brand": "Mintax",
+    "weight_volume": "250 ML",
+    "unit_price": 38,
+    "image_url": null
+  },
+  {
+    "sap_code": "100021361",
+    "product_name": "MINTAX LAVABO AÇICI 3*70 GR",
+    "category": "Temizlik",
+    "brand": "Mintax",
+    "weight_volume": "70 G",
+    "unit_price": 44,
+    "image_url": null
+  },
+  {
+    "sap_code": "100028353",
+    "product_name": "RUFFLES ORG.SÜPER BOY 125 G",
+    "category": "Temel Gıda",
+    "brand": "RUFFLES",
+    "weight_volume": "125 G",
+    "unit_price": 48.5,
+    "image_url": null
+  },
+  {
+    "sap_code": "100027749",
+    "product_name": "BIZIM VATAN BEYAZ SIRKE 2 LT",
+    "category": "Temel Gıda",
+    "brand": "Bizim Vatan",
+    "weight_volume": "2 L",
+    "unit_price": 37.0667,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007186",
+    "product_name": "LEZZCAFE KLASİK 200 GR 200 G",
+    "category": "Temel Gıda",
+    "brand": "LEZZCAFE",
+    "weight_volume": "200 G",
+    "unit_price": 186.724,
+    "image_url": null
+  },
+  {
+    "sap_code": "100003608",
+    "product_name": "AMİGO KABAK ÇEKİRDEĞİ TUZLU 200 G",
+    "category": "Temel Gıda",
+    "brand": "Amigo",
+    "weight_volume": "200 G",
+    "unit_price": 62.5,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007275",
+    "product_name": "AMİGO KIZARMIŞ YERFISTIĞI 150 G",
+    "category": "Temel Gıda",
+    "brand": "Amigo",
+    "weight_volume": "150 G",
+    "unit_price": 32,
+    "image_url": null
+  },
+  {
+    "sap_code": "100019009",
+    "product_name": "AMİGO DALINDAN ÇİĞ BADEM 150 GR",
+    "category": "Atıştırmalık",
+    "brand": "Amigo",
+    "weight_volume": "150 G",
+    "unit_price": 97,
+    "image_url": null
+  },
+  {
+    "sap_code": "100023180",
+    "product_name": "LEZZCAFE FİLTRE KAHVE ORTA KAVR 8 GR",
+    "category": "İçecek",
+    "brand": "LEZZCAFE",
+    "weight_volume": "8 G",
+    "unit_price": 10.8963,
+    "image_url": null
+  },
+  {
+    "sap_code": "100018213",
+    "product_name": "FİNİSH BULAŞIK MAKİNESİ TUZU 1,5 KG",
+    "category": "Temizlik",
+    "brand": "FİNİSH",
+    "weight_volume": "1,5 KG",
+    "unit_price": 110,
+    "image_url": null
+  },
+  {
+    "sap_code": "100002594",
+    "product_name": "FUSE TEA ICE TEA KARPUZ 1 L",
+    "category": "İçecek",
+    "brand": "FUSE TEA",
+    "weight_volume": "1 L",
+    "unit_price": 52,
+    "image_url": null
+  },
+  {
+    "sap_code": "100023729",
+    "product_name": "MİNTAX SIVI ÇAMAŞIR DETERJANI 1690 ML",
+    "category": "Temizlik",
+    "brand": "Mintax",
+    "weight_volume": "1690 ML",
+    "unit_price": 122.5,
+    "image_url": null
+  },
+  {
+    "sap_code": "100021395",
+    "product_name": "TASKALE ÇIFTE KAVRULMUS TAHIN 600 GR",
+    "category": "Temel Gıda",
+    "brand": "Taşkale",
+    "weight_volume": "600 G",
+    "unit_price": 98.7875,
+    "image_url": null
+  },
+  {
+    "sap_code": "100019661",
+    "product_name": "AMİGO PESTO SOS PATATES CİPSİ 200 GR",
+    "category": "Atıştırmalık",
+    "brand": "Amigo",
+    "weight_volume": "200 G",
+    "unit_price": 59.5,
+    "image_url": null
+  },
+  {
+    "sap_code": "100028792",
+    "product_name": "PATOS ACI BAHARATLI SÜPER BOY 135 G",
+    "category": "Temel Gıda",
+    "brand": "PATOS",
+    "weight_volume": "135 G",
+    "unit_price": 42.5,
+    "image_url": null
+  },
+  {
+    "sap_code": "100028365",
+    "product_name": "DORİTOS HOT CORN SÜPER BOY 130 G",
+    "category": "Temel Gıda",
+    "brand": "DORİTOS",
+    "weight_volume": "130 G",
+    "unit_price": 46.5,
+    "image_url": null
+  },
+  {
+    "sap_code": "100028354",
+    "product_name": "LAY S BAHARATLI SÜPER BOY 125 G",
+    "category": "Temel Gıda",
+    "brand": "LAY S",
+    "weight_volume": "125 G",
+    "unit_price": 48.5,
+    "image_url": null
+  },
+  {
+    "sap_code": "100021355",
+    "product_name": "KARMEN TABLET BEYAZ ÇIKOLATA 80 GR",
+    "category": "İçecek",
+    "brand": "Karmen",
+    "weight_volume": "80 G",
+    "unit_price": 53.5,
+    "image_url": null
+  },
+  {
+    "sap_code": "100021812",
+    "product_name": "KARMEN %20 BADEMLI SÜTLÜ ÇIKOLATA 80 GR",
+    "category": "İçecek",
+    "brand": "Karmen",
+    "weight_volume": "80 G",
+    "unit_price": 46.5,
+    "image_url": null
+  },
+  {
+    "sap_code": "100022528",
+    "product_name": "TEMPO PORTAKAL SOSLU BİSKÜVİ 114 GR",
+    "category": "Atıştırmalık",
+    "brand": "TEMPO",
+    "weight_volume": "114 G",
+    "unit_price": 14.5,
+    "image_url": null
+  },
+  {
+    "sap_code": "100000832",
+    "product_name": "CAPRİ-SUN MULTİVİTAMİN M. İÇECEK 200 ML",
+    "category": "İçecek",
+    "brand": "CAPRİ-SUN",
+    "weight_volume": "200 ML",
+    "unit_price": 14.5,
+    "image_url": null
+  },
+  {
+    "sap_code": "100014725",
+    "product_name": "COCA COLA KUTU 330 ML",
+    "category": "İçecek",
+    "brand": "COCA COLA",
+    "weight_volume": "330 ML",
+    "unit_price": 44,
+    "image_url": null
+  },
+  {
+    "sap_code": "100001871",
+    "product_name": "ELİT ŞEMSİYE SÜTLÜ ÇİKOLATA 30 G",
+    "category": "İçecek",
+    "brand": "ELİT",
+    "weight_volume": "30 G",
+    "unit_price": 6.6343,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007323",
+    "product_name": "KARMEN FINDIKLI GOFRET 32GR 32 G",
+    "category": "Atıştırmalık",
+    "brand": "Karmen",
+    "weight_volume": "32G",
+    "unit_price": 13.9,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007168",
+    "product_name": "BİZİM VATAN KÖZLENMİŞ PATLICAN 510 G",
+    "category": "Temel Gıda",
+    "brand": "Bizim Vatan",
+    "weight_volume": "510 G",
+    "unit_price": 49.385,
+    "image_url": null
+  },
+  {
+    "sap_code": "100015227",
+    "product_name": "SUPERFRESH MISIR 3*220 G",
+    "category": "Temel Gıda",
+    "brand": "Mis",
+    "weight_volume": "220 G",
+    "unit_price": 78.7893,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007151",
+    "product_name": "BİZİM VATAN BEZELYE KONSERVESİ 830 G",
+    "category": "Temizlik",
+    "brand": "Bizim Vatan",
+    "weight_volume": "830 G",
+    "unit_price": 51.1183,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007423",
+    "product_name": "BİZİM VATAN KARIŞIK TURŞU 680 G",
+    "category": "Kahvaltılık & Soslar",
+    "brand": "Bizim Vatan",
+    "weight_volume": "680 G",
+    "unit_price": 49.8758,
+    "image_url": null
+  },
+  {
+    "sap_code": "100014895",
+    "product_name": "SPRITE PET 1 L",
+    "category": "İçecek",
+    "brand": "Diğer",
+    "weight_volume": "1 L",
+    "unit_price": 54.5,
+    "image_url": null
+  },
+  {
+    "sap_code": "100001246",
+    "product_name": "PİYALE ÇİKOLATALI SOS 128 G",
+    "category": "İçecek",
+    "brand": "Piyale",
+    "weight_volume": "128 G",
+    "unit_price": 26.5863,
+    "image_url": null
+  },
+  {
+    "sap_code": "100000115",
+    "product_name": "EVİN MARGARİN PAKET 250 G",
+    "category": "Sıvı Yağ & Margarin",
+    "brand": "Evin",
+    "weight_volume": "250 G",
+    "unit_price": 28.1817,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007170",
+    "product_name": "BİZİM VATAN ACI BİBER 325 G",
+    "category": "Temel Gıda",
+    "brand": "Bizim Vatan",
+    "weight_volume": "325 G",
+    "unit_price": 46.0958,
+    "image_url": null
+  },
+  {
+    "sap_code": "100017762",
+    "product_name": "AMİGO DLNDN KURU KAYS 250GR",
+    "category": "Temel Gıda",
+    "brand": "Amigo",
+    "weight_volume": "250G",
+    "unit_price": 140,
+    "image_url": null
+  },
+  {
+    "sap_code": "100022516",
+    "product_name": "KARMEN ÇOKORULO BEYAZ 18 GR",
+    "category": "Temel Gıda",
+    "brand": "Karmen",
+    "weight_volume": "18 G",
+    "unit_price": 8.5,
+    "image_url": null
+  },
+  {
+    "sap_code": "100017240",
+    "product_name": "ETİ CİN PORTAKALLI 325 G",
+    "category": "Temel Gıda",
+    "brand": "Eti",
+    "weight_volume": "325 G",
+    "unit_price": 52.5,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007375",
+    "product_name": "BİZİM VATAN HAŞLANMIŞ BARBUNYA 800 G",
+    "category": "Temel Gıda",
+    "brand": "Bizim Vatan",
+    "weight_volume": "800 G",
+    "unit_price": 37.3008,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007422",
+    "product_name": "BİZİM VATAN SALATALIK TURŞUSU 670 G",
+    "category": "Kahvaltılık & Soslar",
+    "brand": "Bizim Vatan",
+    "weight_volume": "670 G",
+    "unit_price": 47.2758,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007171",
+    "product_name": "BİZİM VATAN KÖZLENMİŞ BİBER 680 G",
+    "category": "Temel Gıda",
+    "brand": "Bizim Vatan",
+    "weight_volume": "680 G",
+    "unit_price": 82.0383,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007145",
+    "product_name": "BİZİM VATAN YAPRAK SARMA 400 G",
+    "category": "Temel Gıda",
+    "brand": "Bizim Vatan",
+    "weight_volume": "400 G",
+    "unit_price": 85.7592,
+    "image_url": null
+  },
+  {
+    "sap_code": "100003582",
+    "product_name": "MINTAX GÜL BAHÇESİ YUMUŞATICI 3 L",
+    "category": "Temizlik",
+    "brand": "Mintax",
+    "weight_volume": "3 L",
+    "unit_price": 122.5,
+    "image_url": null
+  },
+  {
+    "sap_code": "100017962",
+    "product_name": "KIZILAY SADE MADEN SUYU 6*200 ML",
+    "category": "İçecek",
+    "brand": "LAY S",
+    "weight_volume": "200 ML",
+    "unit_price": 57,
+    "image_url": null
+  },
+  {
+    "sap_code": "100006034",
+    "product_name": "CAPRİ-SUN MYSTİC DRAGON 200 ML",
+    "category": "Temel Gıda",
+    "brand": "CAPRİ-SUN",
+    "weight_volume": "200 ML",
+    "unit_price": 14.5,
+    "image_url": null
+  },
+  {
+    "sap_code": "100018403",
+    "product_name": "ETİ CİCİBEBE BİSKÜVİ 172 G",
+    "category": "Atıştırmalık",
+    "brand": "Eti",
+    "weight_volume": "172 G",
+    "unit_price": 39,
+    "image_url": null
+  },
+  {
+    "sap_code": "100013593",
+    "product_name": "ANADOLU MUT ÇİĞ KÖF HARCI 430 G",
+    "category": "Temel Gıda",
+    "brand": "Diğer",
+    "weight_volume": "430 G",
+    "unit_price": 68.643,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007989",
+    "product_name": "AMİGO KABUKLU YER FISTIĞI 500 G",
+    "category": "Temel Gıda",
+    "brand": "Amigo",
+    "weight_volume": "500 G",
+    "unit_price": 70,
+    "image_url": null
+  },
+  {
+    "sap_code": "100008123",
+    "product_name": "DEREN DEMLİK POŞET ÇAY 100*3,2 G",
+    "category": "İçecek",
+    "brand": "Deren",
+    "weight_volume": "3,2 G",
+    "unit_price": 98.795,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007956",
+    "product_name": "ANOLU MUTFAĞI ESMER PİLAVLIK BULGUR 1 KG",
+    "category": "Ev & Yaşam",
+    "brand": "Anadolu Mutfağı",
+    "weight_volume": "1 KG",
+    "unit_price": 32.6853,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007185",
+    "product_name": "YEMENLİ TÜRK KAHVESİ 100 G",
+    "category": "İçecek",
+    "brand": "YEMENLİ",
+    "weight_volume": "100 G",
+    "unit_price": 61.645,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007143",
+    "product_name": "PIYALE INSTANT KURU MAYA 3*11 G 3*11 G",
+    "category": "Temel Gıda",
+    "brand": "Piyale",
+    "weight_volume": "11 G",
+    "unit_price": 10.2296,
+    "image_url": null
+  },
+  {
+    "sap_code": "100009383",
+    "product_name": "EBRU DEKORATİF ARABA KOKUSU 8 ML",
+    "category": "Ev & Yaşam",
+    "brand": "Ebru",
+    "weight_volume": "8 ML",
+    "unit_price": 67.5588,
+    "image_url": null
+  },
+  {
+    "sap_code": "100008927",
+    "product_name": "YUMAK KARE MAKYAJ TEMİZLEME PAMUĞU 70'Lİ",
+    "category": "Temel Gıda",
+    "brand": "YUMAK",
+    "weight_volume": "70'Lİ",
+    "unit_price": 39,
+    "image_url": null
+  },
+  {
+    "sap_code": "100009148",
+    "product_name": "MİNTAX KLASİK BULAŞIK MAKİNESİ JEL 1 L",
+    "category": "Temizlik",
+    "brand": "Mintax",
+    "weight_volume": "1 L",
+    "unit_price": 123,
+    "image_url": null
+  },
+  {
+    "sap_code": "100008681",
+    "product_name": "EBRU MEYVE RÜYASI SIVI SABUN 4 L",
+    "category": "Kişisel Bakım",
+    "brand": "Ebru",
+    "weight_volume": "4 L",
+    "unit_price": 147,
+    "image_url": null
+  },
+  {
+    "sap_code": "100009285",
+    "product_name": "BİSTO LAVAŞ 840 G",
+    "category": "Temel Gıda",
+    "brand": "Bisto",
+    "weight_volume": "840 G",
+    "unit_price": 65.2,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007789",
+    "product_name": "BİZİM VATAN KETÇAP TATLI 1000 GR",
+    "category": "Kahvaltılık & Soslar",
+    "brand": "Bizim Vatan",
+    "weight_volume": "1000 G",
+    "unit_price": 70.057,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007678",
+    "product_name": "EROS DON JUAN PREZERVATİF 12'Lİ",
+    "category": "Kişisel Bakım",
+    "brand": "EROS",
+    "weight_volume": "12'Lİ",
+    "unit_price": 71,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007945",
+    "product_name": "SAHİL ÇAY BARDAĞI 6 LI 100 CC 6'LI",
+    "category": "İçecek",
+    "brand": "Diğer",
+    "weight_volume": "6 L",
+    "unit_price": 64.6408,
+    "image_url": null
+  },
+  {
+    "sap_code": "100030200",
+    "product_name": "ANADOLU MUTFAGI DOLMALIK FISTIK 25 G",
+    "category": "Atıştırmalık",
+    "brand": "Anadolu Mutfağı",
+    "weight_volume": "25 G",
+    "unit_price": 151,
+    "image_url": null
+  },
+  {
+    "sap_code": "100029300",
+    "product_name": "ANADOLU MUTFAĞI KİMYON 75 G*12 ADET",
+    "category": "Temel Gıda",
+    "brand": "Anadolu MutfağıAĞI",
+    "weight_volume": "75 G",
+    "unit_price": 31.75,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007640",
+    "product_name": "ANADOLU MUTFAĞI KIRMIZI MERCİMEK 1 KG",
+    "category": "Temel Gıda",
+    "brand": "Anadolu MutfağıAĞI",
+    "weight_volume": "1 KG",
+    "unit_price": 46.5,
+    "image_url": null
+  },
+  {
+    "sap_code": "100021103",
+    "product_name": "SAKURA 4W E14 FILAMENT LED AMPUL ADET",
+    "category": "Ev & Yaşam",
+    "brand": "SAKURA",
+    "weight_volume": null,
+    "unit_price": 43.8033,
+    "image_url": null
+  },
+  {
+    "sap_code": "100008355",
+    "product_name": "TUTTAZE KİLİTLİ POŞET ORTA BOY 15 ADET",
+    "category": "Ev & Yaşam",
+    "brand": "TUTTAZE",
+    "weight_volume": null,
+    "unit_price": 48.085,
+    "image_url": null
+  },
+  {
+    "sap_code": "100025997",
+    "product_name": "AMİGO BONCUK FISTIK 200 GR",
+    "category": "Atıştırmalık",
+    "brand": "Amigo",
+    "weight_volume": "200 G",
+    "unit_price": 31.9,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007144",
+    "product_name": "PİYALE PASTA KREMASI SADE 140 G",
+    "category": "Kişisel Bakım",
+    "brand": "Piyale",
+    "weight_volume": "140 G",
+    "unit_price": 33.5258,
+    "image_url": null
+  },
+  {
+    "sap_code": "100009930",
+    "product_name": "BİSTO YAĞLI GEVREK 500 G",
+    "category": "Temel Gıda",
+    "brand": "Bisto",
+    "weight_volume": "500 G",
+    "unit_price": 87.9,
+    "image_url": null
+  },
+  {
+    "sap_code": "100002004",
+    "product_name": "FUSE TEA ICE TEA ŞEFTALİ 1 L",
+    "category": "İçecek",
+    "brand": "FUSE TEA",
+    "weight_volume": "1 L",
+    "unit_price": 52,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007281",
+    "product_name": "MİS VİŞNE MEYVE NEKTARI 200 ML",
+    "category": "İçecek",
+    "brand": "Mis",
+    "weight_volume": "200 ML",
+    "unit_price": 15,
+    "image_url": null
+  },
+  {
+    "sap_code": "100015188",
+    "product_name": "SCHWEPPES MANDALİNA ARO.İÇECEK PET 1 L",
+    "category": "İçecek",
+    "brand": "SCHWEPPES",
+    "weight_volume": "1 L",
+    "unit_price": 71,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007858",
+    "product_name": "ANADOLU MUTFAĞI TUZ 750 G",
+    "category": "Temel Gıda",
+    "brand": "Anadolu MutfağıAĞI",
+    "weight_volume": "750 G",
+    "unit_price": 10.25,
+    "image_url": null
+  },
+  {
+    "sap_code": "100001248",
+    "product_name": "PİYALE MERCİMEK ÇORBASI 72 G",
+    "category": "Temel Gıda",
+    "brand": "Piyale",
+    "weight_volume": "72 G",
+    "unit_price": 27.025,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007722",
+    "product_name": "ANADOLU MUTFAĞI BARBUNYA 1 KG",
+    "category": "Temel Gıda",
+    "brand": "Anadolu MutfağıAĞI",
+    "weight_volume": "1 KG",
+    "unit_price": 92,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007792",
+    "product_name": "BİZİM VATAN KETÇAP ACILI 1000 GR",
+    "category": "Kahvaltılık & Soslar",
+    "brand": "Bizim Vatan",
+    "weight_volume": "1000 G",
+    "unit_price": 69.717,
+    "image_url": null
+  },
+  {
+    "sap_code": "100028362",
+    "product_name": "DORİTOS TACO SÜPER BOY 135 G",
+    "category": "Temel Gıda",
+    "brand": "DORİTOS",
+    "weight_volume": "135 G",
+    "unit_price": 46.5,
+    "image_url": null
+  },
+  {
+    "sap_code": "100014715",
+    "product_name": "BİLLUR İYOTLU TUZ 750 G",
+    "category": "Temel Gıda",
+    "brand": "BİLLUR",
+    "weight_volume": "750 G",
+    "unit_price": 31.5,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007196",
+    "product_name": "EVİN AYÇİÇEKYAĞI 2 L",
+    "category": "Sıvı Yağ & Margarin",
+    "brand": "Evin",
+    "weight_volume": "2 L",
+    "unit_price": 214.5456,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007195",
+    "product_name": "EVİN AYÇİÇEKYAĞI 1 L",
+    "category": "Sıvı Yağ & Margarin",
+    "brand": "Evin",
+    "weight_volume": "1 L",
+    "unit_price": 111.4783,
+    "image_url": null
+  },
+  {
+    "sap_code": "100009443",
+    "product_name": "BİSTO SADE GALETA 200 G",
+    "category": "Temel Gıda",
+    "brand": "Bisto",
+    "weight_volume": "200 G",
+    "unit_price": 33.5,
+    "image_url": null
+  },
+  {
+    "sap_code": "100003583",
+    "product_name": "MINTAX LAVANTA YUMUŞATICI 3 L",
+    "category": "Temizlik",
+    "brand": "Mintax",
+    "weight_volume": "3 L",
+    "unit_price": 122.5,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007272",
+    "product_name": "MİS KAYISI MEYVE NEKTARI 1 L",
+    "category": "İçecek",
+    "brand": "Mis",
+    "weight_volume": "1 L",
+    "unit_price": 45.5,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007319",
+    "product_name": "KARMEN SÜTLÜ ÇİKOLATA 80 G",
+    "category": "İçecek",
+    "brand": "Karmen",
+    "weight_volume": "80 G",
+    "unit_price": 46.5,
+    "image_url": null
+  },
+  {
+    "sap_code": "100014727",
+    "product_name": "COCA COLA PET 2,5 L",
+    "category": "İçecek",
+    "brand": "COCA COLA",
+    "weight_volume": "2,5 L",
+    "unit_price": 75,
+    "image_url": null
+  },
+  {
+    "sap_code": "100018461",
+    "product_name": "COCA COLA PET 1,5 L",
+    "category": "İçecek",
+    "brand": "COCA COLA",
+    "weight_volume": "1,5 L",
+    "unit_price": 56.5,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007285",
+    "product_name": "AMİGO LÜKS KABUKSUZ KAR. KURUYEMİŞ 200 G",
+    "category": "Atıştırmalık",
+    "brand": "Amigo",
+    "weight_volume": "200 G",
+    "unit_price": 160,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007267",
+    "product_name": "KARMEN NUGA BAR ÇİKOLATA 35 G",
+    "category": "İçecek",
+    "brand": "Karmen",
+    "weight_volume": "35 G",
+    "unit_price": 10.5,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007083",
+    "product_name": "MİS ÇİLEKLİ SÜT 200 ML",
+    "category": "İçecek",
+    "brand": "Mis",
+    "weight_volume": "200 ML",
+    "unit_price": 14.75,
+    "image_url": null
+  },
+  {
+    "sap_code": "100014242",
+    "product_name": "EBRU SIVI SABUN GÜL 4 LT",
+    "category": "Kişisel Bakım",
+    "brand": "Ebru",
+    "weight_volume": "4 L",
+    "unit_price": 147,
+    "image_url": null
+  },
+  {
+    "sap_code": "100009739",
+    "product_name": "MİNTAX RENK. ÖZEL Ç. DET. TOZ 1,5 KG",
+    "category": "Temel Gıda",
+    "brand": "Mintax",
+    "weight_volume": "1,5 KG",
+    "unit_price": 89.5,
+    "image_url": null
+  },
+  {
+    "sap_code": "100001907",
+    "product_name": "ULUDAĞ LİMONATA PET 1 L",
+    "category": "İçecek",
+    "brand": "ULUDAĞ",
+    "weight_volume": "1 L",
+    "unit_price": 46.9,
+    "image_url": null
+  },
+  {
+    "sap_code": "100014111",
+    "product_name": "AMİGO DALINDAN KURU İNCİR 250 GR",
+    "category": "Temel Gıda",
+    "brand": "Amigo",
+    "weight_volume": "250 G",
+    "unit_price": 103,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007271",
+    "product_name": "MİS VİŞNE MEYVE NEKTARI 1 L",
+    "category": "İçecek",
+    "brand": "Mis",
+    "weight_volume": "1 L",
+    "unit_price": 57,
+    "image_url": null
+  },
+  {
+    "sap_code": "100021791",
+    "product_name": "AMIGO TUZLU SIYAH ÇEKIRDEK 1 KG",
+    "category": "Temel Gıda",
+    "brand": "Amigo",
+    "weight_volume": "1 KG",
+    "unit_price": 95,
+    "image_url": null
+  },
+  {
+    "sap_code": "100019660",
+    "product_name": "AMİGO İRİ BOY TUZSUZ AYÇEKİRDEĞİ 400 GR",
+    "category": "Temel Gıda",
+    "brand": "Amigo",
+    "weight_volume": "400 G",
+    "unit_price": 64,
+    "image_url": null
+  },
+  {
+    "sap_code": "100019662",
+    "product_name": "AMİGO TUZLU AYÇEKİRDEĞİ İRİ BOY 400 GR",
+    "category": "Temel Gıda",
+    "brand": "Amigo",
+    "weight_volume": "400 G",
+    "unit_price": 64,
+    "image_url": null
+  },
+  {
+    "sap_code": "100009947",
+    "product_name": "KARMEN H.CEVİZİ TOPLARI BADEMLİ 30 G",
+    "category": "Atıştırmalık",
+    "brand": "Karmen",
+    "weight_volume": "30 G",
+    "unit_price": 17.9,
+    "image_url": null
+  },
+  {
+    "sap_code": "100017608",
+    "product_name": "BEBELAC 3 DEVAM SÜTÜ 400 G",
+    "category": "İçecek",
+    "brand": "BEBELAC",
+    "weight_volume": "400 G",
+    "unit_price": 351.745,
+    "image_url": null
+  },
+  {
+    "sap_code": "100013962",
+    "product_name": "ANADOLU MUTFAĞI SEBZELİ ÇEŞNİ 200 GR",
+    "category": "Temel Gıda",
+    "brand": "Anadolu MutfağıAĞI",
+    "weight_volume": "200 G",
+    "unit_price": 33.843,
+    "image_url": null
+  },
+  {
+    "sap_code": "100014271",
+    "product_name": "MORFOSE ULTRA STRONG SAÇ SPREYİ 250 ML",
+    "category": "Temel Gıda",
+    "brand": "MORFOSE",
+    "weight_volume": "250 ML",
+    "unit_price": 185,
+    "image_url": null
+  },
+  {
+    "sap_code": "100008262",
+    "product_name": "ETİ SÜT BURGER 35 G",
+    "category": "İçecek",
+    "brand": "Eti",
+    "weight_volume": "35 G",
+    "unit_price": 14.9,
+    "image_url": null
+  },
+  {
+    "sap_code": "100009953",
+    "product_name": "MON AMOUR ASETON 130 ML",
+    "category": "Kişisel Bakım",
+    "brand": "MON AMOUR",
+    "weight_volume": "130 ML",
+    "unit_price": 38,
+    "image_url": null
+  },
+  {
+    "sap_code": "100008820",
+    "product_name": "ADAM ÇİFT BIÇAKLI TIRAŞ BIÇAĞI 10'LU",
+    "category": "Kişisel Bakım",
+    "brand": "ADAM",
+    "weight_volume": "10'LU",
+    "unit_price": 94,
+    "image_url": null
+  },
+  {
+    "sap_code": "100008933",
+    "product_name": "EBRU SIVI SABUN ZEYTİNYAĞLI 750 ML",
+    "category": "Kişisel Bakım",
+    "brand": "Ebru",
+    "weight_volume": "750 ML",
+    "unit_price": 45,
+    "image_url": null
+  },
+  {
+    "sap_code": "100009442",
+    "product_name": "BİSTO KEPEKLİ GALETA 200GR 200 G",
+    "category": "Temel Gıda",
+    "brand": "Bisto",
+    "weight_volume": "200G",
+    "unit_price": 33.7,
+    "image_url": null
+  },
+  {
+    "sap_code": "100013458",
+    "product_name": "TEMPO SANDVİÇ BİSKÜVİ 300GR",
+    "category": "Atıştırmalık",
+    "brand": "TEMPO",
+    "weight_volume": "300G",
+    "unit_price": 33,
+    "image_url": null
+  },
+  {
+    "sap_code": "100009586",
+    "product_name": "KARMEN SANDVİÇ BİSKÜVİ 8 Lİ 240 G",
+    "category": "Atıştırmalık",
+    "brand": "Karmen",
+    "weight_volume": "8 L",
+    "unit_price": 54,
+    "image_url": null
+  },
+  {
+    "sap_code": "100010712",
+    "product_name": "BİSTO HİNDİSTAN CEVİZLİ KURABİYE 500 G",
+    "category": "Atıştırmalık",
+    "brand": "Bisto",
+    "weight_volume": "500 G",
+    "unit_price": 87,
+    "image_url": null
+  },
+  {
+    "sap_code": "100030948",
+    "product_name": "MINTAX INOX SÜNGER 2'LI",
+    "category": "Temizlik",
+    "brand": "Mintax",
+    "weight_volume": null,
+    "unit_price": 50.65,
+    "image_url": null
+  },
+  {
+    "sap_code": "100009373",
+    "product_name": "MİNTAX RENK. ÖZEL Ç. DET. TOZ 4,5 KG",
+    "category": "Temel Gıda",
+    "brand": "Mintax",
+    "weight_volume": "4,5 KG",
+    "unit_price": 217,
+    "image_url": null
+  },
+  {
+    "sap_code": "100011905",
+    "product_name": "ETİ SÜT BURGER ÇİLEKLİ 35 GR",
+    "category": "İçecek",
+    "brand": "Eti",
+    "weight_volume": "35 G",
+    "unit_price": 14.9,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007193",
+    "product_name": "PİYALE PUDRA ŞEKERİ 250 G",
+    "category": "Atıştırmalık",
+    "brand": "Piyale",
+    "weight_volume": "250 G",
+    "unit_price": 23.447,
+    "image_url": null
+  },
+  {
+    "sap_code": "100026896",
+    "product_name": "ÜLKER ÇOKOMEL DEV SADE 22 G",
+    "category": "Atıştırmalık",
+    "brand": "ÜLKER",
+    "weight_volume": "22 G",
+    "unit_price": 7.2,
+    "image_url": null
+  },
+  {
+    "sap_code": "100015599",
+    "product_name": "ETİ PUF KAKAOLU 18 G",
+    "category": "Atıştırmalık",
+    "brand": "Eti",
+    "weight_volume": "18 G",
+    "unit_price": 4.7,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007872",
+    "product_name": "MİS KLASİK İNEK PEYNİRİ 600 G",
+    "category": "Kahvaltılık & Soslar",
+    "brand": "Mis",
+    "weight_volume": "600 G",
+    "unit_price": 29.9,
+    "image_url": null
+  },
+  {
+    "sap_code": "100008352",
+    "product_name": "PİYALE TAVUK GÖĞSÜ 125 G",
+    "category": "Temel Gıda",
+    "brand": "Piyale",
+    "weight_volume": "125 G",
+    "unit_price": 16.3167,
+    "image_url": null
+  },
+  {
+    "sap_code": "100001859",
+    "product_name": "ETİ PUF HİNDİSTAN CEVİZLİ 16 G",
+    "category": "Atıştırmalık",
+    "brand": "Eti",
+    "weight_volume": "16 G",
+    "unit_price": 4.7,
+    "image_url": null
+  },
+  {
+    "sap_code": "100010156",
+    "product_name": "TEMPO SUSAMLI ÇUBUK KRAKER 100 G",
+    "category": "Atıştırmalık",
+    "brand": "TEMPO",
+    "weight_volume": "100 G",
+    "unit_price": 13.5,
+    "image_url": null
+  },
+  {
+    "sap_code": "100030949",
+    "product_name": "PIYALE GALETA UNU 400 G",
+    "category": "Temel Gıda",
+    "brand": "Piyale",
+    "weight_volume": "400 G",
+    "unit_price": 33.295,
+    "image_url": null
+  },
+  {
+    "sap_code": "100021101",
+    "product_name": "TON WICH BOL PEYNİRLİ SANDWICH 130 GR",
+    "category": "Kahvaltılık & Soslar",
+    "brand": "TON WICH",
+    "weight_volume": "130 G",
+    "unit_price": 32.5,
+    "image_url": null
+  },
+  {
+    "sap_code": "100008107",
+    "product_name": "MİNTAX ÇOK AMAÇLI GENEL TEM. 1 L",
+    "category": "Temel Gıda",
+    "brand": "Mintax",
+    "weight_volume": "1 L",
+    "unit_price": 58,
+    "image_url": null
+  },
+  {
+    "sap_code": "100010738",
+    "product_name": "MİNTAX ULTRA SIVI BULAŞIK DET. 750 ML",
+    "category": "Temizlik",
+    "brand": "Mintax",
+    "weight_volume": "750 ML",
+    "unit_price": 69,
+    "image_url": null
+  },
+  {
+    "sap_code": "100009049",
+    "product_name": "SAROZ BÜYÜK BOY ÇÖP TRBS 65*80 CM 20'Lİ",
+    "category": "Temel Gıda",
+    "brand": "SAROZ",
+    "weight_volume": "20'Lİ",
+    "unit_price": 59.0697,
+    "image_url": null
+  },
+  {
+    "sap_code": "100009811",
+    "product_name": "CHANTALE BAMBU KADIN PATİK ÇORAP ADET",
+    "category": "Kişisel Bakım",
+    "brand": "CHANTALE",
+    "weight_volume": null,
+    "unit_price": 28.8829,
+    "image_url": null
+  },
+  {
+    "sap_code": "100022503",
+    "product_name": "CHEETOS SHOTS SÜT MISIR 3*14 G",
+    "category": "İçecek",
+    "brand": "Mis",
+    "weight_volume": "14 G",
+    "unit_price": 18.7,
+    "image_url": null
+  },
+  {
+    "sap_code": "100028339",
+    "product_name": "LAY S KLASİK SÜPER BOY 125 G",
+    "category": "Temel Gıda",
+    "brand": "LAY S",
+    "weight_volume": "125 G",
+    "unit_price": 48.5,
+    "image_url": null
+  },
+  {
+    "sap_code": "100003600",
+    "product_name": "PEKİ MUFFIN KEK MEYVELİ 40 G",
+    "category": "Atıştırmalık",
+    "brand": "Peki",
+    "weight_volume": "40 G",
+    "unit_price": 7,
+    "image_url": null
+  },
+  {
+    "sap_code": "100003604",
+    "product_name": "TEMPO PETİBÖR BİSKÜVİ 1 KG",
+    "category": "Atıştırmalık",
+    "brand": "Eti",
+    "weight_volume": "1 KG",
+    "unit_price": 79.9,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007374",
+    "product_name": "BİZİM VATAN HAŞLANMIŞ NOHUT 800 G",
+    "category": "Temel Gıda",
+    "brand": "Bizim Vatan",
+    "weight_volume": "800 G",
+    "unit_price": 36.0158,
+    "image_url": null
+  },
+  {
+    "sap_code": "100019019",
+    "product_name": "LIONESSE TIRNAK TÖRPÜSÜ 4002",
+    "category": "Temel Gıda",
+    "brand": "Lio",
+    "weight_volume": null,
+    "unit_price": 37.8647,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007098",
+    "product_name": "MİNTAX BULAŞIK PARLATICI 450 ML",
+    "category": "Temizlik",
+    "brand": "Mintax",
+    "weight_volume": "450 ML",
+    "unit_price": 42,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007812",
+    "product_name": "DEREN ŞEFTALİ ICE TEA KUTU 330 ML",
+    "category": "İçecek",
+    "brand": "Deren",
+    "weight_volume": "330 ML",
+    "unit_price": 21.9,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007446",
+    "product_name": "LIO KIRMA YEŞİL ZEYTİN CAM 141-160 400 G",
+    "category": "Kahvaltılık & Soslar",
+    "brand": "Lio",
+    "weight_volume": "400 G",
+    "unit_price": 84.6138,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007509",
+    "product_name": "BOLTANE EKSTRA GEL VİŞNE REÇELİ ADET",
+    "category": "Kahvaltılık & Soslar",
+    "brand": "BOLTANE",
+    "weight_volume": null,
+    "unit_price": 290.1425,
+    "image_url": null
+  },
+  {
+    "sap_code": "100017971",
+    "product_name": "ARI MAMA 12.VİT.6MİN.SÜT.PİR.UNU 200 G",
+    "category": "İçecek",
+    "brand": "ARI MAMA",
+    "weight_volume": "6M",
+    "unit_price": 57.8763,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007855",
+    "product_name": "ALTINKÜP KÜP ŞEKER 1 KG",
+    "category": "Atıştırmalık",
+    "brand": "ALTINKÜP",
+    "weight_volume": "1 KG",
+    "unit_price": 54.1365,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007643",
+    "product_name": "ANADOLU MUTFAĞI PİLAVLIK BULGUR 1 KG",
+    "category": "Ev & Yaşam",
+    "brand": "Anadolu MutfağıAĞI",
+    "weight_volume": "1 KG",
+    "unit_price": 31.0833,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007826",
+    "product_name": "ANOLU MUTFAĞI ESMER KÖFTELİK BULGUR 1 KG",
+    "category": "Temel Gıda",
+    "brand": "Anadolu Mutfağı",
+    "weight_volume": "1 KG",
+    "unit_price": 32.4067,
+    "image_url": null
+  },
+  {
+    "sap_code": "100021348",
+    "product_name": "EBRU LIMON KOLONYASI SPREY 150 ML",
+    "category": "Kişisel Bakım",
+    "brand": "Ebru",
+    "weight_volume": "150 ML",
+    "unit_price": 35.5,
+    "image_url": null
+  },
+  {
+    "sap_code": "100023728",
+    "product_name": "MİNTAX SIVI BULASIK DETER LOSYON 750 ML",
+    "category": "Temel Gıda",
+    "brand": "Mintax",
+    "weight_volume": "750 ML",
+    "unit_price": 53.5,
+    "image_url": null
+  },
+  {
+    "sap_code": "100015589",
+    "product_name": "ETİ BROWNİ GOLD MİNİ KAKAOLU 9*20 G",
+    "category": "Temel Gıda",
+    "brand": "Eti",
+    "weight_volume": "20 G",
+    "unit_price": 52,
+    "image_url": null
+  },
+  {
+    "sap_code": "100018141",
+    "product_name": "PİYALE KREMALI MANTAR ÇORBASI 65 G",
+    "category": "Kişisel Bakım",
+    "brand": "Piyale",
+    "weight_volume": "65 G",
+    "unit_price": 27.025,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007146",
+    "product_name": "BİZİM VATAN GARNİTÜR KONSERVESİ 560 G",
+    "category": "Temel Gıda",
+    "brand": "Bizim Vatan",
+    "weight_volume": "560 G",
+    "unit_price": 39.8767,
+    "image_url": null
+  },
+  {
+    "sap_code": "100010184",
+    "product_name": "MEGANIT ALKALİN İNCE KALEM PİL 4'LÜ ADET",
+    "category": "Ev & Yaşam",
+    "brand": "MEGANIT",
+    "weight_volume": null,
+    "unit_price": 29.3913,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007097",
+    "product_name": "MİNTAX BULAŞIK MAKİNESİ TUZU 1,5 KG",
+    "category": "Temizlik",
+    "brand": "Mintax",
+    "weight_volume": "1,5 KG",
+    "unit_price": 38,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007103",
+    "product_name": "MİNTAX ÇAMAŞIR DETERJANI TOZ 1,5 KG",
+    "category": "Temizlik",
+    "brand": "Mintax",
+    "weight_volume": "1,5 KG",
+    "unit_price": 91,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007273",
+    "product_name": "MİS ŞEFTALİ MEYVE NEKTARI 1 L",
+    "category": "İçecek",
+    "brand": "Mis",
+    "weight_volume": "1 L",
+    "unit_price": 45.5,
+    "image_url": null
+  },
+  {
+    "sap_code": "100018140",
+    "product_name": "PİYALE KREMALI DOMATES ÇORBASI 65 G",
+    "category": "Kişisel Bakım",
+    "brand": "Piyale",
+    "weight_volume": "65 G",
+    "unit_price": 27.025,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007082",
+    "product_name": "MİS MUZLU SÜT 200 ML",
+    "category": "İçecek",
+    "brand": "Mis",
+    "weight_volume": "200 ML",
+    "unit_price": 14.75,
+    "image_url": null
+  },
+  {
+    "sap_code": "100017989",
+    "product_name": "PİYALE MAKARNA ARPA ŞEHRİYE 500 G",
+    "category": "Temel Gıda",
+    "brand": "Piyale",
+    "weight_volume": "500 G",
+    "unit_price": 15.0475,
+    "image_url": null
+  },
+  {
+    "sap_code": "100023215",
+    "product_name": "TUTTAZE ALÜMİNYUM FOLYO 8 M",
+    "category": "Ev & Yaşam",
+    "brand": "TUTTAZE",
+    "weight_volume": "8 M",
+    "unit_price": 60.9719,
+    "image_url": null
+  },
+  {
+    "sap_code": "100028795",
+    "product_name": "CİPSO TIRTIKLI YOĞURT SÜPER BOY 125 G",
+    "category": "Atıştırmalık",
+    "brand": "Diğer",
+    "weight_volume": "125 G",
+    "unit_price": 44,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007612",
+    "product_name": "ANADOLU MUTFAĞI BALDO PİRİNÇ 1 KG",
+    "category": "Temel Gıda",
+    "brand": "Anadolu MutfağıAĞI",
+    "weight_volume": "1 KG",
+    "unit_price": 78.25,
+    "image_url": null
+  },
+  {
+    "sap_code": "100015704",
+    "product_name": "ETİ BROWNİ GOLD KAK.SOS.ÇİK.KEK 45 G",
+    "category": "Atıştırmalık",
+    "brand": "Eti",
+    "weight_volume": "45 G",
+    "unit_price": 11.5,
+    "image_url": null
+  },
+  {
+    "sap_code": "100014351",
+    "product_name": "PİYALE MAKARNA SOSU PESTO 190 GR",
+    "category": "Kahvaltılık & Soslar",
+    "brand": "Piyale",
+    "weight_volume": "190 G",
+    "unit_price": 100.885,
+    "image_url": null
+  },
+  {
+    "sap_code": "100010705",
+    "product_name": "ANADOLU MUTFAĞI KÖFTE HARCI 100 G",
+    "category": "Temel Gıda",
+    "brand": "Anadolu MutfağıAĞI",
+    "weight_volume": "100 G",
+    "unit_price": 32.8733,
+    "image_url": null
+  },
+  {
+    "sap_code": "100008271",
+    "product_name": "CHANTALE İP ASKILI BYN MODAL ATLET ADET",
+    "category": "Kişisel Bakım",
+    "brand": "CHANTALE",
+    "weight_volume": null,
+    "unit_price": 70.8873,
+    "image_url": null
+  },
+  {
+    "sap_code": "100008270",
+    "product_name": "CHANTALE BAYAN MODAL SLİP 3 LÜ ADET",
+    "category": "Kişisel Bakım",
+    "brand": "CHANTALE",
+    "weight_volume": "3 L",
+    "unit_price": 98.8079,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007910",
+    "product_name": "SAKURA LED AMPÜL-GÜN IŞIĞI 9W ADET",
+    "category": "Ev & Yaşam",
+    "brand": "SAKURA",
+    "weight_volume": null,
+    "unit_price": 43.4583,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007960",
+    "product_name": "SOFTY GÜNLÜK PED NORMAL 20'Lİ",
+    "category": "Kişisel Bakım",
+    "brand": "SOFTY",
+    "weight_volume": "20'Lİ",
+    "unit_price": 25.9,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007776",
+    "product_name": "TEN KOMPLE SET SİR AĞDA BANTLARI 41'Lİ",
+    "category": "Kişisel Bakım",
+    "brand": "Diğer",
+    "weight_volume": "41'Lİ",
+    "unit_price": 64,
+    "image_url": null
+  },
+  {
+    "sap_code": "100008071",
+    "product_name": "MİNTAX KİREÇ ÖNLEYİCİ 500 G",
+    "category": "Temizlik",
+    "brand": "Mintax",
+    "weight_volume": "500 G",
+    "unit_price": 49,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007769",
+    "product_name": "KARMEN KAK FINDIK KREMASI CAM 400 G",
+    "category": "Kişisel Bakım",
+    "brand": "Karmen",
+    "weight_volume": "400 G",
+    "unit_price": 94.3825,
+    "image_url": null
+  },
+  {
+    "sap_code": "100029303",
+    "product_name": "ANADOLU MUTFAĞI SUSAM 75 GR* 16 ADET",
+    "category": "Temel Gıda",
+    "brand": "Anadolu MutfağıAĞI",
+    "weight_volume": "75 G",
+    "unit_price": 14.75,
+    "image_url": null
+  },
+  {
+    "sap_code": "100008202",
+    "product_name": "PEKİ KAKAOLU GOFRET 350 G",
+    "category": "Atıştırmalık",
+    "brand": "Peki",
+    "weight_volume": "350 G",
+    "unit_price": 44.5,
+    "image_url": null
+  },
+  {
+    "sap_code": "100021108",
+    "product_name": "MON AMOUR LIPCARE ORIJINAL ADET",
+    "category": "Kişisel Bakım",
+    "brand": "MON AMOUR",
+    "weight_volume": null,
+    "unit_price": 34,
+    "image_url": null
+  },
+  {
+    "sap_code": "100021850",
+    "product_name": "AMİGO POPS PİRİNÇ VE MISIR PATLA 64 GR",
+    "category": "Temel Gıda",
+    "brand": "Amigo",
+    "weight_volume": "64 G",
+    "unit_price": 13.9,
+    "image_url": null
+  },
+  {
+    "sap_code": "100000653",
+    "product_name": "PATOS CRİTOS PEYNİRLİ SÜPER BOY 115 G",
+    "category": "Kahvaltılık & Soslar",
+    "brand": "PATOS",
+    "weight_volume": "115 G",
+    "unit_price": 50,
+    "image_url": null
+  },
+  {
+    "sap_code": "100032893",
+    "product_name": "KARMEN BÜTÜN FINDIK SÜTLÜ ÇİKOLATA 100 G",
+    "category": "İçecek",
+    "brand": "Karmen",
+    "weight_volume": "100 G",
+    "unit_price": 61,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007308",
+    "product_name": "PEKİ KAKAOLU KEK 200GR 200 G",
+    "category": "Atıştırmalık",
+    "brand": "Peki",
+    "weight_volume": "200G",
+    "unit_price": 31.5,
+    "image_url": null
+  },
+  {
+    "sap_code": "100019679",
+    "product_name": "ETİ BALIK KRAKER MISIRLI 70 GR",
+    "category": "Atıştırmalık",
+    "brand": "Eti",
+    "weight_volume": "70 G",
+    "unit_price": 17,
+    "image_url": null
+  },
+  {
+    "sap_code": "100019723",
+    "product_name": "PİYALE KUSKUS 500 GR",
+    "category": "Temel Gıda",
+    "brand": "Piyale",
+    "weight_volume": "500 G",
+    "unit_price": 14.75,
+    "image_url": null
+  },
+  {
+    "sap_code": "100018169",
+    "product_name": "PİYALE MAKARNA YÜKSÜK 500 G",
+    "category": "Temel Gıda",
+    "brand": "Piyale",
+    "weight_volume": "500 G",
+    "unit_price": 14.75,
+    "image_url": null
+  },
+  {
+    "sap_code": "100000131",
+    "product_name": "PİYALE UN 2 KG",
+    "category": "Temel Gıda",
+    "brand": "Piyale",
+    "weight_volume": "2 KG",
+    "unit_price": 54.845,
+    "image_url": null
+  },
+  {
+    "sap_code": "100001726",
+    "product_name": "CAPPY ANANASLI İÇECEK 1LT",
+    "category": "İçecek",
+    "brand": "CAPPY",
+    "weight_volume": "1L",
+    "unit_price": 59,
+    "image_url": null
+  },
+  {
+    "sap_code": "100014724",
+    "product_name": "CAPPY ŞEFTALİ MEYVE NEKTARI 1 L",
+    "category": "İçecek",
+    "brand": "CAPPY",
+    "weight_volume": "1 L",
+    "unit_price": 61,
+    "image_url": null
+  },
+  {
+    "sap_code": "100014776",
+    "product_name": "FANTA PORTAKAL KUTU 330 ML",
+    "category": "İçecek",
+    "brand": "FANTA",
+    "weight_volume": "330 ML",
+    "unit_price": 46,
+    "image_url": null
+  },
+  {
+    "sap_code": "100025712",
+    "product_name": "AMİGO DALINDAN ÜZÜM ANTEP KARASI 250 GR",
+    "category": "Temel Gıda",
+    "brand": "Amigo",
+    "weight_volume": "250 G",
+    "unit_price": 112,
+    "image_url": null
+  },
+  {
+    "sap_code": "100014774",
+    "product_name": "FANTA PORTAKAL PET 1 L",
+    "category": "İçecek",
+    "brand": "FANTA",
+    "weight_volume": "1 L",
+    "unit_price": 54.5,
+    "image_url": null
+  },
+  {
+    "sap_code": "100016582",
+    "product_name": "ETİ ETİMEK 143 G",
+    "category": "Temel Gıda",
+    "brand": "Eti",
+    "weight_volume": "143 G",
+    "unit_price": 42,
+    "image_url": null
+  },
+  {
+    "sap_code": "100014350",
+    "product_name": "PİYALE MAKARNA SOSU NAPOLİTEN 340 GR",
+    "category": "Kahvaltılık & Soslar",
+    "brand": "Piyale",
+    "weight_volume": "340 G",
+    "unit_price": 96.3883,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007169",
+    "product_name": "BİZİM VATAN BİBERİYE 325 G",
+    "category": "Temel Gıda",
+    "brand": "Bizim Vatan",
+    "weight_volume": "325 G",
+    "unit_price": 46.855,
+    "image_url": null
+  },
+  {
+    "sap_code": "100014269",
+    "product_name": "MON AMOUR MASCARA ADET",
+    "category": "Kişisel Bakım",
+    "brand": "MON AMOUR",
+    "weight_volume": null,
+    "unit_price": 79,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007286",
+    "product_name": "AMİGO SOSLU CİPS FISTIK 200 G",
+    "category": "Atıştırmalık",
+    "brand": "Amigo",
+    "weight_volume": "200 G",
+    "unit_price": 35,
+    "image_url": null
+  },
+  {
+    "sap_code": "100015231",
+    "product_name": "HERO BABY MUZ MAND.ARM. 125 G",
+    "category": "Bebek",
+    "brand": "HERO BABY",
+    "weight_volume": "125 G",
+    "unit_price": 42.6525,
+    "image_url": null
+  },
+  {
+    "sap_code": "100003605",
+    "product_name": "TEMPO FINGER BİSKÜVİ SADE 450 G",
+    "category": "Atıştırmalık",
+    "brand": "TEMPO",
+    "weight_volume": "450 G",
+    "unit_price": 37.2,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007183",
+    "product_name": "DEREN BERGAMOT AROMALI ÇAY 500 G",
+    "category": "İçecek",
+    "brand": "Deren",
+    "weight_volume": "500 G",
+    "unit_price": 97.4433,
+    "image_url": null
+  },
+  {
+    "sap_code": "100009047",
+    "product_name": "SAROZ BÜZGÜLÜ ÇÖP TORBASI 65*70 CM 15'Lİ",
+    "category": "Ev & Yaşam",
+    "brand": "SAROZ",
+    "weight_volume": "15'Lİ",
+    "unit_price": 78.5031,
+    "image_url": null
+  },
+  {
+    "sap_code": "100016594",
+    "product_name": "KIZILAY C LİMON ARO.MAD. SUYU 200 ML",
+    "category": "İçecek",
+    "brand": "KIZILAY",
+    "weight_volume": "200 ML",
+    "unit_price": 76,
+    "image_url": null
+  },
+  {
+    "sap_code": "100019737",
+    "product_name": "BİSTO MUHALLEBİLİK KADAYIF 200 GR",
+    "category": "Temel Gıda",
+    "brand": "Bisto",
+    "weight_volume": "200 G",
+    "unit_price": 47.5,
+    "image_url": null
+  },
+  {
+    "sap_code": "100017988",
+    "product_name": "PİYALE MAKARNA KELEBEK 500 G",
+    "category": "Temel Gıda",
+    "brand": "Piyale",
+    "weight_volume": "500 G",
+    "unit_price": 14.75,
+    "image_url": null
+  },
+  {
+    "sap_code": "100014270",
+    "product_name": "MON AMOUR MATTE LIQUID LIPSTICK ADET",
+    "category": "Temel Gıda",
+    "brand": "MON AMOUR",
+    "weight_volume": null,
+    "unit_price": 79,
+    "image_url": null
+  },
+  {
+    "sap_code": "100008077",
+    "product_name": "SAHİL KIRMIZI KAPAKLI KASE 10 CM ADET",
+    "category": "Temel Gıda",
+    "brand": "Diğer",
+    "weight_volume": null,
+    "unit_price": 32.705,
+    "image_url": null
+  },
+  {
+    "sap_code": "100014691",
+    "product_name": "LİNK ÇİLEK AROMALI İÇECEK 200 ML",
+    "category": "İçecek",
+    "brand": "LİNK",
+    "weight_volume": "200 ML",
+    "unit_price": 10.5,
+    "image_url": null
+  },
+  {
+    "sap_code": "100015238",
+    "product_name": "KİNDER PİNGUİ CACAO 30 G",
+    "category": "Temel Gıda",
+    "brand": "KİNDER",
+    "weight_volume": "30 G",
+    "unit_price": 23,
+    "image_url": null
+  },
+  {
+    "sap_code": "100001247",
+    "product_name": "PİYALE TARHANA ÇORBASI 65 G",
+    "category": "Temel Gıda",
+    "brand": "Piyale",
+    "weight_volume": "65 G",
+    "unit_price": 27.025,
+    "image_url": null
+  },
+  {
+    "sap_code": "100001431",
+    "product_name": "PİYALE YAYLA ÇORBA 80 G",
+    "category": "Temel Gıda",
+    "brand": "Piyale",
+    "weight_volume": "80 G",
+    "unit_price": 27.025,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007150",
+    "product_name": "BİZİM VATAN ACILI KAHVALTILIK SOS 320 G",
+    "category": "Temel Gıda",
+    "brand": "Bizim Vatan",
+    "weight_volume": "320 G",
+    "unit_price": 48.84,
+    "image_url": null
+  },
+  {
+    "sap_code": "100008896",
+    "product_name": "ENJOY MUHABBET KUŞU YEMİ VİTAMİNLİ 400 G",
+    "category": "Temel Gıda",
+    "brand": "ENJOY",
+    "weight_volume": "400 G",
+    "unit_price": 55.776,
+    "image_url": null
+  },
+  {
+    "sap_code": "100010171",
+    "product_name": "LADY CLUB FRESH BEAUTY DEO 150 ML",
+    "category": "Kişisel Bakım",
+    "brand": "LADY CLUB",
+    "weight_volume": "150 ML",
+    "unit_price": 67,
+    "image_url": null
+  },
+  {
+    "sap_code": "100016161",
+    "product_name": "ÇAMLICA PORTAKAL CAM ŞİŞE 200 ML",
+    "category": "Temel Gıda",
+    "brand": "ÇAMLICA",
+    "weight_volume": "200 ML",
+    "unit_price": 16,
+    "image_url": null
+  },
+  {
+    "sap_code": "100014144",
+    "product_name": "LİO YAĞLI SYH.ZYTN SLMRA (291-350) 1 KG",
+    "category": "Temel Gıda",
+    "brand": "Lio",
+    "weight_volume": "1 KG",
+    "unit_price": 150.4167,
+    "image_url": null
+  },
+  {
+    "sap_code": "100015586",
+    "product_name": "ETİ POPKEK MUZLU 60 G",
+    "category": "Atıştırmalık",
+    "brand": "Eti",
+    "weight_volume": "60 G",
+    "unit_price": 11.25,
+    "image_url": null
+  },
+  {
+    "sap_code": "100013965",
+    "product_name": "HERO BABY SÜT.BAL.İRMİK KŞK MAMA 400 GR",
+    "category": "İçecek",
+    "brand": "HERO BABY",
+    "weight_volume": "400 G",
+    "unit_price": 210.885,
+    "image_url": null
+  },
+  {
+    "sap_code": "100018531",
+    "product_name": "ETİ BURÇAK KURABİ KAKAOLU 198 G",
+    "category": "Temel Gıda",
+    "brand": "Eti",
+    "weight_volume": "198 G",
+    "unit_price": 52.5,
+    "image_url": null
+  },
+  {
+    "sap_code": "100014825",
+    "product_name": "COLA TURKA PET 2,5 L",
+    "category": "İçecek",
+    "brand": "COLA TURKA",
+    "weight_volume": "2,5 L",
+    "unit_price": 52.5,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007202",
+    "product_name": "EVİN MARGARİN KASE 250 G",
+    "category": "Sıvı Yağ & Margarin",
+    "brand": "Evin",
+    "weight_volume": "250 G",
+    "unit_price": 27.4228,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007159",
+    "product_name": "BİZİM VATAN DOMATES SALÇASI 830 G",
+    "category": "Kahvaltılık & Soslar",
+    "brand": "Bizim Vatan",
+    "weight_volume": "830 G",
+    "unit_price": 50.5,
+    "image_url": null
+  },
+  {
+    "sap_code": "100014149",
+    "product_name": "ORAL-B DİŞ ETİ BAKIMI DERİN TEMZ 65 ML",
+    "category": "Kişisel Bakım",
+    "brand": "Eti",
+    "weight_volume": "65 ML",
+    "unit_price": 109,
+    "image_url": null
+  },
+  {
+    "sap_code": "100008078",
+    "product_name": "MİNTAX BANYO TEMİZLEYİCİ 1000 ML",
+    "category": "Temizlik",
+    "brand": "Mintax",
+    "weight_volume": "1000 ML",
+    "unit_price": 71,
+    "image_url": null
+  },
+  {
+    "sap_code": "100010851",
+    "product_name": "MİNTAX TÜM YÜZ. JEL BAHAR FERAH 750 ML",
+    "category": "Temel Gıda",
+    "brand": "Mintax",
+    "weight_volume": "750 ML",
+    "unit_price": 57.5,
+    "image_url": null
+  },
+  {
+    "sap_code": "100009211",
+    "product_name": "MİNTAX SİRKELİ GENEL TEMİZLEYİCİ 1 L",
+    "category": "Temizlik",
+    "brand": "Mintax",
+    "weight_volume": "1 L",
+    "unit_price": 51.9,
+    "image_url": null
+  },
+  {
+    "sap_code": "100008176",
+    "product_name": "AMİGO YER FISTIĞI EZMESİ 340 G",
+    "category": "Temel Gıda",
+    "brand": "Amigo",
+    "weight_volume": "340 G",
+    "unit_price": 86.28,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007774",
+    "product_name": "ADAM SPORT TIRAŞ KÖPÜĞÜ 250 ML",
+    "category": "Kişisel Bakım",
+    "brand": "ADAM",
+    "weight_volume": "250 ML",
+    "unit_price": 54,
+    "image_url": null
+  },
+  {
+    "sap_code": "100015069",
+    "product_name": "ŞÖLEN OZMO SÜTLÜ ÇİK.OYUNC. YUMURTA 20 G",
+    "category": "İçecek",
+    "brand": "OZMO",
+    "weight_volume": "20 G",
+    "unit_price": 34,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007091",
+    "product_name": "PİYALE İŞKEMBE ÇORBASI 65 G",
+    "category": "Temel Gıda",
+    "brand": "Piyale",
+    "weight_volume": "65 G",
+    "unit_price": 27.025,
+    "image_url": null
+  },
+  {
+    "sap_code": "100015569",
+    "product_name": "ETİ CRAX BAHARATLI ÇUBUK KRAKER 80 G",
+    "category": "Atıştırmalık",
+    "brand": "Eti",
+    "weight_volume": "80 G",
+    "unit_price": 14.9,
+    "image_url": null
+  },
+  {
+    "sap_code": "100009441",
+    "product_name": "MON AMOUR OJE ADET",
+    "category": "Kişisel Bakım",
+    "brand": "MON AMOUR",
+    "weight_volume": null,
+    "unit_price": 29.7857,
+    "image_url": null
+  },
+  {
+    "sap_code": "100008370",
+    "product_name": "CONFORT PEÇETE 200'LÜ",
+    "category": "Ev & Yaşam",
+    "brand": "CONFORT",
+    "weight_volume": null,
+    "unit_price": 24.5,
+    "image_url": null
+  },
+  {
+    "sap_code": "100010172",
+    "product_name": "LADY CLUB MODERN ROMANCE DEO 150 ML",
+    "category": "Kişisel Bakım",
+    "brand": "LADY CLUB",
+    "weight_volume": "150 ML",
+    "unit_price": 67,
+    "image_url": null
+  },
+  {
+    "sap_code": "100008146",
+    "product_name": "MİNTAX ÇAM. MAK. TEM. 1 L",
+    "category": "Temel Gıda",
+    "brand": "Mintax",
+    "weight_volume": "1 L",
+    "unit_price": 43.5,
+    "image_url": null
+  },
+  {
+    "sap_code": "100008105",
+    "product_name": "MİNTAX YAĞ ÇÖZÜCÜ 1 L",
+    "category": "Temizlik",
+    "brand": "Mintax",
+    "weight_volume": "1 L",
+    "unit_price": 58,
+    "image_url": null
+  },
+  {
+    "sap_code": "100010850",
+    "product_name": "AMİGO CEVİZ İÇİ 150 G",
+    "category": "Atıştırmalık",
+    "brand": "Amigo",
+    "weight_volume": "150 G",
+    "unit_price": 99,
+    "image_url": null
+  },
+  {
+    "sap_code": "100009092",
+    "product_name": "AMİGO ANTEP FISTIĞI 150 G",
+    "category": "Temel Gıda",
+    "brand": "Amigo",
+    "weight_volume": "150 G",
+    "unit_price": 182.7,
+    "image_url": null
+  },
+  {
+    "sap_code": "100009807",
+    "product_name": "BİSTO TAHİNLİ SUSAMLI KURABİYE 500 G",
+    "category": "Atıştırmalık",
+    "brand": "Bisto",
+    "weight_volume": "500 G",
+    "unit_price": 87,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007662",
+    "product_name": "YUMAK HİDROFİL PAMUK 100 G",
+    "category": "Kişisel Bakım",
+    "brand": "YUMAK",
+    "weight_volume": "100 G",
+    "unit_price": 28,
+    "image_url": null
+  },
+  {
+    "sap_code": "100000834",
+    "product_name": "PORÇÖZ KİREÇ ÖNLEYİCİ 1 L",
+    "category": "Temizlik",
+    "brand": "PORÇÖZ",
+    "weight_volume": "1 L",
+    "unit_price": 89,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007939",
+    "product_name": "MİNTAX BAHAR FERAHLIĞI YUM. KONS. 1,44 L",
+    "category": "Temel Gıda",
+    "brand": "Mintax",
+    "weight_volume": "1,44 L",
+    "unit_price": 96.5,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007653",
+    "product_name": "TAŞKALE FISTIKLI HELVA 500 G",
+    "category": "Atıştırmalık",
+    "brand": "Taşkale",
+    "weight_volume": "500 G",
+    "unit_price": 121.9992,
+    "image_url": null
+  },
+  {
+    "sap_code": "100029321",
+    "product_name": "ANADOLU MUTFAĞI KARBONAT 100 GR* 16",
+    "category": "Temel Gıda",
+    "brand": "Anadolu MutfağıAĞI",
+    "weight_volume": "100 G",
+    "unit_price": 9,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007813",
+    "product_name": "DEREN LİMON ICE TEA KUTU 330 ML",
+    "category": "İçecek",
+    "brand": "Deren",
+    "weight_volume": "330 ML",
+    "unit_price": 21.9,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007682",
+    "product_name": "AMİGO DALINDAN ÇİĞ FINDIK 150 G",
+    "category": "Atıştırmalık",
+    "brand": "Amigo",
+    "weight_volume": "150 G",
+    "unit_price": 138,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007925",
+    "product_name": "PİYALE ŞEKERLİ VANİLİN 15 Lİ 75 G",
+    "category": "Atıştırmalık",
+    "brand": "Piyale",
+    "weight_volume": "15 L",
+    "unit_price": 17.9839,
+    "image_url": null
+  },
+  {
+    "sap_code": "100009340",
+    "product_name": "LEZZETLİM DANA KAVURMA 150 G",
+    "category": "Atıştırmalık",
+    "brand": "LEZZETLİM",
+    "weight_volume": "150 G",
+    "unit_price": 246.45,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007985",
+    "product_name": "SOFTY ULTRA KANATLI NORMAL 10'LU",
+    "category": "Temel Gıda",
+    "brand": "SOFTY",
+    "weight_volume": "10'LU",
+    "unit_price": 26.5,
+    "image_url": null
+  },
+  {
+    "sap_code": "100008377",
+    "product_name": "MİNTAX MİKROFİBER CAM BEZİ 2 Lİ ADET",
+    "category": "Temizlik",
+    "brand": "Mintax",
+    "weight_volume": "2 L",
+    "unit_price": 35.6839,
+    "image_url": null
+  },
+  {
+    "sap_code": "100008795",
+    "product_name": "MİNTAX ÇAM KOK.KATI WC BLOK 2*48 GR ADET",
+    "category": "Temizlik",
+    "brand": "Mintax",
+    "weight_volume": "48 G",
+    "unit_price": 49.5063,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007099",
+    "product_name": "MİNTAX LİMON BULAŞIK DET. SIVI 750 ML",
+    "category": "Temizlik",
+    "brand": "Mintax",
+    "weight_volume": "750 ML",
+    "unit_price": 55.5,
+    "image_url": null
+  },
+  {
+    "sap_code": "100001879",
+    "product_name": "NESCAFE XPRESS CHOCO 250 ML",
+    "category": "Temel Gıda",
+    "brand": "NESCAFE",
+    "weight_volume": "250 ML",
+    "unit_price": 60,
+    "image_url": null
+  },
+  {
+    "sap_code": "100000741",
+    "product_name": "POWERADE İZOTONİK SPORCU İÇECEĞİ 500 ML",
+    "category": "İçecek",
+    "brand": "POWERADE",
+    "weight_volume": "500 ML",
+    "unit_price": 56,
+    "image_url": null
+  },
+  {
+    "sap_code": "100008074",
+    "product_name": "SOFTY ULTRA GECE 7'Lİ",
+    "category": "Temel Gıda",
+    "brand": "SOFTY",
+    "weight_volume": "7'Lİ",
+    "unit_price": 26.5,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007654",
+    "product_name": "TAŞKALE SADE HELVA 500 G",
+    "category": "Kahvaltılık & Soslar",
+    "brand": "Taşkale",
+    "weight_volume": "500 G",
+    "unit_price": 58.8267,
+    "image_url": null
+  },
+  {
+    "sap_code": "100030203",
+    "product_name": "ANADOLU MUTFAGI KUS ÜZÜMÜ 75 G",
+    "category": "Temel Gıda",
+    "brand": "Anadolu Mutfağı",
+    "weight_volume": "75 G",
+    "unit_price": 67.5,
+    "image_url": null
+  },
+  {
+    "sap_code": "100030204",
+    "product_name": "ANADOLU MUTFAGI TARÇIN 75 G",
+    "category": "Temel Gıda",
+    "brand": "Anadolu Mutfağı",
+    "weight_volume": "75 G",
+    "unit_price": 26.5438,
+    "image_url": null
+  },
+  {
+    "sap_code": "100029322",
+    "product_name": "ANADOLU MUTFAĞI NANE 30 GR* 12 ADET",
+    "category": "Temel Gıda",
+    "brand": "Anadolu MutfağıAĞI",
+    "weight_volume": "30 G",
+    "unit_price": 13,
+    "image_url": null
+  },
+  {
+    "sap_code": "100031380",
+    "product_name": "DEREN FORM KIRAZ SAPLI KARISIK BITKI ÇAY",
+    "category": "İçecek",
+    "brand": "Deren",
+    "weight_volume": null,
+    "unit_price": 38.1317,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007934",
+    "product_name": "ANADOLU MUTFAĞI KIRIK PİRİNÇ 1 KG",
+    "category": "Temel Gıda",
+    "brand": "Anadolu MutfağıAĞI",
+    "weight_volume": "1 KG",
+    "unit_price": 29.0833,
+    "image_url": null
+  },
+  {
+    "sap_code": "100021399",
+    "product_name": "TÜY TOPLAYICI 60 YAPRAK",
+    "category": "Ev & Yaşam",
+    "brand": "Diğer",
+    "weight_volume": null,
+    "unit_price": 33.7133,
+    "image_url": null
+  },
+  {
+    "sap_code": "100023160",
+    "product_name": "AMİGO ULTRA TACO 100 GR",
+    "category": "Temel Gıda",
+    "brand": "Amigo",
+    "weight_volume": "100 G",
+    "unit_price": 29.2,
+    "image_url": null
+  },
+  {
+    "sap_code": "100021813",
+    "product_name": "KARMEN COUPLE ÇIKOLT KAPLMA KARML 42 GR",
+    "category": "Temel Gıda",
+    "brand": "Karmen",
+    "weight_volume": "42 G",
+    "unit_price": 12.2392,
+    "image_url": null
+  },
+  {
+    "sap_code": "100000750",
+    "product_name": "COCA COLA PET ŞİŞE 450 ML",
+    "category": "İçecek",
+    "brand": "COCA COLA",
+    "weight_volume": "450 ML",
+    "unit_price": 45,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007213",
+    "product_name": "PİYALE SADE KREM ŞANTİ 150 G",
+    "category": "Kişisel Bakım",
+    "brand": "Piyale",
+    "weight_volume": "150 G",
+    "unit_price": 32.6408,
+    "image_url": null
+  },
+  {
+    "sap_code": "100014976",
+    "product_name": "RED BULL ENERJİ İÇECEĞİ 250 ML",
+    "category": "İçecek",
+    "brand": "RED BULL",
+    "weight_volume": "250 ML",
+    "unit_price": 59.9,
+    "image_url": null
+  },
+  {
+    "sap_code": "100001908",
+    "product_name": "ULUDAĞ LİMONATA ŞEKERSİZ PET 1 L",
+    "category": "İçecek",
+    "brand": "ULUDAĞ",
+    "weight_volume": "1 L",
+    "unit_price": 46.9,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007276",
+    "product_name": "MİS KARIŞIK MEYVE NEKTARI 1 L",
+    "category": "İçecek",
+    "brand": "Mis",
+    "weight_volume": "1 L",
+    "unit_price": 45.5,
+    "image_url": null
+  },
+  {
+    "sap_code": "100003614",
+    "product_name": "AMİGO FINDIK İÇİ 150 G",
+    "category": "Atıştırmalık",
+    "brand": "Amigo",
+    "weight_volume": "150 G",
+    "unit_price": 166,
+    "image_url": null
+  },
+  {
+    "sap_code": "100015584",
+    "product_name": "ETİ POPKEK KAKAOLU 60 G",
+    "category": "Atıştırmalık",
+    "brand": "Eti",
+    "weight_volume": "60 G",
+    "unit_price": 11.25,
+    "image_url": null
+  },
+  {
+    "sap_code": "100013966",
+    "product_name": "HERO BABY SÜT.MEYV 8TAHL KŞK MAMA 400 GR",
+    "category": "İçecek",
+    "brand": "HERO BABY",
+    "weight_volume": "400 G",
+    "unit_price": 210.885,
+    "image_url": null
+  },
+  {
+    "sap_code": "100001249",
+    "product_name": "PİYALE EZOGELİN ÇORBASI 80 G",
+    "category": "Temel Gıda",
+    "brand": "Piyale",
+    "weight_volume": "80 G",
+    "unit_price": 27.025,
+    "image_url": null
+  },
+  {
+    "sap_code": "100000527",
+    "product_name": "PİYALE SADE PİRİNÇ UNU 250 G",
+    "category": "Temel Gıda",
+    "brand": "Piyale",
+    "weight_volume": "250 G",
+    "unit_price": 20.653,
+    "image_url": null
+  },
+  {
+    "sap_code": "100013968",
+    "product_name": "PİYALE BONCUK MAKARNA 500 GR",
+    "category": "Temel Gıda",
+    "brand": "Piyale",
+    "weight_volume": "500 G",
+    "unit_price": 14.75,
+    "image_url": null
+  },
+  {
+    "sap_code": "100009048",
+    "product_name": "SAROZ ORTA BOY ÇÖP TORB 55*60 CM 30'LU",
+    "category": "Temel Gıda",
+    "brand": "SAROZ",
+    "weight_volume": "30'LU",
+    "unit_price": 50.4609,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007814",
+    "product_name": "BİZİM VATAN MAYONEZ 430 G",
+    "category": "Kahvaltılık & Soslar",
+    "brand": "Bizim Vatan",
+    "weight_volume": "430 G",
+    "unit_price": 68.8567,
+    "image_url": null
+  },
+  {
+    "sap_code": "100007652",
+    "product_name": "EVİN AYÇİÇEK YAĞI DAR AĞIZ PET 5 L",
+    "category": "Sıvı Yağ & Margarin",
+    "brand": "Evin",
+    "weight_volume": "5 L",
+    "unit_price": 467,
+    "image_url": null
+  }
+]

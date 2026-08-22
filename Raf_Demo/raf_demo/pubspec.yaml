@@ -1,0 +1,29 @@
+name: raf_demo
+description: "A new Flutter project."
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # Core packages for the application
+  provider: ^6.1.2                # State management
+  dio: ^5.5.0+1                   # HTTP client for API calls
+  socket_io_client: ^3.0.0        # WebSocket client for real-time updates
+  shared_preferences: ^2.2.3      # Local storage for persistence
+  intl: ^0.19.0                   # For date formatting (e.g., in OrdersScreen)
+  cupertino_icons: ^1.0.8
+  http: ^1.2.1
+  url_launcher: ^6.3.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+
+flutter:
+  uses-material-design: true
