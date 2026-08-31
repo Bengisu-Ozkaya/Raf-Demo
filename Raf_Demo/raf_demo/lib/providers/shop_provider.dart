@@ -314,11 +314,13 @@ class ShopProvider with ChangeNotifier {
   Future<void> fetchMerchantPackages(int shopId) async => fetchPackages(shopId);
 
   /// Master ürün kataloğunu getirir.
-  Future<List<Product>> fetchMasterProducts({String? category, String? search}) async {
+  Future<List<Product>> fetchMasterProducts(
+      {String? category, String? search}) async {
     _isLoading = true;
     notifyListeners();
     try {
-      _masterProducts = await _apiService.fetchMasterProducts(category: category, search: search);
+      _masterProducts = await _apiService.fetchMasterProducts(
+          category: category, search: search);
       _isLoading = false;
       notifyListeners();
       return _masterProducts;
@@ -334,26 +336,51 @@ class ShopProvider with ChangeNotifier {
   Future<bool> createPackage({
     required int shopId,
     required String name,
-    required String packageSize,
+    String? description,
+    String packageSize = 'Standart Paket',
     required double totalPrice,
     required int stock,
-    required List<Map<String, dynamic>> items,
+    List<Map<String, dynamic>> items = const [],
   }) async {
     _isLoading = true;
     notifyListeners();
     try {
+      List<Map<String, dynamic>> finalItems = List.from(items);
+      if (finalItems.isEmpty) {
+        int fallbackMasterId = 1;
+        try {
+          if (_masterProducts.isEmpty) {
+            final masters = await _apiService.fetchMasterProducts();
+            if (masters.isNotEmpty) {
+              _masterProducts = masters;
+              fallbackMasterId = masters.first.id;
+            }
+          } else {
+            fallbackMasterId = _masterProducts.first.id;
+          }
+        } catch (_) {
+          fallbackMasterId = 1;
+        }
+
+        finalItems = [
+          {
+            'master_product_id': fallbackMasterId,
+            'price': totalPrice,
+            'quantity': 1,
+          }
+        ];
+      }
+
       await _apiService.createPackage(
         name: name,
+        description: description,
         packageSize: packageSize,
         totalPrice: totalPrice,
         stock: stock,
-        items: items,
+        items: finalItems,
       );
-      // Paketleri ve ürünleri yeniden çek
-      await Future.wait([
-        fetchMerchantPackages(shopId),
-        fetchMerchantProducts(shopId),
-      ]);
+      // Paketleri yeniden çek
+      await fetchMerchantPackages(shopId);
       _isLoading = false;
       notifyListeners();
       return true;

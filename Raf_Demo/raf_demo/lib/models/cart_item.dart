@@ -5,6 +5,7 @@ import 'shop_package.dart';
 class CartItem {
   final int id; // Ürünün ID'si veya Paketin Negatif ID'si
   final String name;
+  final String? description;
   final double price;
   final String? imageUrl;
   final String? weightVolume;
@@ -16,6 +17,7 @@ class CartItem {
   CartItem({
     required this.id,
     required this.name,
+    this.description,
     this.price = 0.0,
     this.imageUrl,
     this.weightVolume,
@@ -43,6 +45,7 @@ class CartItem {
     return CartItem(
       id: -package.id, // Paketler için negatif ID
       name: package.name,
+      description: package.description,
       price: package.totalPrice,
       imageUrl: package.items.isNotEmpty ? package.items.first.imageUrl : null,
       quantity: quantity,
@@ -72,6 +75,7 @@ class CartItem {
     return {
       'id': id,
       'name': name,
+      'description': description,
       'price': price,
       'imageUrl': imageUrl,
       'weightVolume': weightVolume,
@@ -87,6 +91,7 @@ class CartItem {
     return CartItem(
       id: json['id'],
       name: json['name'] ?? '',
+      description: json['description'] as String?,
       price: (json['price'] as num?)?.toDouble() ?? 0.0,
       imageUrl: json['imageUrl'],
       weightVolume: json['weightVolume'] as String?,

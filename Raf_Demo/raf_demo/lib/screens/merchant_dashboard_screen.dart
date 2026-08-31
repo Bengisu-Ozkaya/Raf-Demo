@@ -125,7 +125,7 @@ class _MerchantDashboardScreenState extends State<MerchantDashboardScreen> {
     );
   }
 
-  /// "Paketlerim / Ürünlerim" sekmesinin içeriğini oluşturan widget.
+  /// "Paketlerim" sekmesinin içeriğini oluşturan widget.
   Widget _buildProductsTab(BuildContext context) {
     return Consumer<ShopProvider>(
       builder: (ctx, shopProvider, _) {
@@ -139,7 +139,8 @@ class _MerchantDashboardScreenState extends State<MerchantDashboardScreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(Icons.inventory_2_outlined, size: 72, color: Colors.orange.shade300),
+                  Icon(Icons.inventory_2_outlined,
+                      size: 72, color: Colors.orange.shade300),
                   const SizedBox(height: 16),
                   const Text(
                     'Marketinizde Henüz Paket Yok',
@@ -147,21 +148,23 @@ class _MerchantDashboardScreenState extends State<MerchantDashboardScreen> {
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    'İşinizi kolaylaştırmak için Küçük (5), Orta (8-10) veya Büyük (13-15) boy paketler oluşturarak marketinize hemen ürün ekleyin.',
+                    'İşletmenize özel adını, içeriğini ve fiyatını belirleyeceğiniz hazır paketler oluşturarak müşterilerinize sunun.',
                     textAlign: TextAlign.center,
                     style: TextStyle(color: Colors.grey.shade600, fontSize: 13),
                   ),
                   const SizedBox(height: 20),
                   ElevatedButton.icon(
                     onPressed: () {
-                      Navigator.of(context).pushNamed(CreatePackageScreen.routeName);
+                      Navigator.of(context)
+                          .pushNamed(CreatePackageScreen.routeName);
                     },
                     icon: const Icon(Icons.inventory_2),
-                    label: const Text('📦 Paket Oluştur'),
+                    label: const Text('Paket Oluştur'),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.orange.shade800,
                       foregroundColor: Colors.white,
-                      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 12),
                     ),
                   ),
                 ],
@@ -175,8 +178,10 @@ class _MerchantDashboardScreenState extends State<MerchantDashboardScreen> {
                 Provider.of<AuthProvider>(context, listen: false).shopId;
             if (shopId != null) {
               await Future.wait([
-                Provider.of<ShopProvider>(context, listen: false).fetchMerchantPackages(shopId),
-                Provider.of<ShopProvider>(context, listen: false).fetchMerchantProducts(shopId),
+                Provider.of<ShopProvider>(context, listen: false)
+                    .fetchMerchantPackages(shopId),
+                Provider.of<ShopProvider>(context, listen: false)
+                    .fetchMerchantProducts(shopId),
               ]);
             }
           },
@@ -185,22 +190,29 @@ class _MerchantDashboardScreenState extends State<MerchantDashboardScreen> {
               // Hızlı Paket Bilgi Çubuğu
               Container(
                 width: double.infinity,
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                 color: Colors.orange.shade50,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
                       'Toplam ${shopProvider.merchantPackages.length} paket listeleniyor',
-                      style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Colors.orange.shade900),
+                      style: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.orange.shade900),
                     ),
                     TextButton.icon(
-                      style: TextButton.styleFrom(visualDensity: VisualDensity.compact),
+                      style: TextButton.styleFrom(
+                          visualDensity: VisualDensity.compact),
                       onPressed: () {
-                        Navigator.of(context).pushNamed(CreatePackageScreen.routeName);
+                        Navigator.of(context)
+                            .pushNamed(CreatePackageScreen.routeName);
                       },
                       icon: const Icon(Icons.add_box, size: 16),
-                      label: const Text('Yeni Paket', style: TextStyle(fontSize: 12)),
+                      label: const Text('Yeni Paket',
+                          style: TextStyle(fontSize: 12)),
                     ),
                   ],
                 ),
@@ -291,7 +303,9 @@ class _MerchantOrderItemCard extends StatelessWidget {
           child: Text(
             '${order.items.fold(0, (sum, i) => sum + i.quantity)} Ürün',
             style: TextStyle(
-                fontWeight: FontWeight.bold, fontSize: 13, color: Colors.teal.shade800),
+                fontWeight: FontWeight.bold,
+                fontSize: 13,
+                color: Colors.teal.shade800),
           ),
         ),
         children: [
@@ -317,7 +331,8 @@ class _MerchantOrderItemCard extends StatelessWidget {
                         children: [
                           Expanded(
                               child: Text('• ${item.quantity}x  ${item.name}',
-                                  style: const TextStyle(fontWeight: FontWeight.w500))),
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.w500))),
                         ],
                       ),
                     )),
@@ -415,16 +430,6 @@ class _ShopPackageCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final shopProvider = Provider.of<ShopProvider>(context, listen: false);
     final shopId = Provider.of<AuthProvider>(context, listen: false).shopId!;
-    final itemsCount = package.items.length;
-
-    Color sizeColor;
-    if (package.packageSize.contains('Küçük')) {
-      sizeColor = Colors.blue;
-    } else if (package.packageSize.contains('Orta')) {
-      sizeColor = Colors.orange;
-    } else {
-      sizeColor = Colors.deepPurple;
-    }
 
     return Card(
       margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
@@ -443,17 +448,18 @@ class _ShopPackageCard extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Üst Satır: Paket Adı ve Rozet
+              // Üst Satır: Paket Adı ve Fiyat
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
                     padding: const EdgeInsets.all(8),
                     decoration: BoxDecoration(
-                      color: sizeColor.withValues(alpha: 0.12),
+                      color: Colors.orange.shade100,
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    child: Icon(Icons.inventory_2, color: sizeColor, size: 24),
+                    child: Icon(Icons.inventory_2,
+                        color: Colors.orange.shade800, size: 24),
                   ),
                   const SizedBox(width: 10),
                   Expanded(
@@ -470,46 +476,47 @@ class _ShopPackageCard extends StatelessWidget {
                           overflow: TextOverflow.ellipsis,
                         ),
                         const SizedBox(height: 3),
-                        Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-                          decoration: BoxDecoration(
-                            color: sizeColor.withValues(alpha: 0.15),
-                            borderRadius: BorderRadius.circular(6),
-                          ),
-                          child: Text(
-                            '${package.packageSize} • $itemsCount Ürün',
-                            style: TextStyle(
-                              fontSize: 11,
-                              fontWeight: FontWeight.bold,
-                              color: sizeColor,
-                            ),
+                        Text(
+                          'Stok: ${package.stock} Adet',
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: Colors.grey.shade600,
                           ),
                         ),
                       ],
                     ),
                   ),
-                  // Sağ Kısım: İçeriği Gör Butonu
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text(
-                            'İçeriği Gör',
-                            style: TextStyle(
-                              fontSize: 12,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.blue.shade700,
-                            ),
-                          ),
-                          Icon(Icons.chevron_right, size: 16, color: Colors.blue.shade700),
-                        ],
+                  Container(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                    decoration: BoxDecoration(
+                      color: Colors.teal.shade50,
+                      borderRadius: BorderRadius.circular(8),
+                      border: Border.all(color: Colors.teal.shade300),
+                    ),
+                    child: Text(
+                      '${package.totalPrice.toStringAsFixed(2)} ₺',
+                      style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.teal.shade800,
                       ),
-                    ],
+                    ),
                   ),
                 ],
               ),
+
+              if (package.description != null &&
+                  package.description!.isNotEmpty) ...[
+                const SizedBox(height: 8),
+                Text(
+                  package.description!,
+                  style: TextStyle(fontSize: 12, color: Colors.grey.shade700),
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ],
+
               const Divider(height: 18),
               // Alt Satır: Durum ve Aksiyonlar
               Row(
@@ -517,18 +524,23 @@ class _ShopPackageCard extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      Icon(Icons.chat_outlined, size: 16, color: Colors.green.shade700),
+                      Icon(Icons.chat_outlined,
+                          size: 16, color: Colors.green.shade700),
                       const SizedBox(width: 5),
                       Text(
                         'WhatsApp Siparişine Açık',
-                        style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: Colors.green.shade800),
+                        style: TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.green.shade800),
                       ),
                     ],
                   ),
                   Row(
                     children: [
                       TextButton.icon(
-                        style: TextButton.styleFrom(visualDensity: VisualDensity.compact),
+                        style: TextButton.styleFrom(
+                            visualDensity: VisualDensity.compact),
                         onPressed: () {
                           Navigator.of(context).pushNamed(
                             PackageDetailScreen.routeName,
@@ -536,13 +548,16 @@ class _ShopPackageCard extends StatelessWidget {
                           );
                         },
                         icon: const Icon(Icons.visibility_outlined, size: 16),
-                        label: const Text('İçerik', style: TextStyle(fontSize: 12)),
+                        label: const Text('İçerik',
+                            style: TextStyle(fontSize: 12)),
                       ),
                       IconButton(
                         visualDensity: VisualDensity.compact,
-                        icon: const Icon(Icons.delete_outline, color: Colors.red),
+                        icon:
+                            const Icon(Icons.delete_outline, color: Colors.red),
                         tooltip: 'Paketi Sil',
-                        onPressed: () => _confirmDeletePackage(context, shopProvider, package.id, shopId, package.name),
+                        onPressed: () => _confirmDeletePackage(context,
+                            shopProvider, package.id, shopId, package.name),
                       ),
                     ],
                   ),
@@ -555,19 +570,22 @@ class _ShopPackageCard extends StatelessWidget {
     );
   }
 
-  void _confirmDeletePackage(BuildContext context, ShopProvider provider, int packageId, int shopId, String packageName) {
+  void _confirmDeletePackage(BuildContext context, ShopProvider provider,
+      int packageId, int shopId, String packageName) {
     showDialog(
       context: context,
       builder: (ctx) => AlertDialog(
         title: const Text('Paketi Sil'),
-        content: Text('"$packageName" paketini silmek istediğinize emin misiniz?'),
+        content:
+            Text('"$packageName" paketini silmek istediğinize emin misiniz?'),
         actions: [
           TextButton(
             child: const Text('İptal'),
             onPressed: () => Navigator.of(ctx).pop(),
           ),
           ElevatedButton(
-            style: ElevatedButton.styleFrom(backgroundColor: Colors.red, foregroundColor: Colors.white),
+            style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.red, foregroundColor: Colors.white),
             child: const Text('Sil'),
             onPressed: () {
               Navigator.of(ctx).pop();

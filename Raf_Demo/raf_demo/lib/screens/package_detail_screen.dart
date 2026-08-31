@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../models/shop_package.dart';
 import '../models/shop.dart';
 import '../providers/shop_provider.dart';
@@ -37,24 +38,30 @@ class _PackageDetailScreenState extends State<PackageDetailScreen> {
       context: context,
       builder: (ctx) => AlertDialog(
         title: const Text('Paketi Sil'),
-        content: Text('"${_package.name}" paketini silmek istediğinize emin misiniz?'),
+        content: Text(
+            '"${_package.name}" paketini silmek istediğinize emin misiniz?'),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(ctx).pop(),
             child: const Text('İptal'),
           ),
           ElevatedButton(
-            style: ElevatedButton.styleFrom(backgroundColor: Colors.red, foregroundColor: Colors.white),
+            style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.red, foregroundColor: Colors.white),
             onPressed: () async {
               Navigator.of(ctx).pop();
-              final authProvider = Provider.of<AuthProvider>(context, listen: false);
-              final shopProvider = Provider.of<ShopProvider>(context, listen: false);
+              final authProvider =
+                  Provider.of<AuthProvider>(context, listen: false);
+              final shopProvider =
+                  Provider.of<ShopProvider>(context, listen: false);
               final shopId = authProvider.shopId;
               if (shopId != null) {
                 await shopProvider.deletePackage(_package.id, shopId);
                 if (mounted) {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Paket başarıyla silindi.'), backgroundColor: Colors.green),
+                    const SnackBar(
+                        content: Text('Paket başarıyla silindi.'),
+                        backgroundColor: Colors.green),
                   );
                   Navigator.of(context).pop();
                 }
@@ -80,7 +87,7 @@ class _PackageDetailScreenState extends State<PackageDetailScreen> {
 
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text('🎉 "${_package.name}" sepete eklendi!'),
+        content: Text('"${_package.name}" sepete eklendi!'),
         backgroundColor: Colors.green,
         duration: const Duration(seconds: 2),
         action: SnackBarAction(
@@ -94,20 +101,51 @@ class _PackageDetailScreenState extends State<PackageDetailScreen> {
     );
   }
 
+  void _askViaWhatsApp() async {
+    String rawPhone = _package.shopPhone ?? '';
+    String cleanPhone = rawPhone.replaceAll(RegExp(r'[^0-9]'), '');
+    if (cleanPhone.startsWith('0')) {
+      cleanPhone = '90${cleanPhone.substring(1)}';
+    } else if (!cleanPhone.startsWith('90') && cleanPhone.isNotEmpty) {
+      cleanPhone = '90$cleanPhone';
+    }
+
+    if (cleanPhone.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('İşletmeye ait bir telefon numarası bulunamadı.'),
+          backgroundColor: Colors.red,
+        ),
+      );
+      return;
+    }
+
+    final message =
+        'Merhaba ${_package.shopName ?? "Market"}! Raf uygulamasından "${_package.name}" (${_package.totalPrice.toStringAsFixed(2)} TL) paketi hakkında bilgi almak / sipariş vermek istiyorum.';
+    final uri = Uri.https('wa.me', '/$cleanPhone', {'text': message});
+
+    try {
+      if (await canLaunchUrl(uri)) {
+        await launchUrl(uri, mode: LaunchMode.externalApplication);
+      } else {
+        await launchUrl(uri, mode: LaunchMode.platformDefault);
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+              content: Text('WhatsApp açılamadı: $e'),
+              backgroundColor: Colors.red),
+        );
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final authProvider = Provider.of<AuthProvider>(context, listen: false);
     final isMerchant = authProvider.userType == UserType.merchant;
     final items = _package.items;
-
-    Color sizeColor;
-    if (_package.packageSize.contains('Küçük')) {
-      sizeColor = Colors.blue;
-    } else if (_package.packageSize.contains('Orta')) {
-      sizeColor = Colors.orange;
-    } else {
-      sizeColor = Colors.deepPurple;
-    }
 
     return Scaffold(
       appBar: AppBar(
@@ -130,43 +168,68 @@ class _PackageDetailScreenState extends State<PackageDetailScreen> {
                 child: ListView(
                   padding: const EdgeInsets.all(16),
                   children: [
-                    // 1. Paket Başlık Kartı
+                    // 1. Paket Başlık ve Fiyat Kartı
                     Card(
                       elevation: 2,
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(16)),
                       child: Padding(
-                        padding: const EdgeInsets.all(16.0),
+                        padding: const EdgeInsets.all(18.0),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Flexible(
+                                Container(
+                                  padding: const EdgeInsets.all(12),
+                                  decoration: BoxDecoration(
+                                    color: Colors.orange.shade100,
+                                    borderRadius: BorderRadius.circular(12),
+                                  ),
+                                  child: Icon(Icons.inventory_2,
+                                      color: Colors.orange.shade900, size: 32),
+                                ),
+                                const SizedBox(width: 14),
+                                Expanded(
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         _package.name,
-                                        style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                                        style: const TextStyle(
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.bold),
                                       ),
                                       const SizedBox(height: 4),
-                                      Container(
-                                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-                                        decoration: BoxDecoration(
-                                          color: sizeColor.withValues(alpha: 0.15),
-                                          borderRadius: BorderRadius.circular(8),
-                                        ),
-                                        child: Text(
-                                          '${_package.packageSize} • ${items.length} Ürün',
+                                      if (_package.stock > 0)
+                                        Text(
+                                          'Stok: ${_package.stock} Adet',
                                           style: TextStyle(
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.bold,
-                                            color: sizeColor,
-                                          ),
+                                              fontSize: 12,
+                                              color: Colors.grey.shade600),
                                         ),
-                                      ),
                                     ],
+                                  ),
+                                ),
+                                Container(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 12, vertical: 6),
+                                  decoration: BoxDecoration(
+                                    color: Colors.teal.shade50,
+                                    borderRadius: BorderRadius.circular(10),
+                                    border: Border.all(
+                                        color: Colors.teal.shade400,
+                                        width: 1.2),
+                                  ),
+                                  child: Text(
+                                    '${_package.totalPrice.toStringAsFixed(2)} ₺',
+                                    style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.teal.shade800,
+                                    ),
                                   ),
                                 ),
                               ],
@@ -178,71 +241,93 @@ class _PackageDetailScreenState extends State<PackageDetailScreen> {
 
                     const SizedBox(height: 16),
 
-                    // 2. Paket İçeriğindeki Ürünler Başlığı
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 6),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'Paket İçeriği (${items.length} Çeşit Ürün)',
-                            style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
-                          ),
-                        ],
+                    // 2. Paket İçeriği Bölümü
+                    Card(
+                      elevation: 1,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(14)),
+                      child: Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              children: [
+                                Icon(Icons.format_list_bulleted,
+                                    color: Theme.of(context).primaryColor,
+                                    size: 20),
+                                const SizedBox(width: 8),
+                                const Text(
+                                  'Paket İçeriği',
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ],
+                            ),
+                            const Divider(height: 20),
+                            if (_package.description != null &&
+                                _package.description!.isNotEmpty)
+                              Text(
+                                _package.description!,
+                                style:
+                                    const TextStyle(fontSize: 14, height: 1.5),
+                              )
+                            else if (items.isNotEmpty)
+                              ...items.map((item) {
+                                return Padding(
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 4.0),
+                                  child: Row(
+                                    children: [
+                                      const Icon(Icons.check_circle_outline,
+                                          size: 16, color: Colors.teal),
+                                      const SizedBox(width: 8),
+                                      Expanded(
+                                        child: Text(
+                                          item.name,
+                                          style: const TextStyle(
+                                              fontSize: 13,
+                                              fontWeight: FontWeight.w500),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                );
+                              })
+                            else
+                              const Text(
+                                'Bu paket için detaylı içerik açıklaması girilmemiş.',
+                                style:
+                                    TextStyle(color: Colors.grey, fontSize: 13),
+                              ),
+                          ],
+                        ),
                       ),
                     ),
 
-                    // 3. Ürün Listesi
-                    ...items.map((item) {
-                      return Card(
-                        margin: const EdgeInsets.symmetric(vertical: 4),
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                        child: Padding(
-                          padding: const EdgeInsets.all(12.0),
-                          child: Row(
-                            children: [
-                              // Ürün Resmi
-                              Container(
-                                width: 50,
-                                height: 50,
-                                decoration: BoxDecoration(
-                                  color: Colors.grey.shade100,
-                                  borderRadius: BorderRadius.circular(8),
-                                ),
-                                child: item.imageUrl != null && item.imageUrl!.isNotEmpty
-                                    ? Image.network(
-                                        item.imageUrl!,
-                                        fit: BoxFit.contain,
-                                        errorBuilder: (ctx, e, st) => const Icon(Icons.inventory_2_outlined, color: Colors.grey),
-                                      )
-                                    : const Icon(Icons.inventory_2_outlined, color: Colors.grey),
-                              ),
-                              const SizedBox(width: 12),
+                    const SizedBox(height: 16),
 
-                              // Ürün Bilgisi
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      item.name,
-                                      style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
-                                      maxLines: 2,
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
-                                    const SizedBox(height: 2),
-                                    Text(
-                                      '${item.brand ?? ''} ${item.weightVolume != null ? '• ${item.weightVolume}' : ''}',
-                                      style: TextStyle(fontSize: 11, color: Colors.grey.shade600),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
+                    // 3. WhatsApp Danışma Butonu
+                    if (!isMerchant)
+                      OutlinedButton.icon(
+                        onPressed: _askViaWhatsApp,
+                        icon: const Icon(Icons.chat, color: Color(0xFF25D366)),
+                        label: const Text(
+                          'WhatsApp ile Bu Paketi Sor / Sipariş Ver',
+                          style: TextStyle(
+                              color: Color(0xFF166534),
+                              fontWeight: FontWeight.bold),
                         ),
-                      );
-                    }),
+                        style: OutlinedButton.styleFrom(
+                          side: const BorderSide(
+                              color: Color(0xFF25D366), width: 1.5),
+                          backgroundColor: const Color(0xFFF0FDF4),
+                          padding: const EdgeInsets.symmetric(vertical: 12),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12)),
+                        ),
+                      ),
                   ],
                 ),
               ),
@@ -252,11 +337,14 @@ class _PackageDetailScreenState extends State<PackageDetailScreen> {
                 Consumer<CartProvider>(
                   builder: (ctx, cart, _) {
                     final packageKey = -_package.id;
-                    final quantityInCart = cart.shops[_package.shopId]?.items[packageKey]?.quantity ?? 0;
+                    final quantityInCart = cart.shops[_package.shopId]
+                            ?.items[packageKey]?.quantity ??
+                        0;
 
                     return Container(
                       width: double.infinity,
-                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 16, vertical: 12),
                       decoration: const BoxDecoration(
                         color: Colors.white,
                         boxShadow: [
@@ -271,16 +359,22 @@ class _PackageDetailScreenState extends State<PackageDetailScreen> {
                         child: quantityInCart == 0
                             ? ElevatedButton.icon(
                                 onPressed: _addToCart,
-                                icon: const Icon(Icons.add_shopping_cart, size: 22),
-                                label: const Text(
-                                  'Sepete Ekle',
-                                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                                icon: const Icon(Icons.add_shopping_cart,
+                                    size: 22),
+                                label: Text(
+                                  'Sepete Ekle (${_package.totalPrice.toStringAsFixed(2)} ₺)',
+                                  style: const TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold),
                                 ),
                                 style: ElevatedButton.styleFrom(
-                                  backgroundColor: Theme.of(context).primaryColor,
+                                  backgroundColor:
+                                      Theme.of(context).primaryColor,
                                   foregroundColor: Colors.white,
-                                  padding: const EdgeInsets.symmetric(vertical: 14),
-                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 14),
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(12)),
                                 ),
                               )
                             : Row(
@@ -289,28 +383,37 @@ class _PackageDetailScreenState extends State<PackageDetailScreen> {
                                     decoration: BoxDecoration(
                                       color: Colors.teal.shade50,
                                       borderRadius: BorderRadius.circular(12),
-                                      border: Border.all(color: Theme.of(context).primaryColor.withValues(alpha: 0.3)),
+                                      border: Border.all(
+                                          color: Theme.of(context)
+                                              .primaryColor
+                                              .withValues(alpha: 0.3)),
                                     ),
                                     child: Row(
                                       mainAxisSize: MainAxisSize.min,
                                       children: [
                                         IconButton(
-                                          icon: const Icon(Icons.remove, size: 20),
+                                          icon: const Icon(Icons.remove,
+                                              size: 20),
                                           onPressed: () {
-                                            cart.decrementItem(-_package.id, _package.shopId);
+                                            cart.decrementItem(
+                                                -_package.id, _package.shopId);
                                           },
                                         ),
                                         Padding(
-                                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 8.0),
                                           child: Text(
                                             '$quantityInCart',
-                                            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                                            style: const TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 16),
                                           ),
                                         ),
                                         IconButton(
                                           icon: const Icon(Icons.add, size: 20),
                                           onPressed: () {
-                                            cart.incrementItem(-_package.id, _package.shopId);
+                                            cart.incrementItem(
+                                                -_package.id, _package.shopId);
                                           },
                                         ),
                                       ],
@@ -320,18 +423,27 @@ class _PackageDetailScreenState extends State<PackageDetailScreen> {
                                   Expanded(
                                     child: ElevatedButton.icon(
                                       onPressed: () {
-                                        Navigator.of(context).pushNamed(CartScreen.routeName);
+                                        Navigator.of(context)
+                                            .pushNamed(CartScreen.routeName);
                                       },
-                                      icon: const Icon(Icons.shopping_cart_checkout, size: 20),
+                                      icon: const Icon(
+                                          Icons.shopping_cart_checkout,
+                                          size: 20),
                                       label: const Text(
                                         'Sepete Git',
-                                        style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                                        style: TextStyle(
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.bold),
                                       ),
                                       style: ElevatedButton.styleFrom(
-                                        backgroundColor: Theme.of(context).primaryColor,
+                                        backgroundColor:
+                                            Theme.of(context).primaryColor,
                                         foregroundColor: Colors.white,
-                                        padding: const EdgeInsets.symmetric(vertical: 14),
-                                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 14),
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(12)),
                                       ),
                                     ),
                                   ),

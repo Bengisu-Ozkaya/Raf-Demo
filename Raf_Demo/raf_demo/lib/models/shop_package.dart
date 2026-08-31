@@ -7,6 +7,7 @@ class ShopPackage {
   final String? shopName;
   final String? shopPhone;
   final String name;
+  final String? description;
   final String packageSize;
   final double totalPrice;
   final int stock;
@@ -20,7 +21,8 @@ class ShopPackage {
     this.shopName,
     this.shopPhone,
     required this.name,
-    required this.packageSize,
+    this.description,
+    this.packageSize = 'Standart Paket',
     this.totalPrice = 0.0,
     required this.stock,
     this.isActive = 1,
@@ -40,17 +42,36 @@ class ShopPackage {
       }).toList();
     }
 
+    final rawPackageSize = json['package_size']?.toString() ?? 'Standart Paket';
+    String? desc =
+        json['description']?.toString() ?? json['content']?.toString();
+    if (desc == null || desc.isEmpty) {
+      if (rawPackageSize != 'Küçük Boy' &&
+          rawPackageSize != 'Orta Boy' &&
+          rawPackageSize != 'Büyük Boy' &&
+          rawPackageSize != 'Standart Paket') {
+        desc = rawPackageSize;
+      }
+    }
+
     return ShopPackage(
-      id: json['id'] is int ? json['id'] : int.tryParse(json['id'].toString()) ?? 0,
-      shopId: json['shop_id'] is int ? json['shop_id'] : int.tryParse(json['shop_id']?.toString() ?? '0') ?? 0,
+      id: json['id'] is int
+          ? json['id']
+          : int.tryParse(json['id'].toString()) ?? 0,
+      shopId: json['shop_id'] is int
+          ? json['shop_id']
+          : int.tryParse(json['shop_id']?.toString() ?? '0') ?? 0,
       shopName: json['shop_name']?.toString(),
       shopPhone: json['shop_phone']?.toString() ?? json['phone']?.toString(),
       name: json['name'] ?? '',
-      packageSize: json['package_size'] ?? 'Orta Boy',
+      description: desc,
+      packageSize: rawPackageSize,
       totalPrice: (json['total_price'] as num?)?.toDouble() ?? 0.0,
       stock: (json['stock'] as num?)?.toInt() ?? 0,
       isActive: json['is_active'] ?? 1,
-      createdAt: json['created_at'] != null ? DateTime.tryParse(json['created_at']) : null,
+      createdAt: json['created_at'] != null
+          ? DateTime.tryParse(json['created_at'])
+          : null,
       items: parsedItems,
     );
   }
@@ -61,6 +82,7 @@ class ShopPackage {
     String? shopName,
     String? shopPhone,
     String? name,
+    String? description,
     String? packageSize,
     double? totalPrice,
     int? stock,
@@ -74,6 +96,7 @@ class ShopPackage {
       shopName: shopName ?? this.shopName,
       shopPhone: shopPhone ?? this.shopPhone,
       name: name ?? this.name,
+      description: description ?? this.description,
       packageSize: packageSize ?? this.packageSize,
       totalPrice: totalPrice ?? this.totalPrice,
       stock: stock ?? this.stock,

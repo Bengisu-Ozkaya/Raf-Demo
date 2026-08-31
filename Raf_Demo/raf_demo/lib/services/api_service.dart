@@ -179,7 +179,8 @@ class ApiService {
   }
 
   /// Master ürünleri getirir. Opsiyonel olarak kategori ve aramaya göre filtreleme yapar.
-  Future<List<Product>> fetchMasterProducts({String? category, String? search}) async {
+  Future<List<Product>> fetchMasterProducts(
+      {String? category, String? search}) async {
     try {
       final Map<String, dynamic> queryParams = {};
       if (category != null && category != 'Tümü') {
@@ -316,7 +317,8 @@ class ApiService {
 
       // 2. Token yoksa hata fırlat. Bu, giriş yapılmadığını gösterir.
       if (token == null) {
-        throw Exception('Doğrulama hatası: Oturum bulunamadı. Lütfen tekrar giriş yapın.');
+        throw Exception(
+            'Doğrulama hatası: Oturum bulunamadı. Lütfen tekrar giriş yapın.');
       }
 
       // 3. Dio isteğini, header'a manuel olarak eklenmiş token ile gönder.
@@ -351,7 +353,8 @@ class ApiService {
       final token = prefs.getString('authToken') ?? _token;
 
       if (token == null) {
-        throw Exception('Doğrulama hatası: Oturum bulunamadı. Lütfen tekrar giriş yapın.');
+        throw Exception(
+            'Doğrulama hatası: Oturum bulunamadı. Lütfen tekrar giriş yapın.');
       }
 
       final response = await _dio.post(
@@ -424,10 +427,11 @@ class ApiService {
   /// Yeni bir paket oluşturur.
   Future<int> createPackage({
     required String name,
-    required String packageSize,
+    String? description,
+    String packageSize = 'Standart Paket',
     required double totalPrice,
     required int stock,
-    required List<Map<String, dynamic>> items,
+    List<Map<String, dynamic>> items = const [],
   }) async {
     try {
       final prefs = await SharedPreferences.getInstance();
@@ -437,15 +441,20 @@ class ApiService {
         throw Exception('Doğrulama hatası: Oturum bulunamadı.');
       }
 
+      final payload = <String, dynamic>{
+        'name': name,
+        'package_size': packageSize,
+        'total_price': totalPrice,
+        'stock': stock,
+        'items': items,
+      };
+      if (description != null && description.isNotEmpty) {
+        payload['description'] = description;
+      }
+
       final response = await _dio.post(
         '/api/packages',
-        data: {
-          'name': name,
-          'package_size': packageSize,
-          'total_price': totalPrice,
-          'stock': stock,
-          'items': items,
-        },
+        data: payload,
         options: Options(
           headers: {'Authorization': 'Bearer $token'},
         ),
