@@ -9,6 +9,7 @@ import 'shop_detail_screen.dart';
 import 'cart_screen.dart';
 import 'orders_screen.dart';
 import '../widgets/custom_badge.dart'; // Sepet ikonu için özel badge widget'ı
+import '../utils/constants.dart';
 
 class ShopsScreen extends StatefulWidget {
   static const routeName = '/shops';
@@ -44,20 +45,13 @@ class _ShopsScreenState extends State<ShopsScreen> {
     final shopProvider = Provider.of<ShopProvider>(context);
     final shops = shopProvider.shops;
 
-    // Örnek şehir listesi. Normalde bu da API'den gelmeli.
-    // Auth ekranındaki liste ile tutarlı hale getirildi.
+    // Türkiye'nin tüm 81 ili + "Tüm Şehirler" seçeneği
     final List<String> cities = [
       'Tüm Şehirler',
-      'İstanbul',
-      'Ankara',
-      'İzmir',
-      'Bursa',
-      'Antalya'
+      ...TURKEY_CITIES,
     ];
 
     // HATA DÜZELTME: Dropdown'ın değeri (selectedCity) her zaman items listesinde olmalıdır.
-    // Eğer kullanıcının şehri bu listede yoksa (örneğin API'den farklı bir şehir gelirse),
-    // listeye geçici olarak ekleyerek çökmesini önlüyoruz.
     final String currentCity = shopProvider.selectedCity;
     if (!cities.contains(currentCity)) {
       cities.insert(1, currentCity); // "Tüm Şehirler"den sonra ekle.

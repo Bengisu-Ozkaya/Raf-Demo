@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/auth_provider.dart';
+import '../utils/constants.dart';
 
 // Auth modunu (Giriş veya Kayıt) belirlemek için enum
 enum AuthMode { Login, Register }
@@ -36,15 +37,8 @@ class _AuthScreenState extends State<AuthScreen> {
   // "Müşteriyim" / "Satıcıyım" seçimi için
   UserType _userType = UserType.customer;
 
-  // Örnek şehir listesi. Normalde bu da API'den gelmeli.
-  // Kayıt için "Tüm Şehirler" seçeneğini kaldırıyoruz.
-  final List<String> _cities = [
-    'İstanbul',
-    'Ankara',
-    'İzmir',
-    'Bursa',
-    'Antalya'
-  ];
+  // Türkiye'deki tüm iller (81 il)
+  final List<String> _cities = TURKEY_CITIES;
 
   // Hata mesajlarını göstermek için
   void _showErrorDialog(String message) {
