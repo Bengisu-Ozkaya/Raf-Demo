@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import '../providers/shop_provider.dart';
 import '../providers/auth_provider.dart';
+import '../utils/theme.dart';
 
 class CreatePackageScreen extends StatefulWidget {
   static const routeName = '/create-package';
@@ -67,25 +68,25 @@ class _CreatePackageScreenState extends State<CreatePackageScreen> {
               children: [
                 // Bilgi Kartı
                 Card(
-                  color: Colors.orange.shade50,
+                  color: AppColors.cream,
                   elevation: 0,
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                    side: BorderSide(color: Colors.orange.shade200),
+                    borderRadius: BorderRadius.circular(14),
+                    side: const BorderSide(color: AppColors.border),
                   ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(14.0),
+                  child: const Padding(
+                    padding: EdgeInsets.all(14.0),
                     child: Row(
                       children: [
                         Icon(Icons.inventory_2,
-                            color: Colors.orange.shade800, size: 28),
-                        const SizedBox(width: 12),
+                            color: AppColors.taupe, size: 28),
+                        SizedBox(width: 12),
                         Expanded(
                           child: Text(
                             'İşletmenize özel hazır paket oluşturun. Müşterileriniz bu paketi tek tıkla sepetine ekleyebilir veya WhatsApp üzerinden sipariş verebilir.',
                             style: TextStyle(
                               fontSize: 13,
-                              color: Colors.orange.shade900,
+                              color: AppColors.deepEspresso,
                               fontWeight: FontWeight.w500,
                             ),
                           ),
@@ -106,9 +107,9 @@ class _CreatePackageScreenState extends State<CreatePackageScreen> {
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 13,
-                          color: Colors.grey),
+                          color: AppColors.mochaText),
                     ),
-                    const SizedBox(height: 6),
+                    const SizedBox(height: 8),
                     SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
                       child: Row(
@@ -118,9 +119,14 @@ class _CreatePackageScreenState extends State<CreatePackageScreen> {
                             padding: const EdgeInsets.only(right: 8.0),
                             child: ActionChip(
                               label: Text(label,
-                                  style: const TextStyle(fontSize: 12)),
+                                  style: const TextStyle(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w500,
+                                      color: AppColors.deepEspresso)),
                               backgroundColor: Colors.white,
-                              side: BorderSide(color: Colors.grey.shade300),
+                              side: const BorderSide(color: AppColors.border),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10)),
                               onPressed: () => _applyTemplate(tmpl),
                             ),
                           );
@@ -266,7 +272,7 @@ class _CreatePackageScreenState extends State<CreatePackageScreen> {
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 13,
-                      color: Colors.grey),
+                      color: AppColors.mochaText),
                 ),
                 const SizedBox(height: 8),
                 _buildPreviewCard(),
@@ -282,11 +288,11 @@ class _CreatePackageScreenState extends State<CreatePackageScreen> {
                     style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
                   ),
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.orange.shade800,
+                    backgroundColor: AppColors.taupe,
                     foregroundColor: Colors.white,
                     padding: const EdgeInsets.symmetric(vertical: 16),
                     shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12)),
+                        borderRadius: BorderRadius.circular(14)),
                   ),
                 ),
                 const SizedBox(height: 30),
@@ -313,10 +319,10 @@ class _CreatePackageScreenState extends State<CreatePackageScreen> {
         : '10';
 
     return Card(
-      elevation: 2,
+      elevation: 1,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
-        side: BorderSide(color: Colors.orange.shade200),
+        side: const BorderSide(color: AppColors.border),
       ),
       child: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -329,11 +335,11 @@ class _CreatePackageScreenState extends State<CreatePackageScreen> {
                 Container(
                   padding: const EdgeInsets.all(10),
                   decoration: BoxDecoration(
-                    color: Colors.orange.shade100,
+                    color: AppColors.cream,
                     borderRadius: BorderRadius.circular(12),
                   ),
-                  child: Icon(Icons.inventory_2,
-                      color: Colors.orange.shade900, size: 28),
+                  child: const Icon(Icons.inventory_2,
+                      color: AppColors.taupe, size: 28),
                 ),
                 const SizedBox(width: 12),
                 Expanded(
@@ -345,6 +351,7 @@ class _CreatePackageScreenState extends State<CreatePackageScreen> {
                         style: const TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
+                          color: AppColors.deepEspresso,
                         ),
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
@@ -352,8 +359,8 @@ class _CreatePackageScreenState extends State<CreatePackageScreen> {
                       const SizedBox(height: 4),
                       Text(
                         'Stok: $stockStr Adet',
-                        style: TextStyle(
-                            fontSize: 12, color: Colors.grey.shade600),
+                        style: const TextStyle(
+                            fontSize: 12, color: AppColors.mochaText),
                       ),
                     ],
                   ),
@@ -362,33 +369,33 @@ class _CreatePackageScreenState extends State<CreatePackageScreen> {
                   padding:
                       const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
                   decoration: BoxDecoration(
-                    color: Colors.teal.shade50,
+                    color: AppColors.sand,
                     borderRadius: BorderRadius.circular(8),
-                    border: Border.all(color: Colors.teal.shade300),
                   ),
                   child: Text(
                     '$priceStr ₺',
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
-                      color: Colors.teal.shade800,
+                      color: AppColors.deepEspresso,
                     ),
                   ),
                 ),
               ],
             ),
             const Divider(height: 20),
-            Text(
+            const Text(
               'Paket İçeriği:',
               style: TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.bold,
-                  color: Colors.grey.shade700),
+                  color: AppColors.mochaText),
             ),
             const SizedBox(height: 4),
             Text(
               content,
-              style: const TextStyle(fontSize: 13, height: 1.4),
+              style: const TextStyle(
+                  fontSize: 13, height: 1.4, color: AppColors.deepEspresso),
             ),
           ],
         ),
@@ -407,7 +414,7 @@ class _CreatePackageScreenState extends State<CreatePackageScreen> {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
             content: Text('Hata: İşletme kimliği bulunamadı.'),
-            backgroundColor: Colors.red),
+            backgroundColor: AppColors.error),
       );
       return;
     }
@@ -422,16 +429,19 @@ class _CreatePackageScreenState extends State<CreatePackageScreen> {
     showDialog(
       context: context,
       barrierDismissible: false,
-      builder: (ctx) => const Center(
+      builder: (ctx) => Center(
         child: Card(
-          child: Padding(
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+          child: const Padding(
             padding: EdgeInsets.all(20.0),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                CircularProgressIndicator(),
+                CircularProgressIndicator(color: AppColors.taupe),
                 SizedBox(height: 16),
-                Text('Paket oluşturuluyor...'),
+                Text('Paket oluşturuluyor...',
+                    style: TextStyle(fontWeight: FontWeight.w500)),
               ],
             ),
           ),
@@ -457,7 +467,7 @@ class _CreatePackageScreenState extends State<CreatePackageScreen> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('"$packageName" paketi başarıyla marketinize eklendi!'),
-          backgroundColor: Colors.green,
+          backgroundColor: AppColors.success,
           duration: const Duration(seconds: 3),
         ),
       );
@@ -467,7 +477,7 @@ class _CreatePackageScreenState extends State<CreatePackageScreen> {
         SnackBar(
           content:
               Text('Hata: ${shopProvider.errorMessage ?? "Paket eklenemedi."}'),
-          backgroundColor: Colors.red,
+          backgroundColor: AppColors.error,
         ),
       );
     }

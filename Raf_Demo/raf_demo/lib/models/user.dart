@@ -19,8 +19,13 @@ class AppUser {
   factory AppUser.fromJson(Map<String, dynamic> json) {
     return AppUser(
       id: json['id']?.toString() ?? '',
-      username: json['username'] as String? ?? json['shop_name'] as String? ?? '',
-      name: json['name'] as String? ?? json['owner_name'] as String? ?? json['username'] as String? ?? json['shop_name'] as String? ?? '',
+      username:
+          json['username'] as String? ?? json['shop_name'] as String? ?? '',
+      name: json['name'] as String? ??
+          json['owner_name'] as String? ??
+          json['username'] as String? ??
+          json['shop_name'] as String? ??
+          '',
       email: json['email'] as String? ?? '',
       city: json['city'] as String? ?? '',
       phone: json['phone'] as String? ?? '',
@@ -37,5 +42,24 @@ class AppUser {
       'city': city,
       'phone': phone,
     };
+  }
+
+  /// AppUser nesnesinin kopyasını alan ve istenen alanları güncelleyen metod.
+  AppUser copyWith({
+    String? id,
+    String? username,
+    String? name,
+    String? email,
+    String? city,
+    String? phone,
+  }) {
+    return AppUser(
+      id: id ?? this.id,
+      username: username ?? this.username,
+      name: name ?? this.name,
+      email: email ?? this.email,
+      city: city ?? this.city,
+      phone: phone ?? this.phone,
+    );
   }
 }

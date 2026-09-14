@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import '../providers/shop_provider.dart';
 import '../providers/auth_provider.dart';
 import '../models/product.dart';
+import '../utils/theme.dart';
 
 class AddProductFromCatalogScreen extends StatefulWidget {
   static const routeName =
@@ -38,9 +39,6 @@ class _AddProductFromCatalogScreenState
   @override
   void initState() {
     super.initState();
-    // Provider'ı dinlemeden, sadece metodunu çağırmak için kullanıyoruz.
-    // Ekran ilk açıldığında "Tümü" kategorisindeki ürünleri getir.
-    // Ayrıca, dükkanın mevcut ürünlerini de tazeleyelim ki "Ekle"/"Güncelle" durumu doğru olsun.
     final shopProvider = Provider.of<ShopProvider>(context, listen: false);
     final shopId = Provider.of<AuthProvider>(context, listen: false).shopId;
     shopProvider.fetchMasterProductsByCategory(_selectedCategory);
@@ -67,7 +65,14 @@ class _AddProductFromCatalogScreenState
       body: Column(
         children: [
           _buildCategoryChips(),
-          Expanded(child: _buildBody(context)),
+          Expanded(
+            child: Center(
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: 1000),
+                child: _buildBody(context),
+              ),
+            ),
+          ),
         ],
       ),
     );
@@ -78,7 +83,8 @@ class _AddProductFromCatalogScreenState
     return Consumer<ShopProvider>(
       builder: (ctx, shopProvider, _) {
         if (shopProvider.isLoading && shopProvider.masterProducts.isEmpty) {
-          return const Center(child: CircularProgressIndicator());
+          return const Center(
+              child: CircularProgressIndicator(color: AppColors.taupe));
         }
 
         if (shopProvider.errorMessage != null &&
@@ -87,14 +93,17 @@ class _AddProductFromCatalogScreenState
               child: Padding(
             padding: const EdgeInsets.all(16.0),
             child: Text('Hata: ${shopProvider.errorMessage}',
-                style: const TextStyle(color: Colors.red),
+                style: const TextStyle(color: AppColors.error),
                 textAlign: TextAlign.center),
           ));
         }
 
         if (shopProvider.masterProducts.isEmpty) {
           return const Center(
-              child: Text('Bu kategoride gösterilecek ürün bulunamadı.'));
+              child: Text(
+            'Bu kategoride gösterilecek ürün bulunamadı.',
+            style: TextStyle(color: AppColors.mochaText),
+          ));
         }
 
         // Ürün grid'ini provider'dan gelen veriyle oluştur.
@@ -106,9 +115,9 @@ class _AddProductFromCatalogScreenState
   /// Yatayda kayan kategori seçme barını oluşturur.
   Widget _buildCategoryChips() {
     return Container(
-      height: 50,
-      color: Colors.grey[100],
-      padding: const EdgeInsets.symmetric(vertical: 4.0),
+      height: 52,
+      color: AppColors.surfaceSubtle,
+      padding: const EdgeInsets.symmetric(vertical: 6.0),
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: _categories.length,
@@ -127,16 +136,14 @@ class _AddProductFromCatalogScreenState
                   _loadMasterProductsForCategory(category);
                 }
               },
-              selectedColor: Theme.of(context).primaryColor,
+              selectedColor: AppColors.taupe,
               labelStyle: TextStyle(
-                  color: isSelected ? Colors.white : Colors.black87,
-                  fontWeight: isSelected ? FontWeight.bold : FontWeight.normal),
+                  color: isSelected ? Colors.white : AppColors.deepEspresso,
+                  fontWeight: isSelected ? FontWeight.bold : FontWeight.w500),
               backgroundColor: Colors.white,
               shape: StadiumBorder(
                   side: BorderSide(
-                      color: isSelected
-                          ? Theme.of(context).primaryColor
-                          : Colors.grey[300]!)),
+                      color: isSelected ? AppColors.taupe : AppColors.border)),
             ),
           );
         },
@@ -179,9 +186,12 @@ class _AddProductFromCatalogScreenState
     final isAdded = shopProduct.id != 0;
 
     return Card(
-      elevation: 3,
-      clipBehavior:
-          Clip.antiAlias, // Görselin kart sınırlarından taşmasını engeller
+      elevation: 1,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(16),
+        side: BorderSide(color: AppColors.border.withValues(alpha: 0.7)),
+      ),
+      clipBehavior: Clip.antiAlias,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -195,10 +205,10 @@ class _AddProductFromCatalogScreenState
                 child: Image.network(
                   masterProduct.imageUrl ?? '',
                   fit: BoxFit.contain,
-                  errorBuilder: (context, error, stackTrace) => Icon(
+                  errorBuilder: (context, error, stackTrace) => const Icon(
                       Icons.inventory_2_outlined,
-                      size: 50,
-                      color: Colors.grey[400]),
+                      size: 48,
+                      color: AppColors.sand),
                 ),
               ),
             ),
@@ -207,7 +217,8 @@ class _AddProductFromCatalogScreenState
           Expanded(
             flex: 4,
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 10.0, vertical: 4.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -215,13 +226,16 @@ class _AddProductFromCatalogScreenState
                   Text(
                     masterProduct.name,
                     style: const TextStyle(
-                        fontWeight: FontWeight.bold, fontSize: 14),
+                        fontWeight: FontWeight.bold,
+                        fontSize: 13,
+                        color: AppColors.deepEspresso),
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                   ),
                   Text(
                     '${masterProduct.brand ?? ''} - ${masterProduct.weightVolume ?? ''}',
-                    style: TextStyle(color: Colors.grey[600], fontSize: 12),
+                    style: const TextStyle(
+                        color: AppColors.mochaText, fontSize: 11),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
@@ -236,14 +250,15 @@ class _AddProductFromCatalogScreenState
               onPressed: () =>
                   _showAddProductDialog(masterProduct, shopProduct),
               icon: Icon(isAdded ? Icons.edit : Icons.add_shopping_cart,
-                  size: 16),
+                  size: 15),
               label: Text(isAdded ? 'Güncelle' : 'Ekle'),
               style: ElevatedButton.styleFrom(
-                backgroundColor: isAdded
-                    ? Colors.orange.shade700
-                    : Theme.of(context).primaryColor,
-                foregroundColor: Colors.white,
+                backgroundColor: isAdded ? AppColors.sand : AppColors.taupe,
+                foregroundColor:
+                    isAdded ? AppColors.deepEspresso : Colors.white,
                 padding: const EdgeInsets.symmetric(vertical: 8),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10)),
                 textStyle:
                     const TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
               ),
@@ -261,8 +276,7 @@ class _AddProductFromCatalogScreenState
     final isAdded = shopProduct.id != 0;
 
     if (isAdded) {
-      stockController.text =
-          shopProduct.stock?.toString() ?? '10';
+      stockController.text = shopProduct.stock?.toString() ?? '10';
     } else {
       stockController.text = '10';
     }
@@ -271,9 +285,13 @@ class _AddProductFromCatalogScreenState
       context: context,
       builder: (context) {
         return AlertDialog(
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
           title: Text(masterProduct.name,
-              style:
-                  const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+              style: const TextStyle(
+                  fontSize: 17,
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.deepEspresso)),
           content: Form(
             key: formKey,
             child: Column(
@@ -283,7 +301,8 @@ class _AddProductFromCatalogScreenState
                   controller: stockController,
                   decoration: const InputDecoration(
                       labelText: 'Stok Adedi',
-                      prefixIcon: Icon(Icons.inventory_2_outlined)),
+                      prefixIcon: Icon(Icons.inventory_2_outlined,
+                          color: AppColors.taupe)),
                   keyboardType: TextInputType.number,
                   validator: (v) =>
                       (v == null || v.isEmpty || int.tryParse(v) == null)
@@ -296,12 +315,20 @@ class _AddProductFromCatalogScreenState
           actions: [
             TextButton(
                 onPressed: () => Navigator.of(context).pop(),
-                child: const Text('İptal')),
+                child: const Text('İptal',
+                    style: TextStyle(color: AppColors.mochaText))),
             ElevatedButton(
-              onPressed: () {
+              style: ElevatedButton.styleFrom(
+                backgroundColor: AppColors.taupe,
+                foregroundColor: Colors.white,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10)),
+              ),
+              onPressed: () async {
                 if (!formKey.currentState!.validate()) return;
 
                 final stock = int.parse(stockController.text);
+                final messenger = ScaffoldMessenger.of(context);
 
                 Navigator.of(context).pop(); // Diyalogu hemen kapat
 
@@ -310,26 +337,24 @@ class _AddProductFromCatalogScreenState
                     Provider.of<ShopProvider>(context, listen: false);
                 final authProvider =
                     Provider.of<AuthProvider>(context, listen: false);
-                shopProvider
-                    .addProduct(
+                final success = await shopProvider.addProduct(
                   masterProductId: masterProduct.id,
                   price: 0.0,
                   stock: stock,
                   shopId: authProvider.shopId,
-                )
-                    .then((success) {
-                  if (!mounted) return;
-                  if (success) {
-                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                        content: Text('Ürün başarıyla kaydedildi!'),
-                        backgroundColor: Colors.green));
-                  } else {
-                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                        content: Text(
-                            'Hata: ${shopProvider.errorMessage ?? 'Ürün kaydedilemedi.'}'),
-                        backgroundColor: Colors.red));
-                  }
-                });
+                );
+
+                if (!mounted) return;
+                if (success) {
+                  messenger.showSnackBar(const SnackBar(
+                      content: Text('Ürün başarıyla kaydedildi!'),
+                      backgroundColor: AppColors.success));
+                } else {
+                  messenger.showSnackBar(SnackBar(
+                      content: Text(
+                          'Hata: ${shopProvider.errorMessage ?? 'Ürün kaydedilemedi.'}'),
+                      backgroundColor: AppColors.error));
+                }
               },
               child: const Text('Kaydet'),
             ),

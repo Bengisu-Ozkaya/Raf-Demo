@@ -4,9 +4,9 @@ import 'package:provider/provider.dart';
 import '../models/product.dart';
 import '../models/shop.dart';
 import '../providers/cart_provider.dart';
+import '../utils/theme.dart';
 
 /// Müşterinin gördüğü, bir dükkandaki tek bir ürünü temsil eden kart widget'ı.
-/// Ürün görseli, adı, fiyatı ve en önemlisi stok durumunu gösterir.
 class CustomerProductItem extends StatelessWidget {
   final Product product;
   final Shop shop;
@@ -22,44 +22,66 @@ class CustomerProductItem extends StatelessWidget {
     final cart = Provider.of<CartProvider>(context, listen: false);
 
     return Card(
-      clipBehavior:
-          Clip.antiAlias, // Görselin kartın köşelerinden taşmasını engeller
+      elevation: 2,
+      shadowColor: AppColors.taupe.withValues(alpha: 0.12),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(16),
+        side: BorderSide(
+          color: AppColors.border.withValues(alpha: 0.6),
+          width: 1,
+        ),
+      ),
+      clipBehavior: Clip.antiAlias,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          // Ürün görseli ve üzerinde stok bilgisi
+          // Ürün görseli
           Expanded(
             child: Stack(
               fit: StackFit.expand,
               children: [
-                // Ürün Görseli
                 Image.network(
                   product.imageUrl ?? 'https://via.placeholder.com/300',
                   fit: BoxFit.cover,
-                  // Yüklenirken gösterilecek placeholder
                   loadingBuilder: (context, child, loadingProgress) {
                     if (loadingProgress == null) return child;
-                    return const Center(child: CircularProgressIndicator());
+                    return Container(
+                      color: AppColors.cream,
+                      child: const Center(
+                        child: CircularProgressIndicator(
+                          color: AppColors.taupe,
+                          strokeWidth: 2,
+                        ),
+                      ),
+                    );
                   },
-                  // Hata durumunda gösterilecek ikon
                   errorBuilder: (context, error, stackTrace) {
-                    return const Icon(Icons.image_not_supported,
-                        color: Colors.grey);
+                    return Container(
+                      color: AppColors.cream,
+                      child: const Center(
+                        child: Icon(Icons.shopping_bag_outlined,
+                            color: AppColors.taupe, size: 36),
+                      ),
+                    );
                   },
                 ),
               ],
             ),
           ),
           // Ürün bilgileri ve Sepete Ekle butonu
-          Padding(
-            padding: const EdgeInsets.all(8.0),
+          Container(
+            color: Colors.white,
+            padding: const EdgeInsets.all(10.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   product.name,
                   style: const TextStyle(
-                      fontWeight: FontWeight.bold, fontSize: 15),
+                    fontWeight: FontWeight.bold,
+                    fontSize: 14,
+                    color: AppColors.deepEspresso,
+                  ),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -71,42 +93,55 @@ class CustomerProductItem extends StatelessWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        if (product.weightVolume != null && product.weightVolume!.isNotEmpty)
+                        if (product.weightVolume != null &&
+                            product.weightVolume!.isNotEmpty)
                           Text(
                             product.weightVolume!,
-                            style: TextStyle(
-                              color: Colors.grey.shade700,
-                              fontSize: 13,
+                            style: const TextStyle(
+                              color: AppColors.mochaText,
+                              fontSize: 12,
                               fontWeight: FontWeight.w500,
                             ),
                           ),
                         const SizedBox(height: 2),
                         Text(
-                          (product.stock ?? 0) > 0 // Null kontrolü eklendi
-                              ? 'Stok: ${product.stock}' // Null kontrolü eklendi
+                          (product.stock ?? 0) > 0
+                              ? 'Stok: ${product.stock}'
                               : 'Tükendi',
                           style: TextStyle(
-                              fontSize: 12,
-                              color: (product.stock ?? 0) > 0
-                                  ? Colors.grey.shade600
-                                  : Colors.red),
+                            fontSize: 11.5,
+                            fontWeight: FontWeight.w600,
+                            color: (product.stock ?? 0) > 0
+                                ? AppColors.success
+                                : AppColors.error,
+                          ),
                         ),
                       ],
                     ),
                     // Stokta varsa sepete ekle butonu göster
-                    if ((product.stock ?? 0) > 0) // Null kontrolü eklendi
-                      IconButton(
-                        icon: const Icon(Icons.add_shopping_cart),
-                        color: Theme.of(context).colorScheme.secondary,
-                        onPressed: () {
-                          cart.addItem(product, shop);
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text('${product.name} sepete eklendi.'),
-                              duration: const Duration(seconds: 2),
-                            ),
-                          );
-                        },
+                    if ((product.stock ?? 0) > 0)
+                      Container(
+                        decoration: BoxDecoration(
+                          color: AppColors.cream,
+                          borderRadius: BorderRadius.circular(10),
+                          border: Border.all(color: AppColors.sand, width: 1),
+                        ),
+                        child: IconButton(
+                          visualDensity: VisualDensity.compact,
+                          icon: const Icon(Icons.add_shopping_cart, size: 18),
+                          color: AppColors.deepEspresso,
+                          onPressed: () {
+                            cart.addItem(product, shop);
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content:
+                                    Text('${product.name} sepete eklendi.'),
+                                backgroundColor: AppColors.success,
+                                duration: const Duration(seconds: 2),
+                              ),
+                            );
+                          },
+                        ),
                       ),
                   ],
                 ),

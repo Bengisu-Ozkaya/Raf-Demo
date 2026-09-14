@@ -9,6 +9,7 @@ import 'providers/cart_provider.dart';
 import 'services/api_service.dart'; // YENİ: ApiService'i import et
 import 'services/socket_service.dart';
 
+import 'utils/theme.dart';
 import 'screens/auth_screen.dart';
 import 'screens/shops_screen.dart';
 import 'screens/shop_detail_screen.dart';
@@ -18,6 +19,7 @@ import 'screens/merchant_dashboard_screen.dart'; // YENİ
 import 'screens/add_product_from_catalog.dart'; // YENİ: AddProductFromCatalogScreen'i import et
 import 'screens/create_package_screen.dart'; // YENİ: CreatePackageScreen'i import et
 import 'screens/package_detail_screen.dart'; // YENİ: PackageDetailScreen'i import et
+import 'screens/profile_screen.dart'; // YENİ: ProfileScreen'i import et
 
 void main() async {
   // Flutter binding'in başlatıldığından emin ol.
@@ -32,13 +34,16 @@ void main() async {
   final socketService = SocketService();
   socketService.connect(); // Uygulama başlarken socket bağlantısını kur.
 
+  final authProvider = AuthProvider(apiService, socketService);
+  // Uygulama başlarken hafızadaki oturum verisini (varsa) otomatik yükle
+  await authProvider.tryAutoLogin();
+
   runApp(
     MultiProvider(
       providers: [
-        // 1. AuthProvider, paylaşılan apiService'i alır.
-        // (Not: AuthProvider sınıfınızın constructor'ını ApiService alacak şekilde güncellemelisiniz)
-        ChangeNotifierProvider(
-          create: (context) => AuthProvider(apiService, socketService),
+        // 1. Önceden başlatılmış ve oturum durumu yüklenmiş AuthProvider
+        ChangeNotifierProvider.value(
+          value: authProvider,
         ),
 
         // 2. Diğer provider'ları AuthProvider'a bağlamak için ChangeNotifierProxyProvider kullanılır.
@@ -76,55 +81,18 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Market Teslimat',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.teal)
-            .copyWith(secondary: Colors.amber[700]),
-        primarySwatch: Colors.teal,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-        scaffoldBackgroundColor: Colors.grey[100],
-        appBarTheme: const AppBarTheme(
-          backgroundColor: Colors.teal,
-          foregroundColor: Colors.white,
-          elevation: 0,
-        ),
-        cardTheme: CardThemeData(
-          elevation: 2,
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-        ),
-        elevatedButtonTheme: ElevatedButtonThemeData(
-          style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.amber[700],
-            foregroundColor: Colors.white,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(20),
-            ),
-            padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 24),
-          ),
-        ),
-      ),
+      title: 'Raf',
+      debugShowCheckedModeBanner: false,
+      theme: AppTheme.lightTheme,
       home: Consumer<AuthProvider>(
         builder: (ctx, auth, _) {
-          // Eğer oturum açıksa ana sayfayı, değilse giriş ekranını göster.
+          // Eğer oturum açıksa ana sayfayı (satıcı veya müşteri), değilse giriş ekranını göster.
           if (auth.isAuthenticated) {
-            // Kullanıcı tipine göre yönlendirme yap
             return auth.userType == UserType.merchant
                 ? const MerchantDashboardScreen()
                 : const ShopsScreen();
           }
-          // Oturum açık değilse, otomatik giriş yapmayı dene.
-          return FutureBuilder(
-            future: auth.tryAutoLogin(),
-            builder: (ctx, authResultSnapshot) =>
-                authResultSnapshot.connectionState == ConnectionState.waiting
-                    ? const Scaffold(
-                        body: Center(
-                          child: CircularProgressIndicator(),
-                        ),
-                      )
-                    : const AuthScreen(),
-          );
+          return const AuthScreen();
         },
       ),
       // Rotaları tanımla (sayfa geçişleri için)
@@ -142,6 +110,8 @@ class MyApp extends StatelessWidget {
             const CreatePackageScreen(), // YENİ: Paket Oluşturucu Rotası
         PackageDetailScreen.routeName: (ctx) =>
             const PackageDetailScreen(), // YENİ: Paket Detay Rotası
+        ProfileScreen.routeName: (ctx) =>
+            const ProfileScreen(), // YENİ: Profilim Rotası
       },
     );
   }

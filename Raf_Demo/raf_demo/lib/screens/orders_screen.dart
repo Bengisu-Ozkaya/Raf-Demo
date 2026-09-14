@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
-import '../providers/cart_provider.dart'; // Bu import'u koru
+import '../providers/cart_provider.dart';
 import '../models/order_model.dart';
+import '../utils/theme.dart';
 import 'shops_screen.dart';
 
 /// Kullanıcının geçmiş siparişlerini listeleyen ekran.
@@ -17,13 +18,9 @@ class OrdersScreen extends StatefulWidget {
 }
 
 class _OrdersScreenState extends State<OrdersScreen> {
-  // _ordersFuture artık gerekli değil, doğrudan Consumer kullanacağız.
-
   @override
   void initState() {
     super.initState();
-    // Ekran ilk açıldığında siparişleri çek.
-    // listen: false çünkü sadece metodu çağırıyoruz, build metodunda dinleyeceğiz.
     Provider.of<CartProvider>(context, listen: false).fetchMyOrders();
   }
 
@@ -31,18 +28,23 @@ class _OrdersScreenState extends State<OrdersScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Siparişlerim'), // Başlık
+        title: const Text('Siparişlerim'),
       ),
       body: Consumer<CartProvider>(
         builder: (ctx, cartProvider, _) {
-          // Yükleme durumunu ve hata mesajını doğrudan provider'dan al.
           if (cartProvider.isLoading && cartProvider.myOrders.isEmpty) {
-            return const Center(child: CircularProgressIndicator());
+            return const Center(
+                child: CircularProgressIndicator(color: AppColors.taupe));
           }
           if (cartProvider.errorMessage != null) {
             return Center(
-                child: Text(
-                    'Siparişler yüklenirken bir hata oluştu: ${cartProvider.errorMessage}'));
+                child: Padding(
+              padding: const EdgeInsets.all(24.0),
+              child: Text(
+                  'Siparişler yüklenirken bir hata oluştu: ${cartProvider.errorMessage}',
+                  style: const TextStyle(color: AppColors.error),
+                  textAlign: TextAlign.center),
+            ));
           }
 
           final orders = cartProvider.myOrders;
@@ -50,37 +52,71 @@ class _OrdersScreenState extends State<OrdersScreen> {
           // Eğer hiç sipariş yoksa, kullanıcıyı bilgilendir.
           if (orders.isEmpty) {
             return Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Icon(Icons.receipt_long, size: 80, color: Colors.grey),
-                  const SizedBox(height: 20),
-                  const Text(
-                    'Henüz bir siparişiniz bulunmamaktadır',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 18, color: Colors.grey),
-                  ),
-                  const SizedBox(height: 20),
-                  ElevatedButton.icon(
-                    icon: const Icon(Icons.shopping_bag),
-                    label: const Text('Alışverişe Başla'),
-                    onPressed: () {
-                      // Kullanıcıyı ana ekrana (mağazalar) yönlendir.
-                      Navigator.of(context)
-                          .pushReplacementNamed(ShopsScreen.routeName);
-                    },
-                  )
-                ],
+              child: Padding(
+                padding: const EdgeInsets.all(24.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.all(24),
+                      decoration: const BoxDecoration(
+                        color: AppColors.cream,
+                        shape: BoxShape.circle,
+                      ),
+                      child: const Icon(Icons.receipt_long_outlined,
+                          size: 64, color: AppColors.taupe),
+                    ),
+                    const SizedBox(height: 20),
+                    const Text(
+                      'Henüz Bir Siparişiniz Yok',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: AppColors.deepEspresso,
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    const Text(
+                      'Verdiğiniz siparişlerin durumunu ve geçmişini bu sayfadan takip edebilirsiniz.',
+                      textAlign: TextAlign.center,
+                      style:
+                          TextStyle(fontSize: 13, color: AppColors.mochaText),
+                    ),
+                    const SizedBox(height: 24),
+                    ElevatedButton.icon(
+                      icon: const Icon(Icons.storefront),
+                      label: const Text('Alışverişe Başla'),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: AppColors.taupe,
+                        foregroundColor: Colors.white,
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 24, vertical: 14),
+                      ),
+                      onPressed: () {
+                        Navigator.of(context)
+                            .pushReplacementNamed(ShopsScreen.routeName);
+                      },
+                    )
+                  ],
+                ),
               ),
             );
           }
 
           // Siparişleri en yeniden eskiye doğru listele.
-          return RefreshIndicator(
-            onRefresh: () => cartProvider.fetchMyOrders(), // Yenileme işlemi
-            child: ListView.builder(
-              itemCount: orders.length,
-              itemBuilder: (ctx, i) => OrderItemCard(order: orders[i]),
+          return Center(
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 800),
+              child: RefreshIndicator(
+                color: AppColors.taupe,
+                onRefresh: () => cartProvider.fetchMyOrders(),
+                child: ListView.builder(
+                  padding: const EdgeInsets.symmetric(vertical: 12),
+                  itemCount: orders.length,
+                  itemBuilder: (ctx, i) => OrderItemCard(order: orders[i]),
+                ),
+              ),
             ),
           );
         },
@@ -93,31 +129,42 @@ class _OrdersScreenState extends State<OrdersScreen> {
 class OrderItemCard extends StatelessWidget {
   final OrderModel order;
 
-  // Duruma göre renk belirleyen, daha kapsamlı yardımcı fonksiyon.
   Color _getStatusColor(String status) {
     switch (status.toLowerCase()) {
-      case 'Teslim Edildi':
+      case 'teslim edildi':
       case 'delivered':
-        return Colors.green;
-      case 'Yola Çıktı':
+        return AppColors.success;
+      case 'yola çıktı':
       case 'on the way':
-        return Colors.blue.shade700;
-      case 'Hazırlanıyor':
+        return AppColors.taupe;
+      case 'hazırlanıyor':
       case 'preparing':
-        return Colors.orange.shade700;
-      case 'İptal Edildi':
+        return AppColors.sand;
+      case 'iptal edildi':
       case 'cancelled':
-        return Colors.red;
+        return AppColors.error;
       case 'pending':
-      case 'Sipariş Alındı':
+      case 'sipariş alındı':
       case 'bekleniyor':
-        return Colors.grey.shade600;
-      default: // Bilinmeyen durumlar için varsayılan renk
-        return Colors.grey.shade600;
+        return AppColors.dustyRose;
+      default:
+        return AppColors.mochaText;
     }
   }
 
-  // Durum metnini Türkçeleştiren yardımcı fonksiyon.
+  Color _getStatusTextColor(String status) {
+    switch (status.toLowerCase()) {
+      case 'hazırlanıyor':
+      case 'preparing':
+      case 'pending':
+      case 'sipariş alındı':
+      case 'bekleniyor':
+        return AppColors.deepEspresso;
+      default:
+        return Colors.white;
+    }
+  }
+
   String _getTurkishStatus(String status) {
     switch (status.toLowerCase()) {
       case 'pending':
@@ -137,7 +184,7 @@ class OrderItemCard extends StatelessWidget {
       case 'iptal edildi':
         return 'İptal Edildi';
       default:
-        return status; // Bilinmeyen bir durum gelirse olduğu gibi göster
+        return status;
     }
   }
 
@@ -145,74 +192,115 @@ class OrderItemCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final statusColor = _getStatusColor(order.status);
+    final statusTextColor = _getStatusTextColor(order.status);
+
     return Card(
-      margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
+      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+      elevation: 1,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(16),
+        side: BorderSide(color: AppColors.border.withValues(alpha: 0.7)),
+      ),
       child: ExpansionTile(
-        tilePadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+        tilePadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(16)),
+        ),
+        collapsedShape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(16)),
+        ),
         title: Text(
           'Sipariş ID: ${order.id.length > 6 ? '...${order.id.substring(order.id.length - 6)}' : order.id}',
-          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+          style: const TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 15,
+            color: AppColors.deepEspresso,
+          ),
         ),
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            const SizedBox(height: 3),
             Text(
               DateFormat('dd MMMM yyyy, HH:mm', 'tr_TR').format(order.dateTime),
-              style: const TextStyle(color: Colors.grey, fontSize: 14),
+              style: const TextStyle(color: AppColors.mochaText, fontSize: 13),
             ),
-            const SizedBox(height: 4),
-            Chip(
-              label: Text(
+            const SizedBox(height: 6),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
+              decoration: BoxDecoration(
+                color: statusColor,
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Text(
                 _getTurkishStatus(order.status),
-                style: const TextStyle(
-                  fontSize: 10,
-                  color: Colors.white,
+                style: TextStyle(
+                  fontSize: 11,
+                  fontWeight: FontWeight.bold,
+                  color: statusTextColor,
                 ),
               ),
-              backgroundColor: _getStatusColor(order.status),
-              visualDensity: VisualDensity.compact,
             ),
           ],
         ),
         trailing: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
           decoration: BoxDecoration(
-            color: Colors.teal.shade50,
-            borderRadius: BorderRadius.circular(6),
+            color: AppColors.cream,
+            borderRadius: BorderRadius.circular(8),
           ),
           child: Text(
             '${order.items.fold(0, (sum, i) => sum + i.quantity)} Ürün',
-            style: TextStyle(
-                fontWeight: FontWeight.bold, fontSize: 13, color: Colors.teal.shade800),
+            style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 13,
+                color: AppColors.deepEspresso),
           ),
         ),
-        // Kart açıldığında görünecek olan ürün detayları
         children: [
           Container(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+            padding: const EdgeInsets.all(16),
             width: double.infinity,
-            decoration: BoxDecoration(
-              color: Colors.grey.shade100,
+            decoration: const BoxDecoration(
+              color: AppColors.surfaceSubtle,
+              borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(16),
+                bottomRight: Radius.circular(16),
+              ),
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Ödeme Yöntemi: ${order.paymentMethod}',
-                    style: const TextStyle(fontWeight: FontWeight.w500)),
-                const SizedBox(height: 10),
+                Row(
+                  children: [
+                    const Icon(Icons.payment, size: 16, color: AppColors.taupe),
+                    const SizedBox(width: 6),
+                    Text('Ödeme Yöntemi: ${order.paymentMethod}',
+                        style: const TextStyle(
+                            fontWeight: FontWeight.w500,
+                            color: AppColors.deepEspresso,
+                            fontSize: 13)),
+                  ],
+                ),
+                const SizedBox(height: 12),
                 const Text('Sipariş İçeriği:',
-                    style: TextStyle(fontWeight: FontWeight.bold)),
-                const Divider(),
-                // Siparişteki her bir ürünü listele
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: AppColors.deepEspresso,
+                        fontSize: 13)),
+                const Divider(height: 16),
                 ...order.items.map((item) => Padding(
                       padding: const EdgeInsets.symmetric(vertical: 4.0),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          // Ürün adı ve adedi
                           Expanded(
                               child: Text('• ${item.quantity}x  ${item.name}',
-                                  style: const TextStyle(fontWeight: FontWeight.w500))),
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.w500,
+                                      color: AppColors.deepEspresso,
+                                      fontSize: 13))),
                         ],
                       ),
                     )),

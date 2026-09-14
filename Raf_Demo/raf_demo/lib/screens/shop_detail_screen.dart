@@ -8,6 +8,7 @@ import '../providers/cart_provider.dart';
 import '../widgets/custom_badge.dart';
 import 'cart_screen.dart';
 import 'package:raf_demo/screens/package_detail_screen.dart';
+import '../utils/theme.dart';
 
 class ShopDetailScreen extends StatefulWidget {
   static const routeName = '/shop-detail';
@@ -123,17 +124,20 @@ class _ShopDetailScreenState extends State<ShopDetailScreen> {
                       // 2. Hazır Paketler Başlığı
                       Row(
                         children: [
-                          Icon(Icons.inventory_2,
-                              color: Theme.of(context).primaryColor, size: 22),
+                          const Icon(Icons.inventory_2_outlined,
+                              color: AppColors.taupe, size: 22),
                           const SizedBox(width: 8),
                           Text(
                             'Hazır Paketler (${packages.length})',
                             style: const TextStyle(
-                                fontSize: 16, fontWeight: FontWeight.bold),
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              color: AppColors.deepEspresso,
+                            ),
                           ),
                         ],
                       ),
-                      const SizedBox(height: 8),
+                      const SizedBox(height: 10),
 
                       // 3. Paketler Listesi
                       if (packages.isEmpty)
@@ -144,14 +148,24 @@ class _ShopDetailScreenState extends State<ShopDetailScreen> {
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Icon(Icons.inventory_2_outlined,
-                                    size: 64, color: Colors.orange.shade300),
+                                Container(
+                                  padding: const EdgeInsets.all(18),
+                                  decoration: BoxDecoration(
+                                    color: AppColors.cream,
+                                    shape: BoxShape.circle,
+                                    border: Border.all(
+                                        color: AppColors.sand, width: 1.5),
+                                  ),
+                                  child: const Icon(Icons.inventory_2_outlined,
+                                      size: 52, color: AppColors.taupe),
+                                ),
                                 const SizedBox(height: 16),
                                 const Text(
                                   'Bu markette henüz hazır paket bulunmuyor.',
                                   style: TextStyle(
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.bold),
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                      color: AppColors.deepEspresso),
                                   textAlign: TextAlign.center,
                                 ),
                                 const SizedBox(height: 8),
@@ -159,7 +173,7 @@ class _ShopDetailScreenState extends State<ShopDetailScreen> {
                                   'Tekli ürün veya özel siparişleriniz için yukarıdaki WhatsApp butonunu kullanabilirsiniz.',
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
-                                      color: Colors.grey, fontSize: 13),
+                                      color: AppColors.mochaText, fontSize: 13),
                                 ),
                               ],
                             ),
@@ -177,19 +191,27 @@ class _ShopDetailScreenState extends State<ShopDetailScreen> {
 
                                 return Card(
                                   margin:
-                                      const EdgeInsets.symmetric(vertical: 6),
+                                      const EdgeInsets.symmetric(vertical: 8),
                                   elevation: 2,
+                                  shadowColor:
+                                      AppColors.taupe.withValues(alpha: 0.15),
                                   shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(14)),
+                                    borderRadius: BorderRadius.circular(16),
+                                    side: BorderSide(
+                                      color: AppColors.border
+                                          .withValues(alpha: 0.6),
+                                      width: 1,
+                                    ),
+                                  ),
                                   child: InkWell(
-                                    borderRadius: BorderRadius.circular(14),
+                                    borderRadius: BorderRadius.circular(16),
                                     onTap: () =>
                                         Navigator.of(context).pushNamed(
                                       PackageDetailScreen.routeName,
                                       arguments: pkg,
                                     ),
                                     child: Padding(
-                                      padding: const EdgeInsets.all(14.0),
+                                      padding: const EdgeInsets.all(16.0),
                                       child: Column(
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
@@ -200,15 +222,19 @@ class _ShopDetailScreenState extends State<ShopDetailScreen> {
                                             children: [
                                               Container(
                                                 padding:
-                                                    const EdgeInsets.all(10),
+                                                    const EdgeInsets.all(12),
                                                 decoration: BoxDecoration(
-                                                  color: Colors.orange.shade100,
+                                                  color: AppColors.cream,
                                                   borderRadius:
-                                                      BorderRadius.circular(10),
+                                                      BorderRadius.circular(14),
+                                                  border: Border.all(
+                                                      color: AppColors.sand,
+                                                      width: 1.2),
                                                 ),
-                                                child: Icon(Icons.inventory_2,
+                                                child: const Icon(
+                                                    Icons.inventory_2_outlined,
                                                     color:
-                                                        Colors.orange.shade900,
+                                                        AppColors.deepEspresso,
                                                     size: 24),
                                               ),
                                               const SizedBox(width: 12),
@@ -220,21 +246,46 @@ class _ShopDetailScreenState extends State<ShopDetailScreen> {
                                                     Text(
                                                       pkg.name,
                                                       style: const TextStyle(
-                                                          fontSize: 16,
-                                                          fontWeight:
-                                                              FontWeight.bold),
+                                                        fontSize: 16,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        color: AppColors
+                                                            .deepEspresso,
+                                                      ),
                                                       maxLines: 2,
                                                       overflow:
                                                           TextOverflow.ellipsis,
                                                     ),
                                                     if (pkg.stock > 0) ...[
-                                                      const SizedBox(height: 2),
-                                                      Text(
-                                                        'Stokta ${pkg.stock} adet var',
-                                                        style: TextStyle(
-                                                            fontSize: 11,
-                                                            color: Colors
-                                                                .grey.shade600),
+                                                      const SizedBox(height: 3),
+                                                      Row(
+                                                        children: [
+                                                          Container(
+                                                            width: 7,
+                                                            height: 7,
+                                                            decoration:
+                                                                const BoxDecoration(
+                                                              color: AppColors
+                                                                  .success,
+                                                              shape: BoxShape
+                                                                  .circle,
+                                                            ),
+                                                          ),
+                                                          const SizedBox(
+                                                              width: 5),
+                                                          Text(
+                                                            'Stokta ${pkg.stock} adet var',
+                                                            style:
+                                                                const TextStyle(
+                                                              fontSize: 11.5,
+                                                              color: AppColors
+                                                                  .success,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w600,
+                                                            ),
+                                                          ),
+                                                        ],
                                                       ),
                                                     ],
                                                   ],
@@ -243,22 +294,24 @@ class _ShopDetailScreenState extends State<ShopDetailScreen> {
                                               Container(
                                                 padding:
                                                     const EdgeInsets.symmetric(
-                                                        horizontal: 10,
-                                                        vertical: 4),
+                                                        horizontal: 12,
+                                                        vertical: 6),
                                                 decoration: BoxDecoration(
-                                                  color: Colors.teal.shade50,
+                                                  color:
+                                                      AppColors.surfaceSubtle,
                                                   borderRadius:
-                                                      BorderRadius.circular(8),
+                                                      BorderRadius.circular(10),
                                                   border: Border.all(
-                                                      color:
-                                                          Colors.teal.shade300),
+                                                      color: AppColors.sand,
+                                                      width: 1),
                                                 ),
                                                 child: Text(
                                                   '${pkg.totalPrice.toStringAsFixed(2)} ₺',
-                                                  style: TextStyle(
+                                                  style: const TextStyle(
                                                     fontSize: 15,
                                                     fontWeight: FontWeight.bold,
-                                                    color: Colors.teal.shade800,
+                                                    color:
+                                                        AppColors.deepEspresso,
                                                   ),
                                                 ),
                                               ),
@@ -268,56 +321,56 @@ class _ShopDetailScreenState extends State<ShopDetailScreen> {
                                           // Paket İçeriği Özeti
                                           if (pkg.description != null &&
                                               pkg.description!.isNotEmpty) ...[
-                                            const SizedBox(height: 10),
+                                            const SizedBox(height: 12),
                                             Container(
                                               width: double.infinity,
-                                              padding: const EdgeInsets.all(10),
+                                              padding: const EdgeInsets.all(12),
                                               decoration: BoxDecoration(
-                                                color: Colors.grey.shade50,
+                                                color: AppColors.surfaceSubtle,
                                                 borderRadius:
-                                                    BorderRadius.circular(8),
+                                                    BorderRadius.circular(10),
                                                 border: Border.all(
-                                                    color:
-                                                        Colors.grey.shade200),
+                                                    color: AppColors.border),
                                               ),
                                               child: Text(
                                                 pkg.description!,
-                                                style: TextStyle(
-                                                    fontSize: 12,
-                                                    color: Colors.grey.shade800,
-                                                    height: 1.3),
+                                                style: const TextStyle(
+                                                    fontSize: 12.5,
+                                                    color: AppColors.mochaText,
+                                                    height: 1.35),
                                                 maxLines: 3,
                                                 overflow: TextOverflow.ellipsis,
                                               ),
                                             ),
                                           ] else if (pkg.items.isNotEmpty) ...[
-                                            const SizedBox(height: 10),
+                                            const SizedBox(height: 12),
                                             Container(
                                               width: double.infinity,
-                                              padding: const EdgeInsets.all(10),
+                                              padding: const EdgeInsets.all(12),
                                               decoration: BoxDecoration(
-                                                color: Colors.grey.shade50,
+                                                color: AppColors.surfaceSubtle,
                                                 borderRadius:
-                                                    BorderRadius.circular(8),
+                                                    BorderRadius.circular(10),
                                                 border: Border.all(
-                                                    color:
-                                                        Colors.grey.shade200),
+                                                    color: AppColors.border),
                                               ),
                                               child: Text(
                                                 pkg.items
                                                     .map((i) => '• ${i.name}')
                                                     .join('\n'),
-                                                style: TextStyle(
-                                                    fontSize: 12,
-                                                    color: Colors.grey.shade800,
-                                                    height: 1.3),
+                                                style: const TextStyle(
+                                                    fontSize: 12.5,
+                                                    color: AppColors.mochaText,
+                                                    height: 1.35),
                                                 maxLines: 3,
                                                 overflow: TextOverflow.ellipsis,
                                               ),
                                             ),
                                           ],
 
-                                          const Divider(height: 20),
+                                          const Divider(
+                                              height: 24,
+                                              color: AppColors.border),
 
                                           Row(
                                             mainAxisAlignment:
@@ -332,11 +385,16 @@ class _ShopDetailScreenState extends State<ShopDetailScreen> {
                                                 ),
                                                 icon: const Icon(
                                                     Icons.info_outline,
-                                                    size: 16),
+                                                    size: 16,
+                                                    color: AppColors.taupe),
                                                 label: const Text(
                                                     'Paket Detayı',
                                                     style: TextStyle(
-                                                        fontSize: 12)),
+                                                        fontSize: 13,
+                                                        color: AppColors
+                                                            .deepEspresso,
+                                                        fontWeight:
+                                                            FontWeight.w600)),
                                               ),
                                               if (quantityInCart == 0)
                                                 ElevatedButton.icon(
@@ -349,40 +407,38 @@ class _ShopDetailScreenState extends State<ShopDetailScreen> {
                                                   label: const Text(
                                                       'Sepete Ekle',
                                                       style: TextStyle(
-                                                          fontSize: 12)),
+                                                          fontSize: 13,
+                                                          fontWeight:
+                                                              FontWeight.bold)),
                                                   style:
                                                       ElevatedButton.styleFrom(
-                                                    visualDensity:
-                                                        VisualDensity.compact,
                                                     backgroundColor:
-                                                        Theme.of(context)
-                                                            .primaryColor,
+                                                        AppColors.taupe,
                                                     foregroundColor:
                                                         Colors.white,
                                                     padding: const EdgeInsets
                                                         .symmetric(
-                                                        horizontal: 14,
-                                                        vertical: 8),
+                                                        horizontal: 16,
+                                                        vertical: 9),
                                                     shape:
                                                         RoundedRectangleBorder(
                                                             borderRadius:
                                                                 BorderRadius
                                                                     .circular(
-                                                                        8)),
+                                                                        12)),
                                                   ),
                                                 )
                                               else
                                                 Container(
                                                   decoration: BoxDecoration(
-                                                    color: Colors.teal.shade50,
+                                                    color:
+                                                        AppColors.surfaceSubtle,
                                                     borderRadius:
                                                         BorderRadius.circular(
-                                                            8),
+                                                            12),
                                                     border: Border.all(
-                                                        color: Theme.of(context)
-                                                            .primaryColor
-                                                            .withValues(
-                                                                alpha: 0.3)),
+                                                        color:
+                                                            AppColors.border),
                                                   ),
                                                   child: Row(
                                                     mainAxisSize:
@@ -394,27 +450,38 @@ class _ShopDetailScreenState extends State<ShopDetailScreen> {
                                                                 .compact,
                                                         icon: const Icon(
                                                             Icons.remove,
-                                                            size: 16),
+                                                            size: 16,
+                                                            color: AppColors
+                                                                .deepEspresso),
                                                         onPressed: () =>
                                                             cart.decrementItem(
                                                                 -pkg.id,
                                                                 shop.id),
                                                       ),
-                                                      Text('$quantityInCart',
-                                                          style:
-                                                              const TextStyle(
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold,
-                                                                  fontSize:
-                                                                      14)),
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .symmetric(
+                                                                horizontal: 4),
+                                                        child: Text(
+                                                            '$quantityInCart',
+                                                            style: const TextStyle(
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold,
+                                                                fontSize: 15,
+                                                                color: AppColors
+                                                                    .deepEspresso)),
+                                                      ),
                                                       IconButton(
                                                         visualDensity:
                                                             VisualDensity
                                                                 .compact,
                                                         icon: const Icon(
                                                             Icons.add,
-                                                            size: 16),
+                                                            size: 16,
+                                                            color: AppColors
+                                                                .deepEspresso),
                                                         onPressed: () =>
                                                             cart.incrementItem(
                                                                 -pkg.id,

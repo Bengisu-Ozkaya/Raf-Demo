@@ -47,8 +47,11 @@ class AuthProvider with ChangeNotifier {
         _userType = UserType.customer;
         _shopId = null;
         _shopName = null;
+        _apiService.setAuthToken(_token);
         // YENİ: Müşteriyi kendi odasına dahil et
-        _socketService.joinCustomerRoom(_user!.id);
+        if (_user != null) {
+          _socketService.joinCustomerRoom(_user!.id);
+        }
       } else {
         // Dükkan sahibi market adı veya telefon numarası ile giriş yapar.
         final response = await _apiService.loginMerchant(identifier, password);
@@ -56,8 +59,11 @@ class AuthProvider with ChangeNotifier {
         _shopId = response['shopId'];
         _shopName = response['shopName'];
         _userType = UserType.merchant;
+        _apiService.setAuthToken(_token);
         // YENİ: Satıcıyı kendi odasına dahil et
-        _socketService.joinMerchantRoom(_shopId!);
+        if (_shopId != null) {
+          _socketService.joinMerchantRoom(_shopId!);
+        }
         // Satıcı için geçici bir AppUser oluşturalım
         // YENİ: Backend'den gelen city bilgisi ile kullanıcı oluşturuluyor.
         _user = AppUser(
@@ -68,9 +74,7 @@ class AuthProvider with ChangeNotifier {
             city: response['city'] ?? '');
       }
 
-      // Token ekleme işlemi artık main.dart'taki ChangeNotifierProxyProvider
-      // tarafından merkezi olarak yönetiliyor. Bu satıra gerek kalmadı.
-      _saveAuthData(); // Oturum verilerini kaydet
+      await _saveAuthData(); // Oturum verilerini kalıcı olarak kaydet
       _setError(null);
       return true;
     } catch (e) {
@@ -135,42 +139,145 @@ class AuthProvider with ChangeNotifier {
     }
   }
 
-  // Otomatik giriş denemesi
+  // Profil bilgilerini güncelleme (hem müşteri hem satıcı için)
+  Future<bool> updateProfile({
+    required String name,
+    required String username,
+    required String email,
+    required String phone,
+    required String city,
+  }) async {
+    _setLoading(true);
+    try {
+      if (_userType == UserType.customer) {
+        await _apiService.updateCustomerProfile(
+          name: name,
+          username: username,
+          email: email,
+          phone: phone,
+          city: city,
+        );
+        _user = (_user != null)
+            ? _user!.copyWith(
+                name: name,
+                username: username,
+                email: email,
+                phone: phone,
+                city: city,
+              )
+            : AppUser(
+                id: _user?.id ?? '0',
+                username: username,
+                name: name,
+                email: email,
+                city: city,
+                phone: phone,
+              );
+      } else {
+        // Satıcı / Dükkan Sahibi
+        await _apiService.updateMerchantProfile(
+          shopName: username,
+          ownerName: name,
+          phone: phone,
+          city: city,
+          email: email,
+        );
+        _shopName = username;
+        _user = (_user != null)
+            ? _user!.copyWith(
+                name: name,
+                username: username,
+                email: email,
+                phone: phone,
+                city: city,
+              )
+            : AppUser(
+                id: _shopId?.toString() ?? '0',
+                username: username,
+                name: name,
+                email: email,
+                city: city,
+                phone: phone,
+              );
+      }
+
+      await _saveAuthData(); // Güncellenen bilgileri SharedPreferences'a kaydet
+      _setError(null);
+      notifyListeners();
+      return true;
+    } catch (e) {
+      _setError(e.toString());
+      return false;
+    } finally {
+      _setLoading(false);
+    }
+  }
+
+  // Otomatik giriş denemesi (Kullanıcı çıkış yapana kadar oturumunu korur)
   Future<void> tryAutoLogin() async {
-    // Bu fonksiyonun birden çok kez çağrılmasını engelle (FutureBuilder kaynaklı)
     if (_didTryAutoLogin) {
       return;
     }
 
-    final prefs = await SharedPreferences.getInstance();
-    if (!prefs.containsKey('authData')) {
-      _didTryAutoLogin = true;
-      return;
-    }
-
-    final extractedData =
-        json.decode(prefs.getString('authData')!) as Map<String, dynamic>;
-
-    // DÜZELTME: Kullanıcı verisi artık her zaman 'user' anahtarından okunuyor.
-    _token = extractedData['token'];
-    _userType = UserType.values[extractedData['userType']];
-    _user = AppUser.fromJson(extractedData['user']);
-
-    if (_userType == UserType.customer && _user != null) {
-      // YENİ: Müşteriyi kendi odasına dahil et
-      _socketService.joinCustomerRoom(_user!.id);
-    } else if (_userType == UserType.merchant) {
-      _shopId = extractedData['shopId'];
-      _shopName = extractedData['shopName'];
-      if (_shopId != null) {
-        _socketService.joinMerchantRoom(_shopId!);
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      if (!prefs.containsKey('authData')) {
+        _didTryAutoLogin = true;
+        return;
       }
-    }
-    // Token ekleme işlemi artık main.dart'taki ChangeNotifierProxyProvider
-    // tarafından merkezi olarak yönetiliyor. Bu satıra gerek kalmadı.
 
-    notifyListeners();
-    _didTryAutoLogin = true;
+      final rawData = prefs.getString('authData');
+      if (rawData == null) {
+        _didTryAutoLogin = true;
+        return;
+      }
+
+      final extractedData = json.decode(rawData) as Map<String, dynamic>;
+      final token = extractedData['token'] as String?;
+      if (token == null || token.isEmpty) {
+        _didTryAutoLogin = true;
+        return;
+      }
+
+      _token = token;
+      _apiService.setAuthToken(_token);
+
+      if (extractedData['userType'] != null) {
+        final typeIndex = extractedData['userType'] is int
+            ? extractedData['userType'] as int
+            : int.tryParse(extractedData['userType'].toString()) ?? 0;
+        if (typeIndex >= 0 && typeIndex < UserType.values.length) {
+          _userType = UserType.values[typeIndex];
+        }
+      }
+
+      if (extractedData['user'] != null &&
+          extractedData['user'] is Map<String, dynamic>) {
+        _user = AppUser.fromJson(extractedData['user'] as Map<String, dynamic>);
+      }
+
+      if (_userType == UserType.customer && _user != null) {
+        _shopId = null;
+        _shopName = null;
+        _socketService.joinCustomerRoom(_user!.id);
+      } else if (_userType == UserType.merchant) {
+        if (extractedData['shopId'] != null) {
+          _shopId = extractedData['shopId'] is int
+              ? extractedData['shopId'] as int
+              : int.tryParse(extractedData['shopId'].toString());
+        }
+        _shopName = extractedData['shopName'] as String?;
+        if (_shopId != null) {
+          _socketService.joinMerchantRoom(_shopId!);
+        }
+      }
+
+      _didTryAutoLogin = true;
+      notifyListeners();
+    } catch (e) {
+      debugPrint('Auto login error: $e');
+      _didTryAutoLogin = true;
+    }
   }
 
   // Oturumu kapatma
@@ -178,31 +285,32 @@ class AuthProvider with ChangeNotifier {
     _token = null;
     _user = null;
     _shopId = null;
+    _shopName = null;
     _userType = null;
+    _apiService.setAuthToken(null);
+    _didTryAutoLogin = true;
 
-    final prefs = await SharedPreferences.getInstance();
-    // Token'ın ApiService'ten kaldırılması main.dart'taki ProxyProvider'da
-    // bu notifyListeners() çağrısı sayesinde tetiklenir. ProxyProvider,
-    // isAuthenticated'in false olduğunu görüp token'ı temizleyecektir.
-    await prefs.remove('authData'); // Kayıtlı veriyi sil
-    // YENİ: Ayrı olarak kaydedilen token'ı da temizle.
-    await prefs.remove('authToken');
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.remove('authData'); // Kayıtlı veriyi sil
+      await prefs.remove('authToken');
+    } catch (e) {
+      debugPrint('Logout prefs error: $e');
+    }
 
     notifyListeners();
   }
 
   // Oturum verilerini telefona kaydetme
   Future<void> _saveAuthData() async {
+    if (_token == null || _userType == null) return;
     final prefs = await SharedPreferences.getInstance();
 
-    // YENİ: Token'ı hem ayrı bir anahtarla hem de authData içinde saklıyoruz.
-    // Bu, bazı özel API çağrılarında token'a doğrudan erişim için bir yedek mekanizma sağlar.
     await prefs.setString('authToken', _token!);
     final authData = {
       'token': _token,
       'userType': _userType!.index,
-      'user': _user
-          ?.toJson(), // DÜZELTME: Hem müşteri hem satıcı için user objesi kaydediliyor.
+      'user': _user?.toJson(),
       'shopId': _shopId,
       'shopName': _shopName,
     };

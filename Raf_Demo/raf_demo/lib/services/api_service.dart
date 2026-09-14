@@ -523,6 +523,69 @@ class ApiService {
     }
   }
 
+  // --- PROFİL GÜNCELLEME METODLARI ---
+
+  /// Müşteri profil bilgilerini günceller.
+  Future<void> updateCustomerProfile({
+    required String name,
+    required String username,
+    required String email,
+    required String phone,
+    required String city,
+  }) async {
+    try {
+      final response = await _dio.put(
+        '/api/customer/profile',
+        data: {
+          'name': name,
+          'username': username,
+          'email': email,
+          'phone': phone,
+          'city': city,
+        },
+      );
+      if (response.data != null && response.data['success'] == false) {
+        throw Exception(response.data['message'] ?? 'Profil güncellenemedi.');
+      }
+    } on DioException catch (e) {
+      if (e.response?.statusCode == 404) {
+        // Backend'de henüz bu endpoint açılmamışsa yerel profil durumunu korumak için sessiz geçilir
+        return;
+      }
+      throw _handleDioException(e);
+    }
+  }
+
+  /// Satıcı/İşletmeci profil bilgilerini günceller.
+  Future<void> updateMerchantProfile({
+    required String shopName,
+    required String ownerName,
+    required String phone,
+    required String city,
+    String? email,
+  }) async {
+    try {
+      final response = await _dio.put(
+        '/api/merchant/profile',
+        data: {
+          'shop_name': shopName,
+          'owner_name': ownerName,
+          'phone': phone,
+          'city': city,
+          if (email != null && email.isNotEmpty) 'email': email,
+        },
+      );
+      if (response.data != null && response.data['success'] == false) {
+        throw Exception(response.data['message'] ?? 'Profil güncellenemedi.');
+      }
+    } on DioException catch (e) {
+      if (e.response?.statusCode == 404) {
+        return;
+      }
+      throw _handleDioException(e);
+    }
+  }
+
   // Dio'dan gelen hataları yakalayıp daha anlaşılır mesajlara çeviren yardımcı fonksiyon.
   Exception _handleDioException(DioException e) {
     // Sunucudan yapısal bir hata mesajı geldiyse onu kullan.

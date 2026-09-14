@@ -7,6 +7,7 @@ import '../providers/shop_provider.dart';
 import '../providers/auth_provider.dart';
 import '../providers/cart_provider.dart';
 import 'cart_screen.dart';
+import '../utils/theme.dart';
 
 class PackageDetailScreen extends StatefulWidget {
   static const routeName = '/package-detail';
@@ -47,7 +48,8 @@ class _PackageDetailScreenState extends State<PackageDetailScreen> {
           ),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.red, foregroundColor: Colors.white),
+                backgroundColor: AppColors.error,
+                foregroundColor: Colors.white),
             onPressed: () async {
               Navigator.of(ctx).pop();
               final authProvider =
@@ -61,7 +63,7 @@ class _PackageDetailScreenState extends State<PackageDetailScreen> {
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(
                         content: Text('Paket başarıyla silindi.'),
-                        backgroundColor: Colors.green),
+                        backgroundColor: AppColors.success),
                   );
                   Navigator.of(context).pop();
                 }
@@ -88,7 +90,7 @@ class _PackageDetailScreenState extends State<PackageDetailScreen> {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text('"${_package.name}" sepete eklendi!'),
-        backgroundColor: Colors.green,
+        backgroundColor: AppColors.success,
         duration: const Duration(seconds: 2),
         action: SnackBarAction(
           label: 'Sepete Git',
@@ -114,7 +116,7 @@ class _PackageDetailScreenState extends State<PackageDetailScreen> {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('İşletmeye ait bir telefon numarası bulunamadı.'),
-          backgroundColor: Colors.red,
+          backgroundColor: AppColors.error,
         ),
       );
       return;
@@ -135,7 +137,7 @@ class _PackageDetailScreenState extends State<PackageDetailScreen> {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
               content: Text('WhatsApp açılamadı: $e'),
-              backgroundColor: Colors.red),
+              backgroundColor: AppColors.error),
         );
       }
     }
@@ -171,8 +173,14 @@ class _PackageDetailScreenState extends State<PackageDetailScreen> {
                     // 1. Paket Başlık ve Fiyat Kartı
                     Card(
                       elevation: 2,
+                      shadowColor: AppColors.taupe.withValues(alpha: 0.15),
                       shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(16)),
+                        borderRadius: BorderRadius.circular(18),
+                        side: BorderSide(
+                          color: AppColors.border.withValues(alpha: 0.6),
+                          width: 1,
+                        ),
+                      ),
                       child: Padding(
                         padding: const EdgeInsets.all(18.0),
                         child: Column(
@@ -184,11 +192,13 @@ class _PackageDetailScreenState extends State<PackageDetailScreen> {
                                 Container(
                                   padding: const EdgeInsets.all(12),
                                   decoration: BoxDecoration(
-                                    color: Colors.orange.shade100,
-                                    borderRadius: BorderRadius.circular(12),
+                                    color: AppColors.cream,
+                                    borderRadius: BorderRadius.circular(14),
+                                    border: Border.all(
+                                        color: AppColors.sand, width: 1.2),
                                   ),
-                                  child: Icon(Icons.inventory_2,
-                                      color: Colors.orange.shade900, size: 32),
+                                  child: const Icon(Icons.inventory_2_outlined,
+                                      color: AppColors.deepEspresso, size: 30),
                                 ),
                                 const SizedBox(width: 14),
                                 Expanded(
@@ -199,16 +209,33 @@ class _PackageDetailScreenState extends State<PackageDetailScreen> {
                                       Text(
                                         _package.name,
                                         style: const TextStyle(
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.bold),
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold,
+                                          color: AppColors.deepEspresso,
+                                        ),
                                       ),
                                       const SizedBox(height: 4),
                                       if (_package.stock > 0)
-                                        Text(
-                                          'Stok: ${_package.stock} Adet',
-                                          style: TextStyle(
-                                              fontSize: 12,
-                                              color: Colors.grey.shade600),
+                                        Row(
+                                          children: [
+                                            Container(
+                                              width: 7,
+                                              height: 7,
+                                              decoration: const BoxDecoration(
+                                                color: AppColors.success,
+                                                shape: BoxShape.circle,
+                                              ),
+                                            ),
+                                            const SizedBox(width: 5),
+                                            Text(
+                                              'Stok: ${_package.stock} Adet',
+                                              style: const TextStyle(
+                                                fontSize: 12.5,
+                                                color: AppColors.success,
+                                                fontWeight: FontWeight.w600,
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                     ],
                                   ),
@@ -217,18 +244,17 @@ class _PackageDetailScreenState extends State<PackageDetailScreen> {
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 12, vertical: 6),
                                   decoration: BoxDecoration(
-                                    color: Colors.teal.shade50,
+                                    color: AppColors.surfaceSubtle,
                                     borderRadius: BorderRadius.circular(10),
                                     border: Border.all(
-                                        color: Colors.teal.shade400,
-                                        width: 1.2),
+                                        color: AppColors.sand, width: 1.2),
                                   ),
                                   child: Text(
                                     '${_package.totalPrice.toStringAsFixed(2)} ₺',
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       fontSize: 18,
                                       fontWeight: FontWeight.bold,
-                                      color: Colors.teal.shade800,
+                                      color: AppColors.deepEspresso,
                                     ),
                                   ),
                                 ),
@@ -243,52 +269,63 @@ class _PackageDetailScreenState extends State<PackageDetailScreen> {
 
                     // 2. Paket İçeriği Bölümü
                     Card(
-                      elevation: 1,
+                      elevation: 1.5,
+                      shadowColor: AppColors.taupe.withValues(alpha: 0.12),
                       shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(14)),
+                        borderRadius: BorderRadius.circular(16),
+                        side: BorderSide(
+                          color: AppColors.border.withValues(alpha: 0.6),
+                          width: 1,
+                        ),
+                      ),
                       child: Padding(
                         padding: const EdgeInsets.all(16.0),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Row(
+                            const Row(
                               children: [
                                 Icon(Icons.format_list_bulleted,
-                                    color: Theme.of(context).primaryColor,
-                                    size: 20),
-                                const SizedBox(width: 8),
-                                const Text(
+                                    color: AppColors.taupe, size: 20),
+                                SizedBox(width: 8),
+                                Text(
                                   'Paket İçeriği',
                                   style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold),
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                    color: AppColors.deepEspresso,
+                                  ),
                                 ),
                               ],
                             ),
-                            const Divider(height: 20),
+                            const Divider(height: 20, color: AppColors.border),
                             if (_package.description != null &&
                                 _package.description!.isNotEmpty)
                               Text(
                                 _package.description!,
-                                style:
-                                    const TextStyle(fontSize: 14, height: 1.5),
+                                style: const TextStyle(
+                                    fontSize: 14,
+                                    height: 1.5,
+                                    color: AppColors.mochaText),
                               )
                             else if (items.isNotEmpty)
                               ...items.map((item) {
                                 return Padding(
                                   padding:
-                                      const EdgeInsets.symmetric(vertical: 4.0),
+                                      const EdgeInsets.symmetric(vertical: 5.0),
                                   child: Row(
                                     children: [
                                       const Icon(Icons.check_circle_outline,
-                                          size: 16, color: Colors.teal),
+                                          size: 16, color: AppColors.success),
                                       const SizedBox(width: 8),
                                       Expanded(
                                         child: Text(
                                           item.name,
                                           style: const TextStyle(
-                                              fontSize: 13,
-                                              fontWeight: FontWeight.w500),
+                                            fontSize: 13.5,
+                                            fontWeight: FontWeight.w500,
+                                            color: AppColors.deepEspresso,
+                                          ),
                                         ),
                                       ),
                                     ],
@@ -298,8 +335,8 @@ class _PackageDetailScreenState extends State<PackageDetailScreen> {
                             else
                               const Text(
                                 'Bu paket için detaylı içerik açıklaması girilmemiş.',
-                                style:
-                                    TextStyle(color: Colors.grey, fontSize: 13),
+                                style: TextStyle(
+                                    color: AppColors.lightText, fontSize: 13),
                               ),
                           ],
                         ),
@@ -312,7 +349,8 @@ class _PackageDetailScreenState extends State<PackageDetailScreen> {
                     if (!isMerchant)
                       OutlinedButton.icon(
                         onPressed: _askViaWhatsApp,
-                        icon: const Icon(Icons.chat, color: Color(0xFF25D366)),
+                        icon: const Icon(Icons.chat_bubble_outline,
+                            color: Color(0xFF25D366)),
                         label: const Text(
                           'WhatsApp ile Bu Paketi Sor / Sipariş Ver',
                           style: TextStyle(
@@ -323,9 +361,9 @@ class _PackageDetailScreenState extends State<PackageDetailScreen> {
                           side: const BorderSide(
                               color: Color(0xFF25D366), width: 1.5),
                           backgroundColor: const Color(0xFFF0FDF4),
-                          padding: const EdgeInsets.symmetric(vertical: 12),
+                          padding: const EdgeInsets.symmetric(vertical: 13),
                           shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12)),
+                              borderRadius: BorderRadius.circular(14)),
                         ),
                       ),
                   ],
@@ -344,13 +382,16 @@ class _PackageDetailScreenState extends State<PackageDetailScreen> {
                     return Container(
                       width: double.infinity,
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 16, vertical: 12),
-                      decoration: const BoxDecoration(
+                          horizontal: 16, vertical: 14),
+                      decoration: BoxDecoration(
                         color: Colors.white,
+                        border: const Border(
+                          top: BorderSide(color: AppColors.border),
+                        ),
                         boxShadow: [
                           BoxShadow(
-                            color: Color(0x14000000),
-                            offset: Offset(0, -3),
+                            color: AppColors.taupe.withValues(alpha: 0.1),
+                            offset: const Offset(0, -3),
                             blurRadius: 8,
                           ),
                         ],
@@ -360,7 +401,7 @@ class _PackageDetailScreenState extends State<PackageDetailScreen> {
                             ? ElevatedButton.icon(
                                 onPressed: _addToCart,
                                 icon: const Icon(Icons.add_shopping_cart,
-                                    size: 22),
+                                    size: 20),
                                 label: Text(
                                   'Sepete Ekle (${_package.totalPrice.toStringAsFixed(2)} ₺)',
                                   style: const TextStyle(
@@ -368,32 +409,30 @@ class _PackageDetailScreenState extends State<PackageDetailScreen> {
                                       fontWeight: FontWeight.bold),
                                 ),
                                 style: ElevatedButton.styleFrom(
-                                  backgroundColor:
-                                      Theme.of(context).primaryColor,
+                                  backgroundColor: AppColors.taupe,
                                   foregroundColor: Colors.white,
                                   padding:
                                       const EdgeInsets.symmetric(vertical: 14),
                                   shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(12)),
+                                      borderRadius: BorderRadius.circular(14)),
                                 ),
                               )
                             : Row(
                                 children: [
                                   Container(
                                     decoration: BoxDecoration(
-                                      color: Colors.teal.shade50,
-                                      borderRadius: BorderRadius.circular(12),
-                                      border: Border.all(
-                                          color: Theme.of(context)
-                                              .primaryColor
-                                              .withValues(alpha: 0.3)),
+                                      color: AppColors.surfaceSubtle,
+                                      borderRadius: BorderRadius.circular(14),
+                                      border:
+                                          Border.all(color: AppColors.border),
                                     ),
                                     child: Row(
                                       mainAxisSize: MainAxisSize.min,
                                       children: [
                                         IconButton(
                                           icon: const Icon(Icons.remove,
-                                              size: 20),
+                                              size: 20,
+                                              color: AppColors.deepEspresso),
                                           onPressed: () {
                                             cart.decrementItem(
                                                 -_package.id, _package.shopId);
@@ -406,11 +445,14 @@ class _PackageDetailScreenState extends State<PackageDetailScreen> {
                                             '$quantityInCart',
                                             style: const TextStyle(
                                                 fontWeight: FontWeight.bold,
-                                                fontSize: 16),
+                                                fontSize: 16,
+                                                color: AppColors.deepEspresso),
                                           ),
                                         ),
                                         IconButton(
-                                          icon: const Icon(Icons.add, size: 20),
+                                          icon: const Icon(Icons.add,
+                                              size: 20,
+                                              color: AppColors.deepEspresso),
                                           onPressed: () {
                                             cart.incrementItem(
                                                 -_package.id, _package.shopId);
@@ -436,14 +478,13 @@ class _PackageDetailScreenState extends State<PackageDetailScreen> {
                                             fontWeight: FontWeight.bold),
                                       ),
                                       style: ElevatedButton.styleFrom(
-                                        backgroundColor:
-                                            Theme.of(context).primaryColor,
+                                        backgroundColor: AppColors.taupe,
                                         foregroundColor: Colors.white,
                                         padding: const EdgeInsets.symmetric(
                                             vertical: 14),
                                         shape: RoundedRectangleBorder(
                                             borderRadius:
-                                                BorderRadius.circular(12)),
+                                                BorderRadius.circular(14)),
                                       ),
                                     ),
                                   ),

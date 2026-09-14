@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/auth_provider.dart';
 import '../utils/constants.dart';
+import '../utils/theme.dart';
 
 // Auth modunu (Giriş veya Kayıt) belirlemek için enum
 enum AuthMode { Login, Register }
@@ -25,6 +26,10 @@ class _AuthScreenState extends State<AuthScreen> {
   final _emailController = TextEditingController();
   final _phoneController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
+
+  // Şifre görünürlüğü kontrolleri
+  bool _obscurePassword = true;
+  bool _obscureConfirmPassword = true;
 
   // --- YENİ: Dükkan Sahibi için Controller'lar ---
   final _shopNameController = TextEditingController();
@@ -96,7 +101,7 @@ class _AuthScreenState extends State<AuthScreen> {
           if (success && mounted) {
             ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
               content: Text('Kayıt başarılı! Lütfen giriş yapın.'),
-              backgroundColor: Colors.green,
+              backgroundColor: AppColors.success,
             ));
             _switchAuthMode();
           } else if (mounted) {
@@ -135,7 +140,7 @@ class _AuthScreenState extends State<AuthScreen> {
           if (success && mounted) {
             ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
               content: Text('Dükkan kaydı başarılı! Lütfen giriş yapın.'),
-              backgroundColor: Colors.green,
+              backgroundColor: AppColors.success,
             ));
             _switchAuthMode();
           } else if (mounted) {
@@ -183,313 +188,425 @@ class _AuthScreenState extends State<AuthScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final deviceSize = MediaQuery.of(context).size;
-
     return Scaffold(
-      body: Center(
-        child: SingleChildScrollView(
-          child: Container(
-            width: deviceSize.width * 0.85,
-            padding: const EdgeInsets.all(16.0),
-            child: Form(
-              key: _formKey,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: <Widget>[
-                  // Logo veya başlık
-                  Icon(Icons.shopping_cart_checkout,
-                      size: 80, color: Theme.of(context).primaryColor),
-                  const SizedBox(height: 20),
-                  Text(
-                    _authMode == AuthMode.Login
-                        ? 'Hoş Geldiniz!'
-                        : 'Hesap Oluşturun',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 28,
-                      fontWeight: FontWeight.bold,
-                      color: Theme.of(context).primaryColor,
-                    ),
-                  ),
-                  const SizedBox(height: 20),
-
-                  // Müşteri / Satıcı seçimi
-                  // Sadece giriş modunda Müşteri/Satıcı seçimi gösterilir.
-                  // Kayıt işlemi sadece müşteriler için olduğundan bu bölüm gizlenir.
-                  if (_authMode == AuthMode.Login) ...[
-                    SegmentedButton<UserType>(
-                      segments: const <ButtonSegment<UserType>>[
-                        ButtonSegment<UserType>(
-                            value: UserType.customer,
-                            label: Text('Müşteriyim'),
-                            icon: Icon(Icons.person)),
-                        ButtonSegment<UserType>(
-                            value: UserType.merchant,
-                            label: Text('Satıcıyım'),
-                            icon: Icon(Icons.store)),
-                      ],
-                      selected: <UserType>{_userType},
-                      onSelectionChanged: (Set<UserType> newSelection) {
-                        setState(() {
-                          _userType = newSelection.first;
-                        });
-                      },
-                    ),
-                    const SizedBox(height: 20),
-                  ],
-
-                  // --- DİNAMİK FORM ALANLARI ---
-
-                  // Müşteri Giriş/Kayıt için Kullanıcı Adı/E-posta
-                  if (_userType == UserType.customer)
-                    TextFormField(
-                      controller: _identifierController,
-                      decoration: InputDecoration(
-                        labelText: _authMode == AuthMode.Login
-                            ? 'E-posta veya Kullanıcı Adı'
-                            : 'Kullanıcı Adı',
-                        prefixIcon: const Icon(Icons.account_circle),
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(12)),
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [AppColors.background, AppColors.cream],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+          ),
+        ),
+        child: SafeArea(
+          child: Center(
+            child: SingleChildScrollView(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 20.0, vertical: 24.0),
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: 440),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    // Marka ve Logo Başlığı
+                    Container(
+                      width: 76,
+                      height: 76,
+                      decoration: BoxDecoration(
+                        color: AppColors.cream,
+                        borderRadius: BorderRadius.circular(22),
+                        border: Border.all(color: AppColors.sand, width: 2),
+                        boxShadow: [
+                          BoxShadow(
+                            color: AppColors.taupe.withValues(alpha: 0.18),
+                            blurRadius: 14,
+                            offset: const Offset(0, 5),
+                          ),
+                        ],
                       ),
-                      keyboardType: TextInputType.text,
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Lütfen bu alanı doldurun.';
-                        }
-                        return null;
-                      },
-                    ),
-
-                  // Dükkan Kayıt için Dükkan Adı
-                  if (_userType == UserType.merchant &&
-                      _authMode == AuthMode.Register)
-                    TextFormField(
-                      controller: _shopNameController,
-                      decoration: InputDecoration(
-                        labelText: 'Market Adı',
-                        prefixIcon: const Icon(Icons.storefront),
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(12)),
+                      child: const Center(
+                        child: Icon(
+                          Icons.storefront_rounded,
+                          size: 42,
+                          color: AppColors.deepEspresso,
+                        ),
                       ),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Lütfen market adını girin.';
-                        }
-                        return null;
-                      },
                     ),
-
-                  const SizedBox(height: 12),
-
-                  // Dükkan Kayıt için Sahip Adı
-                  if (_userType == UserType.merchant &&
-                      _authMode == AuthMode.Register) ...[
-                    TextFormField(
-                      controller: _ownerNameController,
-                      decoration: InputDecoration(
-                        labelText: 'Dükkan Sahibi (Ad Soyad)',
-                        prefixIcon: const Icon(Icons.person_pin),
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(12)),
+                    const SizedBox(height: 16),
+                    const Text(
+                      'Raf',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 32,
+                        fontWeight: FontWeight.bold,
+                        letterSpacing: -0.5,
+                        color: AppColors.deepEspresso,
                       ),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Lütfen adınızı ve soyadınızı girin.';
-                        }
-                        return null;
-                      },
                     ),
-                    const SizedBox(height: 12),
-                  ],
-
-                  const SizedBox(height: 12),
-
-                  // Sadece Kayıt modunda gösterilecek alanlar
-                  // Müşteri Kayıt için E-posta
-                  if (_userType == UserType.customer &&
-                      _authMode == AuthMode.Register) ...[
-                    TextFormField(
-                      controller: _emailController,
-                      decoration: InputDecoration(
-                        labelText: 'E-posta Adresi',
-                        prefixIcon: const Icon(Icons.email),
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(12)),
+                    const SizedBox(height: 4),
+                    Text(
+                      _authMode == AuthMode.Login
+                          ? 'Mahallenizin taze ürünleri ve esnaf rafları'
+                          : 'Yeni bir hesap oluşturarak mahalleye katılın',
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(
+                        fontSize: 14,
+                        color: AppColors.mochaText,
                       ),
-                      keyboardType: TextInputType.emailAddress,
-                      validator: (value) {
-                        if (value == null || !value.contains('@')) {
-                          return 'Lütfen geçerli bir e-posta adresi girin.';
-                        }
-                        return null;
-                      },
-                    ),
-                    const SizedBox(height: 12),
-                  ],
-
-                  // Müşteri Kayıt için Şehir Seçimi
-                  if (_userType == UserType.customer &&
-                      _authMode == AuthMode.Register) ...[
-                    DropdownButtonFormField<String>(
-                      initialValue: _selectedCity,
-                      decoration: InputDecoration(
-                        labelText: 'Şehir',
-                        prefixIcon: const Icon(Icons.location_city),
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(12)),
-                      ),
-                      hint: const Text('Şehir Seçin'),
-                      items: _cities.map((String city) {
-                        return DropdownMenuItem<String>(
-                          value: city,
-                          child: Text(city),
-                        );
-                      }).toList(),
-                      onChanged: (newValue) {
-                        setState(() {
-                          _selectedCity = newValue;
-                        });
-                      },
-                      validator: (value) {
-                        if (value == null) {
-                          return 'Lütfen bir şehir seçin.';
-                        }
-                        return null;
-                      },
-                    ),
-                    const SizedBox(height: 12),
-                  ],
-
-                  // Telefon Numarası (Kayıt) veya Tanımlayıcı (Dükkan Giriş)
-                  if ((_userType == UserType.customer &&
-                          _authMode == AuthMode.Register) ||
-                      _userType == UserType.merchant)
-                    TextFormField(
-                      controller:
-                          _phoneController, // Bu controller artık çok amaçlı kullanılıyor
-                      decoration: InputDecoration(
-                        labelText: _userType == UserType.merchant &&
-                                _authMode == AuthMode.Login
-                            ? 'Market Adı veya Telefon No'
-                            : 'Telefon Numarası',
-                        prefixIcon: Icon(_userType == UserType.merchant &&
-                                _authMode == AuthMode.Login
-                            ? Icons.store
-                            : Icons.phone),
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(12)),
-                      ),
-                      keyboardType: _authMode == AuthMode.Register
-                          ? TextInputType.phone
-                          : TextInputType.text,
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Lütfen bu alanı doldurun.';
-                        }
-                        // Kayıt modunda her zaman telefon numarası girildiği için uzunluk kontrolü yap
-                        if (_authMode == AuthMode.Register &&
-                            value.length < 10) {
-                          return 'Lütfen geçerli bir telefon numarası girin.';
-                        }
-                        return null;
-                      },
-                    ),
-
-                  const SizedBox(height: 12),
-
-                  // Dükkan Kayıt için Şehir Seçimi
-                  if (_userType == UserType.merchant &&
-                      _authMode == AuthMode.Register) ...[
-                    DropdownButtonFormField<String>(
-                      initialValue: _selectedCity,
-                      decoration: InputDecoration(
-                        labelText: 'Şehir',
-                        prefixIcon: const Icon(Icons.location_city),
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(12)),
-                      ),
-                      hint: const Text('Şehir Seçin'),
-                      items: _cities.map((String city) {
-                        return DropdownMenuItem<String>(
-                          value: city,
-                          child: Text(city),
-                        );
-                      }).toList(),
-                      onChanged: (newValue) {
-                        setState(() {
-                          _selectedCity = newValue;
-                        });
-                      },
-                      validator: (value) {
-                        if (value == null) {
-                          return 'Lütfen bir şehir seçin.';
-                        }
-                        return null;
-                      },
-                    ),
-                    const SizedBox(height: 12),
-                  ],
-
-                  // Şifre alanı
-                  TextFormField(
-                    controller: _passwordController,
-                    decoration: InputDecoration(
-                      labelText: 'Şifre',
-                      prefixIcon: const Icon(Icons.lock),
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12)),
-                    ),
-                    obscureText: true,
-                    validator: (value) {
-                      if (value == null || value.isEmpty || value.length < 6) {
-                        return 'Şifre en az 6 karakter olmalıdır.';
-                      }
-                      return null;
-                    },
-                  ),
-                  const SizedBox(height: 12),
-
-                  // Şifre Tekrar alanı (sadece kayıt modunda)
-                  if (_authMode == AuthMode.Register) ...[
-                    TextFormField(
-                      controller: _confirmPasswordController,
-                      decoration: InputDecoration(
-                        labelText: 'Şifreyi Onayla',
-                        prefixIcon: const Icon(Icons.lock_outline),
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(12)),
-                      ),
-                      obscureText: true,
-                      validator: (value) {
-                        if (value != _passwordController.text) {
-                          return 'Şifreler eşleşmiyor!';
-                        }
-                        return null;
-                      },
                     ),
                     const SizedBox(height: 24),
-                  ],
 
-                  // Giriş Butonu
-                  Consumer<AuthProvider>(
-                    builder: (ctx, auth, _) => auth.isLoading
-                        ? const Center(child: CircularProgressIndicator())
-                        : ElevatedButton(
-                            onPressed: _submit,
-                            child: Text(_authMode == AuthMode.Login
-                                ? 'Giriş Yap'
-                                : 'Kayıt Ol'),
+                    // Giriş / Kayıt Kartı
+                    Card(
+                      elevation: 3,
+                      shadowColor: AppColors.taupe.withValues(alpha: 0.18),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(22),
+                        side:
+                            const BorderSide(color: AppColors.border, width: 1),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(22.0),
+                        child: Form(
+                          key: _formKey,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: <Widget>[
+                              // Başlık
+                              Text(
+                                _authMode == AuthMode.Login
+                                    ? 'Giriş Yap'
+                                    : 'Hesap Oluştur',
+                                style: const TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                  color: AppColors.deepEspresso,
+                                ),
+                              ),
+                              const SizedBox(height: 16),
+
+                              // Müşteri / Satıcı Rol Seçici (Hem Giriş hem Kayıt için)
+                              SegmentedButton<UserType>(
+                                segments: const <ButtonSegment<UserType>>[
+                                  ButtonSegment<UserType>(
+                                    value: UserType.customer,
+                                    label: Text('Müşteriyim'),
+                                    icon: Icon(Icons.person_outline, size: 18),
+                                  ),
+                                  ButtonSegment<UserType>(
+                                    value: UserType.merchant,
+                                    label: Text('Satıcıyım'),
+                                    icon: Icon(Icons.storefront_outlined,
+                                        size: 18),
+                                  ),
+                                ],
+                                selected: <UserType>{_userType},
+                                onSelectionChanged:
+                                    (Set<UserType> newSelection) {
+                                  setState(() {
+                                    _userType = newSelection.first;
+                                  });
+                                },
+                              ),
+                              const SizedBox(height: 18),
+
+                              // --- DİNAMİK FORM ALANLARI ---
+
+                              // Müşteri Giriş/Kayıt için Kullanıcı Adı/E-posta
+                              if (_userType == UserType.customer)
+                                TextFormField(
+                                  controller: _identifierController,
+                                  decoration: InputDecoration(
+                                    labelText: _authMode == AuthMode.Login
+                                        ? 'E-posta veya Kullanıcı Adı'
+                                        : 'Kullanıcı Adı',
+                                    prefixIcon: const Icon(
+                                        Icons.account_circle_outlined),
+                                  ),
+                                  keyboardType: TextInputType.text,
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return 'Lütfen bu alanı doldurun.';
+                                    }
+                                    return null;
+                                  },
+                                ),
+
+                              // Dükkan Kayıt için Dükkan Adı
+                              if (_userType == UserType.merchant &&
+                                  _authMode == AuthMode.Register) ...[
+                                TextFormField(
+                                  controller: _shopNameController,
+                                  decoration: const InputDecoration(
+                                    labelText: 'Market / Dükkan Adı',
+                                    prefixIcon: Icon(Icons.storefront_rounded),
+                                  ),
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return 'Lütfen market adını girin.';
+                                    }
+                                    return null;
+                                  },
+                                ),
+                                const SizedBox(height: 14),
+                              ],
+
+                              // Dükkan Kayıt için Sahip Adı
+                              if (_userType == UserType.merchant &&
+                                  _authMode == AuthMode.Register) ...[
+                                TextFormField(
+                                  controller: _ownerNameController,
+                                  decoration: const InputDecoration(
+                                    labelText: 'Dükkan Sahibi (Ad Soyad)',
+                                    prefixIcon: Icon(Icons.badge_outlined),
+                                  ),
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return 'Lütfen adınızı ve soyadınızı girin.';
+                                    }
+                                    return null;
+                                  },
+                                ),
+                                const SizedBox(height: 14),
+                              ],
+
+                              // Müşteri Kayıt için E-posta
+                              if (_userType == UserType.customer &&
+                                  _authMode == AuthMode.Register) ...[
+                                const SizedBox(height: 14),
+                                TextFormField(
+                                  controller: _emailController,
+                                  decoration: const InputDecoration(
+                                    labelText: 'E-posta Adresi',
+                                    prefixIcon: Icon(Icons.email_outlined),
+                                  ),
+                                  keyboardType: TextInputType.emailAddress,
+                                  validator: (value) {
+                                    if (value == null || !value.contains('@')) {
+                                      return 'Lütfen geçerli bir e-posta adresi girin.';
+                                    }
+                                    return null;
+                                  },
+                                ),
+                              ],
+
+                              // Müşteri Kayıt için Şehir Seçimi
+                              if (_userType == UserType.customer &&
+                                  _authMode == AuthMode.Register) ...[
+                                const SizedBox(height: 14),
+                                DropdownButtonFormField<String>(
+                                  initialValue: _selectedCity,
+                                  decoration: const InputDecoration(
+                                    labelText: 'Şehir',
+                                    prefixIcon:
+                                        Icon(Icons.location_city_outlined),
+                                  ),
+                                  hint: const Text('Şehir Seçin'),
+                                  items: _cities.map((String city) {
+                                    return DropdownMenuItem<String>(
+                                      value: city,
+                                      child: Text(city),
+                                    );
+                                  }).toList(),
+                                  onChanged: (newValue) {
+                                    setState(() {
+                                      _selectedCity = newValue;
+                                    });
+                                  },
+                                  validator: (value) {
+                                    if (value == null) {
+                                      return 'Lütfen bir şehir seçin.';
+                                    }
+                                    return null;
+                                  },
+                                ),
+                              ],
+
+                              // Telefon Numarası (Kayıt) veya Tanımlayıcı (Dükkan Giriş)
+                              if ((_userType == UserType.customer &&
+                                      _authMode == AuthMode.Register) ||
+                                  _userType == UserType.merchant) ...[
+                                const SizedBox(height: 14),
+                                TextFormField(
+                                  controller: _phoneController,
+                                  decoration: InputDecoration(
+                                    labelText: _userType == UserType.merchant &&
+                                            _authMode == AuthMode.Login
+                                        ? 'Market Adı veya Telefon No'
+                                        : 'Telefon Numarası',
+                                    prefixIcon: Icon(
+                                        _userType == UserType.merchant &&
+                                                _authMode == AuthMode.Login
+                                            ? Icons.store
+                                            : Icons.phone_outlined),
+                                  ),
+                                  keyboardType: _authMode == AuthMode.Register
+                                      ? TextInputType.phone
+                                      : TextInputType.text,
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return 'Lütfen bu alanı doldurun.';
+                                    }
+                                    if (_authMode == AuthMode.Register &&
+                                        value.length < 10) {
+                                      return 'Lütfen geçerli bir telefon numarası girin.';
+                                    }
+                                    return null;
+                                  },
+                                ),
+                              ],
+
+                              // Dükkan Kayıt için Şehir Seçimi
+                              if (_userType == UserType.merchant &&
+                                  _authMode == AuthMode.Register) ...[
+                                const SizedBox(height: 14),
+                                DropdownButtonFormField<String>(
+                                  initialValue: _selectedCity,
+                                  decoration: const InputDecoration(
+                                    labelText: 'Şehir',
+                                    prefixIcon:
+                                        Icon(Icons.location_city_outlined),
+                                  ),
+                                  hint: const Text('Şehir Seçin'),
+                                  items: _cities.map((String city) {
+                                    return DropdownMenuItem<String>(
+                                      value: city,
+                                      child: Text(city),
+                                    );
+                                  }).toList(),
+                                  onChanged: (newValue) {
+                                    setState(() {
+                                      _selectedCity = newValue;
+                                    });
+                                  },
+                                  validator: (value) {
+                                    if (value == null) {
+                                      return 'Lütfen bir şehir seçin.';
+                                    }
+                                    return null;
+                                  },
+                                ),
+                              ],
+
+                              const SizedBox(height: 14),
+
+                              // Şifre alanı
+                              TextFormField(
+                                controller: _passwordController,
+                                decoration: InputDecoration(
+                                  labelText: 'Şifre',
+                                  prefixIcon: const Icon(Icons.lock_outline),
+                                  suffixIcon: IconButton(
+                                    icon: Icon(
+                                      _obscurePassword
+                                          ? Icons.visibility_off_outlined
+                                          : Icons.visibility_outlined,
+                                      color: AppColors.mochaText,
+                                    ),
+                                    onPressed: () {
+                                      setState(() {
+                                        _obscurePassword = !_obscurePassword;
+                                      });
+                                    },
+                                  ),
+                                ),
+                                obscureText: _obscurePassword,
+                                validator: (value) {
+                                  if (value == null ||
+                                      value.isEmpty ||
+                                      value.length < 6) {
+                                    return 'Şifre en az 6 karakter olmalıdır.';
+                                  }
+                                  return null;
+                                },
+                              ),
+
+                              // Şifre Tekrar alanı (sadece kayıt modunda)
+                              if (_authMode == AuthMode.Register) ...[
+                                const SizedBox(height: 14),
+                                TextFormField(
+                                  controller: _confirmPasswordController,
+                                  decoration: InputDecoration(
+                                    labelText: 'Şifreyi Onayla',
+                                    prefixIcon: const Icon(Icons.lock_reset),
+                                    suffixIcon: IconButton(
+                                      icon: Icon(
+                                        _obscureConfirmPassword
+                                            ? Icons.visibility_off_outlined
+                                            : Icons.visibility_outlined,
+                                        color: AppColors.mochaText,
+                                      ),
+                                      onPressed: () {
+                                        setState(() {
+                                          _obscureConfirmPassword =
+                                              !_obscureConfirmPassword;
+                                        });
+                                      },
+                                    ),
+                                  ),
+                                  obscureText: _obscureConfirmPassword,
+                                  validator: (value) {
+                                    if (value != _passwordController.text) {
+                                      return 'Şifreler eşleşmiyor!';
+                                    }
+                                    return null;
+                                  },
+                                ),
+                              ],
+
+                              const SizedBox(height: 22),
+
+                              // Giriş / Kayıt Butonu
+                              Consumer<AuthProvider>(
+                                builder: (ctx, auth, _) => SizedBox(
+                                  height: 48,
+                                  child: ElevatedButton(
+                                    onPressed: auth.isLoading ? null : _submit,
+                                    child: auth.isLoading
+                                        ? const SizedBox(
+                                            height: 22,
+                                            width: 22,
+                                            child: CircularProgressIndicator(
+                                              strokeWidth: 2.5,
+                                              valueColor:
+                                                  AlwaysStoppedAnimation<Color>(
+                                                      Colors.white),
+                                            ),
+                                          )
+                                        : Text(
+                                            _authMode == AuthMode.Login
+                                                ? 'Giriş Yap'
+                                                : 'Kayıt Ol',
+                                            style: const TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                  ),
+                                ),
+                              ),
+
+                              const SizedBox(height: 12),
+
+                              // Mod Değiştirme Butonu
+                              TextButton(
+                                onPressed: _switchAuthMode,
+                                child: Text(
+                                  _authMode == AuthMode.Login
+                                      ? 'Hesabınız yok mu? Kayıt Olun'
+                                      : 'Zaten bir hesabınız var mı? Giriş Yapın',
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.w600,
+                                    color: AppColors.deepEspresso,
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
-                  ),
-                  TextButton(
-                    onPressed: _switchAuthMode,
-                    child: Text(_authMode == AuthMode.Login
-                        ? 'Hesabınız yok mu? Kayıt Olun'
-                        : 'Zaten bir hesabınız var mı? Giriş Yapın'),
-                  )
-                ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
