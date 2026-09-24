@@ -301,12 +301,53 @@ class _PackageDetailScreenState extends State<PackageDetailScreen> {
                             const Divider(height: 20, color: AppColors.border),
                             if (_package.description != null &&
                                 _package.description!.isNotEmpty)
-                              Text(
-                                _package.description!,
-                                style: const TextStyle(
-                                    fontSize: 14,
-                                    height: 1.5,
-                                    color: AppColors.mochaText),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: _package.description!
+                                    .split('\n')
+                                    .map((line) => line.trim())
+                                    .where((line) => line.isNotEmpty)
+                                    .map((line) {
+                                  final cleanLine = line.replaceFirst(
+                                      RegExp(r'^[•\-\*\s]+'), '');
+                                  return Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 4.5),
+                                    child: Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Container(
+                                          margin:
+                                              const EdgeInsets.only(top: 2.5),
+                                          padding: const EdgeInsets.all(2),
+                                          decoration: BoxDecoration(
+                                            color: AppColors.sand
+                                                .withValues(alpha: 0.6),
+                                            shape: BoxShape.circle,
+                                          ),
+                                          child: const Icon(
+                                            Icons.check,
+                                            size: 12,
+                                            color: AppColors.deepEspresso,
+                                          ),
+                                        ),
+                                        const SizedBox(width: 10),
+                                        Expanded(
+                                          child: Text(
+                                            cleanLine,
+                                            style: const TextStyle(
+                                              fontSize: 14,
+                                              height: 1.4,
+                                              fontWeight: FontWeight.w500,
+                                              color: AppColors.deepEspresso,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                }).toList(),
                               )
                             else if (items.isNotEmpty)
                               ...items.map((item) {

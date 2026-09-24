@@ -3,9 +3,11 @@ import 'package:provider/provider.dart';
 import '../providers/auth_provider.dart';
 import '../providers/shop_provider.dart';
 import '../models/shop_package.dart';
+import '../models/shop.dart';
 import '../screens/create_package_screen.dart';
 import '../screens/package_detail_screen.dart';
 import '../screens/profile_screen.dart';
+import '../screens/shop_detail_screen.dart';
 import '../utils/theme.dart';
 
 /// İşletmecinin ürünlerini yönettiği ana panel ekranı.
@@ -49,10 +51,20 @@ class _MerchantDashboardScreenState extends State<MerchantDashboardScreen> {
     final authProvider = Provider.of<AuthProvider>(context);
     final shopName = authProvider.user?.name ?? 'İşletme Paneli';
     final shopCity = authProvider.user?.city ?? '';
+    final merchantShop = Shop(
+      id: authProvider.shopId ?? 0,
+      name: authProvider.user?.name ?? 'Marketim',
+      city: authProvider.user?.city ?? '',
+      phone: authProvider.user?.phone,
+    );
 
     final List<Widget> widgetOptions = <Widget>[
       _buildProductsTab(context),
-      const ProfileScreen(isEmbedded: true),
+      ShopDetailScreen(
+        shop: merchantShop,
+        isPreview: true,
+        isEmbedded: true,
+      ),
     ];
 
     return Scaffold(
@@ -60,31 +72,44 @@ class _MerchantDashboardScreenState extends State<MerchantDashboardScreen> {
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(_selectedIndex == 1 ? 'İşletme Profili' : shopName),
-            if (shopCity.isNotEmpty && _selectedIndex != 1)
+            Text(
+              _selectedIndex == 0 ? shopName : 'Mağazam',
+            ),
+            if (_selectedIndex == 0 && shopCity.isNotEmpty)
               Text(
                 shopCity,
                 style:
                     const TextStyle(fontSize: 12, fontWeight: FontWeight.w300),
+              )
+            else if (_selectedIndex == 1)
+              const Text(
+                'Müşteri Gözüyle Önizleme',
+                style: TextStyle(fontSize: 12, fontWeight: FontWeight.w300),
               ),
           ],
         ),
         actions: [
-          if (_selectedIndex != 1)
+          if (_selectedIndex == 1)
             IconButton(
-              icon: const Icon(Icons.person),
-              tooltip: 'Profilim',
+              icon: const Icon(Icons.open_in_new),
+              tooltip: 'Tam Ekran Görünüm',
               onPressed: () {
-                setState(() {
-                  _selectedIndex = 1;
-                });
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (_) => ShopDetailScreen(
+                      shop: merchantShop,
+                      isPreview: true,
+                      isEmbedded: false,
+                    ),
+                  ),
+                );
               },
             ),
           IconButton(
-            icon: const Icon(Icons.logout),
-            tooltip: 'Çıkış Yap',
+            icon: const Icon(Icons.person_outline),
+            tooltip: 'Profilim',
             onPressed: () {
-              Provider.of<AuthProvider>(context, listen: false).logout();
+              Navigator.of(context).pushNamed(ProfileScreen.routeName);
             },
           ),
         ],
@@ -106,12 +131,14 @@ class _MerchantDashboardScreenState extends State<MerchantDashboardScreen> {
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.inventory_2),
+            icon: Icon(Icons.inventory_2_outlined),
+            activeIcon: Icon(Icons.inventory_2),
             label: 'Paketlerim',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Profilim',
+            icon: Icon(Icons.storefront_outlined),
+            activeIcon: Icon(Icons.storefront),
+            label: 'Mağazam',
           ),
         ],
         currentIndex: _selectedIndex,
@@ -208,58 +235,13 @@ class _MerchantDashboardScreenState extends State<MerchantDashboardScreen> {
               ]);
             }
           },
-          child: Column(
-            children: [
-              // Hızlı Paket Bilgi Çubuğu
-              Container(
-                width: double.infinity,
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-                decoration: BoxDecoration(
-                  color: AppColors.cream.withValues(alpha: 0.6),
-                  border: Border(
-                    bottom: BorderSide(
-                        color: AppColors.border.withValues(alpha: 0.8)),
-                  ),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Toplam ${shopProvider.merchantPackages.length} paket listeleniyor',
-                      style: const TextStyle(
-                          fontSize: 13,
-                          fontWeight: FontWeight.bold,
-                          color: AppColors.deepEspresso),
-                    ),
-                    TextButton.icon(
-                      style: TextButton.styleFrom(
-                        foregroundColor: AppColors.taupe,
-                        visualDensity: VisualDensity.compact,
-                      ),
-                      onPressed: () {
-                        Navigator.of(context)
-                            .pushNamed(CreatePackageScreen.routeName);
-                      },
-                      icon: const Icon(Icons.add_box_rounded, size: 18),
-                      label: const Text('Yeni Paket',
-                          style: TextStyle(
-                              fontSize: 13, fontWeight: FontWeight.bold)),
-                    ),
-                  ],
-                ),
-              ),
-              Expanded(
-                child: ListView.builder(
-                  padding: const EdgeInsets.only(top: 12, bottom: 80),
-                  itemCount: shopProvider.merchantPackages.length,
-                  itemBuilder: (ctx, i) {
-                    final package = shopProvider.merchantPackages[i];
-                    return _ShopPackageCard(package: package);
-                  },
-                ),
-              ),
-            ],
+          child: ListView.builder(
+            padding: const EdgeInsets.only(top: 12, bottom: 80),
+            itemCount: shopProvider.merchantPackages.length,
+            itemBuilder: (ctx, i) {
+              final package = shopProvider.merchantPackages[i];
+              return _ShopPackageCard(package: package);
+            },
           ),
         );
       },

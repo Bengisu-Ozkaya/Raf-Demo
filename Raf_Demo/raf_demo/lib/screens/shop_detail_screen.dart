@@ -13,7 +13,16 @@ import '../utils/theme.dart';
 class ShopDetailScreen extends StatefulWidget {
   static const routeName = '/shop-detail';
 
-  const ShopDetailScreen({super.key});
+  final Shop? shop;
+  final bool isPreview;
+  final bool isEmbedded;
+
+  const ShopDetailScreen({
+    super.key,
+    this.shop,
+    this.isPreview = false,
+    this.isEmbedded = false,
+  });
 
   @override
   State<ShopDetailScreen> createState() => _ShopDetailScreenState();
@@ -22,15 +31,36 @@ class ShopDetailScreen extends StatefulWidget {
 class _ShopDetailScreenState extends State<ShopDetailScreen> {
   late Future<void> _dataFuture;
   bool _isInit = false;
+  Shop? _cachedShop;
+
+  Shop _resolveShop() {
+    if (widget.shop != null) return widget.shop!;
+    if (_cachedShop != null) return _cachedShop!;
+    final args = ModalRoute.of(context)?.settings.arguments;
+    if (args is Shop) {
+      _cachedShop = args;
+      return args;
+    }
+    return Shop(id: 0, name: 'Market', city: '');
+  }
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
     if (!_isInit) {
-      final shop = ModalRoute.of(context)!.settings.arguments as Shop;
+      final shop = _resolveShop();
       final shopProvider = Provider.of<ShopProvider>(context, listen: false);
       _dataFuture = shopProvider.fetchPackages(shop.id);
       _isInit = true;
+    }
+  }
+
+  @override
+  void didUpdateWidget(covariant ShopDetailScreen oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.shop?.id != widget.shop?.id && widget.shop != null) {
+      final shopProvider = Provider.of<ShopProvider>(context, listen: false);
+      _dataFuture = shopProvider.fetchPackages(widget.shop!.id);
     }
   }
 
@@ -76,46 +106,48 @@ class _ShopDetailScreenState extends State<ShopDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final shop = ModalRoute.of(context)!.settings.arguments as Shop;
+    final shop = _resolveShop();
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(shop.name),
-        actions: [
-          // Sepet ikonu ve Badge
-          Consumer<CartProvider>(
-            builder: (_, cart, ch) => CustomBadge(
-              value: cart.totalItemCount.toString(),
-              child: ch!,
+    final bodyContent = FutureBuilder(
+      future: _dataFuture,
+      builder: (ctx, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(
+              child: CircularProgressIndicator(color: AppColors.taupe));
+        } else if (snapshot.hasError) {
+          return Center(
+            child: Padding(
+              padding: const EdgeInsets.all(24.0),
+              child: Text(
+                'Bir hata oluştu: ${snapshot.error}',
+                style: const TextStyle(color: AppColors.error),
+                textAlign: TextAlign.center,
+              ),
             ),
-            child: IconButton(
-              icon: const Icon(Icons.shopping_cart),
-              onPressed: () {
-                Navigator.of(context).pushNamed(CartScreen.routeName);
-              },
-            ),
-          ),
-        ],
-      ),
-      body: FutureBuilder(
-        future: _dataFuture,
-        builder: (ctx, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
-          } else if (snapshot.hasError) {
-            return Center(child: Text('Bir hata oluştu: ${snapshot.error}'));
-          }
+          );
+        }
 
-          return Consumer<ShopProvider>(
-            builder: (ctx, shopProvider, _) {
-              final packages = shopProvider.merchantPackages;
+        return Consumer<ShopProvider>(
+          builder: (ctx, shopProvider, _) {
+            final packages = shopProvider.merchantPackages;
 
-              return Center(
-                child: ConstrainedBox(
-                  constraints: const BoxConstraints(maxWidth: 800),
+            return Center(
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: 800),
+                child: RefreshIndicator(
+                  color: AppColors.taupe,
+                  onRefresh: () async {
+                    await shopProvider.fetchPackages(shop.id);
+                  },
                   child: ListView(
                     padding: const EdgeInsets.all(12),
                     children: [
+                      // Önizleme Bilgilendirme Rozeti
+                      if (widget.isPreview) ...[
+                        _buildPreviewModeBanner(context),
+                        const SizedBox(height: 14),
+                      ],
+
                       // 1. WhatsApp Tekli Ürün Sipariş Kartı
                       _buildWhatsAppSingleOrderCard(shop),
 
@@ -504,10 +536,89 @@ class _ShopDetailScreenState extends State<ShopDetailScreen> {
                     ],
                   ),
                 ),
-              );
-            },
-          );
-        },
+              ),
+            );
+          },
+        );
+      },
+    );
+
+    if (widget.isEmbedded) {
+      return bodyContent;
+    }
+
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(shop.name),
+        actions: [
+          Consumer<CartProvider>(
+            builder: (_, cart, ch) => CustomBadge(
+              value: cart.totalItemCount.toString(),
+              child: ch!,
+            ),
+            child: IconButton(
+              icon: const Icon(Icons.shopping_cart),
+              onPressed: () {
+                Navigator.of(context).pushNamed(CartScreen.routeName);
+              },
+            ),
+          ),
+        ],
+      ),
+      body: bodyContent,
+    );
+  }
+
+  Widget _buildPreviewModeBanner(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+      decoration: BoxDecoration(
+        color: AppColors.sand.withValues(alpha: 0.35),
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(
+          color: AppColors.taupe.withValues(alpha: 0.35),
+          width: 1,
+        ),
+      ),
+      child: Row(
+        children: [
+          Container(
+            padding: const EdgeInsets.all(6),
+            decoration: BoxDecoration(
+              color: AppColors.taupe.withValues(alpha: 0.15),
+              shape: BoxShape.circle,
+            ),
+            child: const Icon(
+              Icons.visibility_outlined,
+              size: 20,
+              color: AppColors.deepEspresso,
+            ),
+          ),
+          const SizedBox(width: 10),
+          const Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Canlı Müşteri Önizlemesi',
+                  style: TextStyle(
+                    fontSize: 13,
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.deepEspresso,
+                  ),
+                ),
+                SizedBox(height: 2),
+                Text(
+                  'Müşterileriniz mağazanızı ve paketlerinizi bu şekilde görür.',
+                  style: TextStyle(
+                    fontSize: 11.5,
+                    color: AppColors.mochaText,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
