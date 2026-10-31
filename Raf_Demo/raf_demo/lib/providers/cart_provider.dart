@@ -4,9 +4,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../models/product.dart';
 import '../models/cart_item.dart';
-import '../models/shop.dart'; // Keep this import
+import '../models/shop.dart';
 import '../models/shop_package.dart';
-import '../models/order_model.dart';
 import '../services/socket_service.dart';
 import '../services/api_service.dart';
 
@@ -45,22 +44,18 @@ class CartProvider with ChangeNotifier {
   final ApiService _apiService;
   final SocketService _socketService;
   Map<int, CartShop> _shops = {}; // Shop ID -> CartShop
-  List<OrderModel> _myOrders = []; // YENİ: Sipariş geçmişini tutan liste
 
   bool _isLoading = false;
   String? _errorMessage;
 
   // Getters
   Map<int, CartShop> get shops => _shops;
-  List<OrderModel> get myOrders =>
-      [..._myOrders]; // Dışarıdan değiştirilememesi için kopyasını gönder
   bool get isLoading => _isLoading;
   String? get errorMessage => _errorMessage;
 
   // Sepetteki toplam ürün sayısı (ikon üzerinde göstermek için)
   int get totalItemCount {
     if (_shops.isEmpty) return 0;
-    // Boş bir listede .reduce() kullanmak hata verir. .fold() kullanmak daha güvenlidir.
     return _shops.values.fold(
         0,
         (total, shop) =>
@@ -72,7 +67,6 @@ class CartProvider with ChangeNotifier {
   // Tüm sepetin toplam tutarı
   double get totalAmount {
     if (_shops.isEmpty) return 0.0;
-    // Boş bir listede .reduce() kullanmak hata verir. .fold() kullanmak daha güvenlidir.
     return _shops.values.fold(
         0.0,
         (total, shop) =>
@@ -83,29 +77,6 @@ class CartProvider with ChangeNotifier {
 
   CartProvider(this._apiService, this._socketService) {
     loadCartFromPrefs();
-
-    // YENİ: Sipariş durumu güncellemelerini dinle
-    _socketService.onOrderStatusUpdated((updateData) {
-      final int orderId = updateData['orderId'];
-      final String newStatus = updateData['newStatus'];
-
-      final index =
-          _myOrders.indexWhere((order) => order.id == orderId.toString());
-      if (index != -1) {
-        final oldOrder = _myOrders[index];
-        // OrderModel'in bir copyWith metodu olduğunu varsayıyoruz, yoksa bu şekilde yeni bir nesne oluşturulur.
-        _myOrders[index] = oldOrder.copyWith(
-          id: oldOrder.id,
-          items: oldOrder.items,
-          totalAmount: oldOrder.totalAmount,
-          dateTime: oldOrder.dateTime,
-          paymentMethod: oldOrder.paymentMethod,
-          shopName: oldOrder.shopName,
-          status: newStatus, // Durumu güncelle
-        );
-        notifyListeners();
-      }
-    });
   }
 
   // Ürünü sepete ekler
@@ -178,14 +149,12 @@ class CartProvider with ChangeNotifier {
   void incrementItem(int productId, int shopId, {int stockLimit = 999}) {
     if (!_shops.containsKey(shopId) ||
         !_shops[shopId]!.items.containsKey(productId)) {
-      return; // Dükkan veya ürün sepette yok
+      return;
     }
     final item = _shops[shopId]!.items[productId]!;
     if (item.quantity < stockLimit) {
       item.increment();
       _saveCartAndNotify();
-    } else {
-      // Stok dolu uyarısı, belki bir SnackBar ile kullanıcıya gösterilebilir.
     }
   }
 
@@ -193,7 +162,7 @@ class CartProvider with ChangeNotifier {
   void decrementItem(int productId, int shopId) {
     if (!_shops.containsKey(shopId) ||
         !_shops[shopId]!.items.containsKey(productId)) {
-      return; // Dükkan veya ürün sepette yok
+      return;
     }
 
     final cartItem = _shops[shopId]!.items[productId]!;
@@ -217,49 +186,6 @@ class CartProvider with ChangeNotifier {
     _saveCartAndNotify();
   }
 
-  // Siparişi ver
-  Future<bool> placeOrder({
-    required String userId,
-    required String userName,
-    required String paymentMethod,
-  }) async {
-    if (_shops.isEmpty) {
-      _setError("Sepetiniz boş.");
-      return false;
-    }
-    _setLoading(true);
-
-    // Backend'in beklediği formata dönüştür: { "shopId1": { "items": [...] } }
-    final Map<String, dynamic> cartsPayload = _shops.map((shopId, cartShop) {
-      final itemsPayload = cartShop.items.values.map((item) {
-        // Backend'e ürünün tüm detaylarını gönderiyoruz.
-        return item.toJson();
-      }).toList();
-      return MapEntry(shopId.toString(), {'items': itemsPayload});
-    });
-
-    try {
-      // GÜNCELLEME: Yeni API metodunu çağır
-      await _apiService.placeOrder(
-          carts: cartsPayload,
-          userId: userId,
-          userName: userName,
-          paymentMethod: paymentMethod);
-
-      // YENİ: Sipariş başarılıysa, sipariş listesini sunucudan yeniden çek.
-      await fetchMyOrders();
-
-      clearCart(); // Sipariş başarılıysa sepeti temizle
-      _setError(null);
-      return true;
-    } catch (e) {
-      _setError(e.toString());
-      return false;
-    } finally {
-      _setLoading(false);
-    }
-  }
-
   // Sepeti SharedPreferences'a kaydet
   Future<void> _saveCartAndNotify() async {
     final prefs = await SharedPreferences.getInstance();
@@ -281,21 +207,6 @@ class CartProvider with ChangeNotifier {
     _shops =
         decodedCart.map((k, v) => MapEntry(int.parse(k), CartShop.fromJson(v)));
     notifyListeners();
-  }
-
-  /// Müşterinin sipariş geçmişini sunucudan çeker.
-  Future<void> fetchMyOrders() async {
-    _setLoading(true); // Yükleme başladığını bildir
-    try {
-      _myOrders = await _apiService.fetchMyOrders();
-      _setError(null);
-    } catch (e) {
-      _setError(e.toString());
-      _myOrders = []; // Hata durumunda listeyi temizle
-    } finally {
-      _setLoading(false); // Yükleme bittiğini bildir
-      notifyListeners();
-    }
   }
 
   void _setLoading(bool value) {

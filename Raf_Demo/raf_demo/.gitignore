@@ -14,6 +14,9 @@ migrate_working_dir/
 .env
 .env.*
 !.env.example
+serviceAccountKey.json
+*serviceAccount*.json
+__pycache__/
 node_modules/
 .wwebjs_auth/
 .wwebjs_cache/

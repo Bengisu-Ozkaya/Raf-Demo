@@ -3,8 +3,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../models/product.dart';
 import '../models/shop.dart';
 import '../models/user.dart';
-import '../models/merchant_order.dart';
-import '../models/order_model.dart';
 import '../models/shop_package.dart';
 import '../utils/constants.dart';
 
@@ -205,85 +203,7 @@ class ApiService {
     }
   }
 
-  /// Sepetteki ürünleri birden fazla dükkan için sipariş verir (GÜNCELLENDİ).
-  Future<void> placeOrder({
-    required Map<String, dynamic> carts,
-    required String userId,
-    required String userName,
-    required String paymentMethod,
-  }) async {
-    try {
-      final response = await _dio.post(
-        '/api/orders', // Endpoint /api/orders olarak güncellendi
-        data: {
-          'carts': carts,
-          'userId': userId,
-          'userName': userName,
-          'paymentMethod': paymentMethod,
-        },
-      );
-      if (!response.data['success']) {
-        throw Exception(response.data['message'] ?? 'Sipariş oluşturulamadı.');
-      }
-    } on DioException catch (e) {
-      throw _handleDioException(e);
-    }
-  }
-
-  // --- YENİ: MÜŞTERİ SİPARİŞLERİNİ ÇEKME ---
-  Future<List<OrderModel>> fetchMyOrders() async {
-    try {
-      // Bu endpoint artık token ile korunduğu için ApiService interceptor'ı
-      // otomatik olarak Authorization header'ını ekleyecektir.
-      final response = await _dio.get('/api/customer/orders');
-      if (response.data != null && response.data is List) {
-        return (response.data as List)
-            .map((orderData) => OrderModel.fromJson(orderData))
-            .toList();
-      }
-      return []; // Sipariş yoksa boş liste dön
-    } on DioException catch (e) {
-      throw _handleDioException(e);
-    }
-  }
-
-  // --- YENİ: SATICI SİPARİŞLERİNİ ÇEKME ---
-  Future<List<MerchantOrder>> fetchMerchantOrders(int shopId) async {
-    try {
-      // Backend, token'dan satıcıyı tanıdığı için URL'de shopId göndermeye gerek yok.
-      final response = await _dio.get(
-        // Token otomatik eklenir.
-        '/api/merchant/orders',
-      );
-      if (response.data != null && response.data is List) {
-        return (response.data as List)
-            .map((orderData) => MerchantOrder.fromJson(orderData))
-            .toList();
-      }
-      return []; // Sipariş yoksa boş liste dön
-    } on DioException catch (e) {
-      throw _handleDioException(e);
-    }
-  }
-
-  // --- YENİ: SİPARİŞ DURUMUNU GÜNCELLEME ---
-  Future<void> updateOrderStatus(int orderId, String status) async {
-    try {
-      // Bu endpoint token ile korunduğu için interceptor header'ı ekleyecektir.
-      final response = await _dio.put(
-        '/api/orders/$orderId/status',
-        data: {'status': status},
-      );
-      if (response.data == null || response.data['success'] != true) {
-        throw Exception(
-            response.data['message'] ?? 'Sipariş durumu güncellenemedi.');
-      }
-    } on DioException catch (e) {
-      throw _handleDioException(e);
-    }
-  }
-
-  // --- YENİ: İŞLETMECİ ÜRÜN YÖNETİMİ METODLARI ---
+  // --- İŞLETMECİ ÜRÜN YÖNETİMİ METODLARI ---
 
   /// Belirli bir dükkanın ürünlerini getirir (İşletmeci paneli için).
   Future<List<Product>> fetchProductsForMerchant(int shopId) async {
@@ -306,27 +226,19 @@ class ApiService {
     required int stock,
     required int masterProductId, // YENİ: master_product_id eklendi
   }) async {
-    // DİKKAT: Normalde token yönetimi merkezi interceptor tarafından yapılır.
-    // Ancak bu kritik işlemde token'ın kesinlikle gönderildiğinden emin olmak için
-    // token'ı manuel olarak okuyup header'a ekliyoruz. Bu, olası zamanlama
-    // sorunlarını ortadan kaldıran bir "güvenlik" önlemidir.
     try {
-      // 1. Kaydedilmiş token'ı yerel hafızadan oku veya mevcut _token'ı kullan.
       final prefs = await SharedPreferences.getInstance();
       final token = prefs.getString('authToken') ?? _token;
 
-      // 2. Token yoksa hata fırlat. Bu, giriş yapılmadığını gösterir.
       if (token == null) {
         throw Exception(
             'Doğrulama hatası: Oturum bulunamadı. Lütfen tekrar giriş yapın.');
       }
 
-      // 3. Dio isteğini, header'a manuel olarak eklenmiş token ile gönder.
       final response = await _dio.post(
         '/api/products',
         data: {
-          'master_product_id':
-              masterProductId, // YENİ: master_product_id gönderiliyor
+          'master_product_id': masterProductId,
           'price': price,
           'stock': stock,
         },
@@ -384,7 +296,7 @@ class ApiService {
       {double? price, int? stock}) async {
     try {
       final response = await _dio.put(
-        '/api/products/$shopProductId', // shopProductId kullanılıyor
+        '/api/products/$shopProductId',
         data: {'price': price, 'stock': stock},
       );
       if (!response.data['success']) {
@@ -398,8 +310,7 @@ class ApiService {
   /// Bir ürünü siler.
   Future<void> deleteProduct(int shopProductId) async {
     try {
-      await _dio
-          .delete('/api/products/$shopProductId'); // shopProductId kullanılıyor
+      await _dio.delete('/api/products/$shopProductId');
     } on DioException catch (e) {
       throw _handleDioException(e);
     }
@@ -549,7 +460,6 @@ class ApiService {
       }
     } on DioException catch (e) {
       if (e.response?.statusCode == 404) {
-        // Backend'de henüz bu endpoint açılmamışsa yerel profil durumunu korumak için sessiz geçilir
         return;
       }
       throw _handleDioException(e);
@@ -588,12 +498,10 @@ class ApiService {
 
   // Dio'dan gelen hataları yakalayıp daha anlaşılır mesajlara çeviren yardımcı fonksiyon.
   Exception _handleDioException(DioException e) {
-    // Sunucudan yapısal bir hata mesajı geldiyse onu kullan.
     if (e.response?.data is Map && e.response!.data['message'] != null) {
       return Exception(e.response!.data['message']);
     }
 
-    // Aksi halde, ağ hatasının tipine göre daha açıklayıcı bir mesaj oluştur.
     switch (e.type) {
       case DioExceptionType.connectionTimeout:
       case DioExceptionType.sendTimeout:
