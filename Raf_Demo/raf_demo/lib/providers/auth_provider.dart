@@ -56,7 +56,10 @@ class AuthProvider with ChangeNotifier {
         // Dükkan sahibi market adı veya telefon numarası ile giriş yapar.
         final response = await _apiService.loginMerchant(identifier, password);
         _token = response['token'];
-        _shopId = response['shopId'];
+        _shopId = response['shopId'] is int
+            ? response['shopId'] as int
+            : int.tryParse(response['shopId']?.toString() ?? '0') ??
+                (response['shopId']?.toString().hashCode.abs() ?? 0);
         _shopName = response['shopName'];
         _userType = UserType.merchant;
         _apiService.setAuthToken(_token);

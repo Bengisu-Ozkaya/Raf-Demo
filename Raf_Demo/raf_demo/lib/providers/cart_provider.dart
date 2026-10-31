@@ -32,7 +32,9 @@ class CartShop {
       };
 
   factory CartShop.fromJson(Map<String, dynamic> json) => CartShop(
-        shopId: json['shopId'],
+        shopId: json['shopId'] is int
+            ? json['shopId']
+            : int.tryParse(json['shopId']?.toString() ?? '0') ?? 0,
         shopName: json['shopName'] ?? '',
         shopPhone: json['shopPhone'],
         items: (json['items'] as Map<String, dynamic>)

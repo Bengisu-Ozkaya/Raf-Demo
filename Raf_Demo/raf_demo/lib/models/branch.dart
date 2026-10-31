@@ -15,8 +15,8 @@ class Branch {
   /// Gelen JSON verisinden bir Branch nesnesi oluşturur.
   factory Branch.fromJson(Map<String, dynamic> json) {
     return Branch(
-      id: json['id'],
-      shopId: json['shop_id'],
+      id: json['id'] is int ? json['id'] : int.tryParse(json['id']?.toString() ?? '0') ?? 0,
+      shopId: json['shop_id'] is int ? json['shop_id'] : int.tryParse(json['shop_id']?.toString() ?? '0') ?? 0,
       city: json['city'],
       fullAddress: json['full_address'],
     );

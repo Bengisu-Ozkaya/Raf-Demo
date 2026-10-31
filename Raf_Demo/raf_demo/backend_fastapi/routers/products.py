@@ -45,22 +45,34 @@ async def get_shop_products(shopId: Optional[str] = Query(None)):
     
     query = db.collection("shop_products")
     if shopId:
-        query = query.where("shop_id", "==", shopId)
+        query = query.where("shop_id", "in", [shopId, str(shopId)])
     
     docs = query.stream()
     products = []
     for doc in docs:
         d = doc.to_dict()
+        prod_id = d.get("id")
+        if prod_id is None:
+            try:
+                prod_id = int(doc.id)
+            except ValueError:
+                prod_id = abs(hash(doc.id)) % 2147483647
+        shop_id = d.get("shop_id")
+        if shop_id is not None:
+            try:
+                shop_id = int(shop_id)
+            except (ValueError, TypeError):
+                shop_id = abs(hash(str(shop_id))) % 2147483647
         products.append({
-            "id": doc.id,
-            "shopId": d.get("shop_id"),
-            "master_product_id": d.get("master_product_id"),
+            "id": prod_id,
+            "shop_id": shop_id,
+            "master_product_id": d.get("master_product_id") or prod_id,
             "name": d.get("name", "Ürün"),
             "brand": d.get("brand", ""),
             "category": d.get("category", ""),
             "price": float(d.get("price", 0.0)),
             "stock": int(d.get("stock", 0)),
-            "imageUrl": d.get("image_url", ""),
+            "image_url": d.get("image_url", ""),
         })
     return products
 

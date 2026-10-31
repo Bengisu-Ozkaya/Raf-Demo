@@ -18,8 +18,14 @@ async def get_shops(city: Optional[str] = Query(None)):
     shops = []
     for doc in docs:
         d = doc.to_dict()
+        shop_id = d.get("id")
+        if shop_id is None:
+            try:
+                shop_id = int(doc.id)
+            except ValueError:
+                shop_id = abs(hash(doc.id)) % 2147483647
         shops.append({
-            "id": doc.id,
+            "id": shop_id,
             "name": d.get("shop_name", ""),
             "ownerName": d.get("owner_name", ""),
             "phone": d.get("phone", ""),

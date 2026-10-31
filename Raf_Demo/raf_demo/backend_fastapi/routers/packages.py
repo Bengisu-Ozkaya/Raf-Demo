@@ -20,9 +20,21 @@ async def get_packages(shopId: Optional[str] = Query(None)):
     packages = []
     for doc in docs:
         d = doc.to_dict()
+        pkg_id = d.get("id")
+        if pkg_id is None:
+            try:
+                pkg_id = int(doc.id)
+            except ValueError:
+                pkg_id = abs(hash(doc.id)) % 2147483647
+        shop_id = d.get("shop_id")
+        if shop_id is not None:
+            try:
+                shop_id = int(shop_id)
+            except (ValueError, TypeError):
+                shop_id = abs(hash(str(shop_id))) % 2147483647
         packages.append({
-            "id": doc.id,
-            "shop_id": d.get("shop_id"),
+            "id": pkg_id,
+            "shop_id": shop_id,
             "name": d.get("name"),
             "description": d.get("description", ""),
             "package_size": d.get("package_size", "Standart Paket"),

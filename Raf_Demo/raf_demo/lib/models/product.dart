@@ -33,7 +33,13 @@ class Product {
     return Product(
       id: json['id'] is int ? json['id'] : int.tryParse(json['id'].toString()) ?? 0,
       shopId: json['shop_id'] is int ? json['shop_id'] : int.tryParse(json['shop_id']?.toString() ?? '0') ?? 0,
-      masterProductId: json['master_product_id'] ?? json['id'],
+      masterProductId: json['master_product_id'] is int
+          ? json['master_product_id']
+          : int.tryParse(json['master_product_id']?.toString() ?? '') ??
+              (json['id'] is int
+                  ? json['id']
+                  : int.tryParse(json['id']?.toString() ?? '0') ??
+                      (json['id']?.toString().hashCode.abs() ?? 0)),
       name: json['product_name'] ?? json['name'] ?? '',
       price: (json['price'] as num?)?.toDouble(),
       stock: (json['stock'] as num?)?.toInt(),

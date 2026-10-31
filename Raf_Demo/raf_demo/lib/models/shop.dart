@@ -17,7 +17,10 @@ class Shop {
   /// JSON verisinden bir Shop nesnesi oluşturur.
   factory Shop.fromJson(Map<String, dynamic> json) {
     return Shop(
-      id: json['id'],
+      id: json['id'] is int
+          ? json['id']
+          : int.tryParse(json['id']?.toString() ?? '0') ??
+              (json['id']?.toString().hashCode.abs() ?? 0),
       name: json['shop_name'] ?? json['name'] ?? '',
       city: json['city'] ?? '',
       phone: json['phone']?.toString(),

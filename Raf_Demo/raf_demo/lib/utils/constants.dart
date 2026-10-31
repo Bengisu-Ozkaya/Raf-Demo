@@ -2,7 +2,7 @@
 // LocalTunnel, ngrok gibi servisler her yeniden başlatıldığında URL değişebilir.
 // Bu yüzden burayı merkezi bir yerden yönetmek önemlidir.
 const String BASE_URL =
-    'https://raf-demo-backend.onrender.com'; // Port 3001 olarak düzeltildi
+    'https://raf-backend-655360658098.europe-west1.run.app';
 
 /// Türkiye'nin 81 İli (01-81 İl Sıralı)
 const List<String> TURKEY_CITIES = [

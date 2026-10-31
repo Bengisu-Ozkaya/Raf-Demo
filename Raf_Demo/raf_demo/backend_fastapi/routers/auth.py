@@ -81,8 +81,11 @@ async def register_merchant(payload: MerchantRegisterRequest):
     if existing:
         raise HTTPException(status_code=400, detail="Bu telefon numarasına ait bir dükkan zaten kayıtlı.")
 
+    import time
+    numeric_id = int(time.time() * 1000) % 2147483647
     password_hash = get_password_hash(payload.password)
     merchant_data = {
+        "id": numeric_id,
         "shop_name": payload.shop_name,
         "owner_name": payload.owner_name,
         "phone": payload.phone,
@@ -90,10 +93,10 @@ async def register_merchant(payload: MerchantRegisterRequest):
         "password_hash": password_hash,
     }
     
-    doc_ref = db.collection("merchants").document()
+    doc_ref = db.collection("merchants").document(str(numeric_id))
     doc_ref.set(merchant_data)
     
-    return {"success": True, "message": "Esnaf/Dükkan kaydı başarıyla tamamlandı.", "shopId": doc_ref.id}
+    return {"success": True, "message": "Esnaf/Dükkan kaydı başarıyla tamamlandı.", "shopId": numeric_id}
 
 @router.post("/merchant/login")
 async def login_merchant(payload: MerchantLoginRequest):
@@ -114,8 +117,15 @@ async def login_merchant(payload: MerchantLoginRequest):
     if not verify_password(payload.password, merchant_dict.get("password_hash", "")):
         raise HTTPException(status_code=401, detail="Geçersiz dükkan bilgisi veya şifre.")
     
+    shop_id = merchant_dict.get("id")
+    if shop_id is None:
+        try:
+            shop_id = int(merchant_doc.id)
+        except ValueError:
+            shop_id = abs(hash(merchant_doc.id)) % 2147483647
+    
     token = create_access_token({
-        "merchantId": merchant_doc.id,
+        "merchantId": str(shop_id),
         "shopName": merchant_dict.get("shop_name"),
         "role": "merchant"
     })
@@ -123,7 +133,7 @@ async def login_merchant(payload: MerchantLoginRequest):
     return {
         "success": True,
         "token": token,
-        "shopId": merchant_doc.id,
+        "shopId": shop_id,
         "shopName": merchant_dict.get("shop_name"),
         "city": merchant_dict.get("city"),
     }
