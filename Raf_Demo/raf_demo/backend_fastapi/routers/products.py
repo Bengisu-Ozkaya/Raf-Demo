@@ -91,7 +91,11 @@ async def add_product(
     master_doc = db.collection("master_products").document(str(payload.master_product_id)).get()
     master_data = master_doc.to_dict() if master_doc.exists else {}
     
+    import time
+    numeric_id = int(time.time() * 1000) % 2147483647
+    
     shop_product_data = {
+        "id": numeric_id,
         "shop_id": merchant_id,
         "master_product_id": payload.master_product_id,
         "name": master_data.get("product_name", "Ürün"),
@@ -102,10 +106,10 @@ async def add_product(
         "stock": payload.stock,
     }
     
-    doc_ref = db.collection("shop_products").document()
+    doc_ref = db.collection("shop_products").document(str(numeric_id))
     doc_ref.set(shop_product_data)
     
-    return {"success": True, "message": "Ürün başarıyla dükkana eklendi.", "id": doc_ref.id}
+    return {"success": True, "message": "Ürün başarıyla dükkana eklendi.", "id": numeric_id}
 
 @router.post("/products/batch")
 async def add_products_batch(
@@ -118,10 +122,14 @@ async def add_products_batch(
     
     merchant_id = merchant["merchantId"]
     batch = db.batch()
+    import time
+    base_time = int(time.time() * 1000)
     
-    for item in payload.products:
-        doc_ref = db.collection("shop_products").document()
+    for idx, item in enumerate(payload.products):
+        numeric_id = (base_time + idx) % 2147483647
+        doc_ref = db.collection("shop_products").document(str(numeric_id))
         item_data = {
+            "id": numeric_id,
             "shop_id": merchant_id,
             "master_product_id": item.get("master_product_id"),
             "name": item.get("name", "Ürün"),
@@ -151,7 +159,7 @@ async def update_product(
     if not doc.exists:
         raise HTTPException(status_code=404, detail="Ürün bulunamadı.")
     
-    if doc.to_dict().get("shop_id") != merchant["merchantId"]:
+    if str(doc.to_dict().get("shop_id")) != str(merchant["merchantId"]):
         raise HTTPException(status_code=403, detail="Bu ürünü güncelleme yetkiniz yok.")
     
     updates = {}
@@ -179,7 +187,7 @@ async def delete_product(
     if not doc.exists:
         raise HTTPException(status_code=404, detail="Ürün bulunamadı.")
     
-    if doc.to_dict().get("shop_id") != merchant["merchantId"]:
+    if str(doc.to_dict().get("shop_id")) != str(merchant["merchantId"]):
         raise HTTPException(status_code=403, detail="Bu ürünü silme yetkiniz yok.")
     
     doc_ref.delete()

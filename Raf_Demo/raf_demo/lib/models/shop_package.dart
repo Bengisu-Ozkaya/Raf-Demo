@@ -57,10 +57,12 @@ class ShopPackage {
     return ShopPackage(
       id: json['id'] is int
           ? json['id']
-          : int.tryParse(json['id'].toString()) ?? 0,
+          : int.tryParse(json['id']?.toString() ?? '0') ??
+              (json['id']?.toString().hashCode.abs() ?? 0),
       shopId: json['shop_id'] is int
           ? json['shop_id']
-          : int.tryParse(json['shop_id']?.toString() ?? '0') ?? 0,
+          : int.tryParse(json['shop_id']?.toString() ?? '0') ??
+              (json['shop_id']?.toString().hashCode.abs() ?? 0),
       shopName: json['shop_name']?.toString(),
       shopPhone: json['shop_phone']?.toString() ?? json['phone']?.toString(),
       name: json['name'] ?? '',

@@ -41,7 +41,10 @@ class ShopProvider with ChangeNotifier {
       final type = updateData['type'];
 
       if (type == 'full_update') {
-        final int updatedShopId = updateData['shopId'];
+        final rawShopId = updateData['shopId'];
+        final int updatedShopId = rawShopId is int
+            ? rawShopId
+            : int.tryParse(rawShopId?.toString() ?? '0') ?? 0;
         final List<Product> updatedProducts = updateData['products'];
 
         if (_products.isNotEmpty && _products.first.shopId == updatedShopId) {
@@ -53,8 +56,11 @@ class ShopProvider with ChangeNotifier {
         }
         notifyListeners();
       } else if (type == 'partial_update') {
-        final int productId = updateData['productId'];
-        final int newStock = updateData['newStock'];
+        final rawProdId = updateData['productId'];
+        final int productId = rawProdId is int
+            ? rawProdId
+            : int.tryParse(rawProdId?.toString() ?? '0') ?? 0;
+        final int newStock = (updateData['newStock'] as num?)?.toInt() ?? 0;
         final double? newPrice = (updateData['newPrice'] as num?)?.toDouble();
 
         final pIndex = _products.indexWhere((p) => p.id == productId);

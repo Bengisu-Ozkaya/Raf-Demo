@@ -89,16 +89,19 @@ class CartItem {
   /// SharedPreferences'dan okumak için JSON'dan oluşturur.
   factory CartItem.fromJson(Map<String, dynamic> json) {
     return CartItem(
-      id: json['id'],
+      id: json['id'] is int
+          ? json['id']
+          : int.tryParse(json['id']?.toString() ?? '0') ??
+              (json['id']?.toString().hashCode.abs() ?? 0),
       name: json['name'] ?? '',
       description: json['description'] as String?,
       price: (json['price'] as num?)?.toDouble() ?? 0.0,
       imageUrl: json['imageUrl'],
       weightVolume: json['weightVolume'] as String?,
-      quantity: json['quantity'] as int? ?? 0,
+      quantity: (json['quantity'] as num?)?.toInt() ?? 0,
       isPackage: json['isPackage'] as bool? ?? false,
       packageSize: json['packageSize'] as String?,
-      packageItemCount: json['packageItemCount'] as int?,
+      packageItemCount: (json['packageItemCount'] as num?)?.toInt(),
     );
   }
 }

@@ -31,8 +31,14 @@ class Product {
   /// JSON verisinden bir Product nesnesi oluşturur.
   factory Product.fromJson(Map<String, dynamic> json) {
     return Product(
-      id: json['id'] is int ? json['id'] : int.tryParse(json['id'].toString()) ?? 0,
-      shopId: json['shop_id'] is int ? json['shop_id'] : int.tryParse(json['shop_id']?.toString() ?? '0') ?? 0,
+      id: json['id'] is int
+          ? json['id']
+          : int.tryParse(json['id']?.toString() ?? '0') ??
+              (json['id']?.toString().hashCode.abs() ?? 0),
+      shopId: json['shop_id'] is int
+          ? json['shop_id']
+          : int.tryParse(json['shop_id']?.toString() ?? '0') ??
+              (json['shop_id']?.toString().hashCode.abs() ?? 0),
       masterProductId: json['master_product_id'] is int
           ? json['master_product_id']
           : int.tryParse(json['master_product_id']?.toString() ?? '') ??

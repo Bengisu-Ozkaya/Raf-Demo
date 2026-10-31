@@ -128,9 +128,14 @@ class ApiService {
         data: {'identifier': identifier, 'password': password},
       );
       if (response.data['success']) {
+        final rawShopId = response.data['shopId'];
+        final int parsedShopId = rawShopId is int
+            ? rawShopId
+            : int.tryParse(rawShopId?.toString() ?? '0') ??
+                (rawShopId?.toString().hashCode.abs() ?? 0);
         return {
           'token': response.data['token'],
-          'shopId': response.data['shopId'],
+          'shopId': parsedShopId,
           'shopName': response.data['shopName'],
           'city': response.data['city'], // YENİ: city verisini de al
         };
@@ -282,7 +287,9 @@ class ApiService {
       );
 
       if (response.data != null && response.data['success'] == true) {
-        return response.data['count'] ?? products.length;
+        final count = response.data['count'];
+        if (count is int) return count;
+        return int.tryParse(count?.toString() ?? '') ?? products.length;
       } else {
         throw Exception(response.data?['message'] ?? 'Ürünler eklenemedi.');
       }
@@ -372,7 +379,10 @@ class ApiService {
       );
 
       if (response.data != null && response.data['success'] == true) {
-        return response.data['packageId'] ?? 0;
+        final rawId = response.data['packageId'];
+        if (rawId is int) return rawId;
+        return int.tryParse(rawId?.toString() ?? '0') ??
+            (rawId?.toString().hashCode.abs() ?? 0);
       } else {
         throw Exception(response.data?['message'] ?? 'Paket oluşturulamadı.');
       }

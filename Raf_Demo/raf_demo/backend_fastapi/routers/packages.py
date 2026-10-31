@@ -53,7 +53,11 @@ async def create_package(
     if not db:
         raise HTTPException(status_code=500, detail="Veritabanı bağlantısı hazır değil.")
     
+    import time
+    numeric_id = int(time.time() * 1000) % 2147483647
+    
     package_data = {
+        "id": numeric_id,
         "shop_id": merchant["merchantId"],
         "name": payload.name,
         "description": payload.description,
@@ -63,10 +67,10 @@ async def create_package(
         "items": payload.items,
     }
     
-    doc_ref = db.collection("shop_packages").document()
+    doc_ref = db.collection("shop_packages").document(str(numeric_id))
     doc_ref.set(package_data)
     
-    return {"success": True, "packageId": doc_ref.id}
+    return {"success": True, "packageId": numeric_id}
 
 @router.put("/{package_id}")
 async def update_package(
@@ -83,7 +87,7 @@ async def update_package(
     if not doc.exists:
         raise HTTPException(status_code=404, detail="Paket bulunamadı.")
     
-    if doc.to_dict().get("shop_id") != merchant["merchantId"]:
+    if str(doc.to_dict().get("shop_id")) != str(merchant["merchantId"]):
         raise HTTPException(status_code=403, detail="Bu paketi güncelleme yetkiniz yok.")
     
     updates = {}
@@ -113,7 +117,7 @@ async def delete_package(
     if not doc.exists:
         raise HTTPException(status_code=404, detail="Paket bulunamadı.")
     
-    if doc.to_dict().get("shop_id") != merchant["merchantId"]:
+    if str(doc.to_dict().get("shop_id")) != str(merchant["merchantId"]):
         raise HTTPException(status_code=403, detail="Bu paketi silme yetkiniz yok.")
     
     doc_ref.delete()
