@@ -1,3 +1,4 @@
+import zlib
 from fastapi import APIRouter, HTTPException, Query
 from typing import Optional, List
 from database import get_firestore
@@ -20,10 +21,11 @@ async def get_shops(city: Optional[str] = Query(None)):
         d = doc.to_dict()
         shop_id = d.get("id")
         if shop_id is None:
+            shop_id = zlib.crc32(doc.id.encode('utf-8')) & 0x7FFFFFFF
             try:
-                shop_id = int(doc.id)
-            except ValueError:
-                shop_id = abs(hash(doc.id)) % 2147483647
+                doc.reference.update({"id": shop_id})
+            except Exception:
+                pass
         shops.append({
             "id": shop_id,
             "name": d.get("shop_name", ""),
@@ -43,11 +45,24 @@ async def get_shop_detail(shop_id: str):
     
     doc = db.collection("merchants").document(shop_id).get()
     if not doc.exists:
+        # shop_id int/crc32 gelmiş olabilir
+        try:
+            num_id = int(shop_id)
+            results = list(db.collection("merchants").where("id", "==", num_id).limit(1).stream())
+            if results:
+                doc = results[0]
+        except Exception:
+            pass
+            
+    if not doc.exists:
         raise HTTPException(status_code=404, detail="Dükkan bulunamadı.")
     
     d = doc.to_dict()
+    shop_id = d.get("id")
+    if shop_id is None:
+        shop_id = zlib.crc32(doc.id.encode('utf-8')) & 0x7FFFFFFF
     return {
-        "id": doc.id,
+        "id": shop_id,
         "name": d.get("shop_name", ""),
         "ownerName": d.get("owner_name", ""),
         "phone": d.get("phone", ""),

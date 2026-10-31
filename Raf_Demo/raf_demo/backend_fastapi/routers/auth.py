@@ -119,13 +119,16 @@ async def login_merchant(payload: MerchantLoginRequest):
     
     shop_id = merchant_dict.get("id")
     if shop_id is None:
+        import zlib
+        shop_id = zlib.crc32(merchant_doc.id.encode('utf-8')) & 0x7FFFFFFF
         try:
-            shop_id = int(merchant_doc.id)
-        except ValueError:
-            shop_id = abs(hash(merchant_doc.id)) % 2147483647
+            merchant_doc.reference.update({"id": shop_id})
+        except Exception:
+            pass
     
     token = create_access_token({
         "merchantId": str(shop_id),
+        "merchantDocId": merchant_doc.id,
         "shopName": merchant_dict.get("shop_name"),
         "role": "merchant"
     })

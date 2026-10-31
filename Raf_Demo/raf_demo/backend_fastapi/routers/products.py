@@ -43,26 +43,40 @@ async def get_shop_products(shopId: Optional[str] = Query(None)):
     if not db:
         raise HTTPException(status_code=500, detail="Veritabanı bağlantısı hazır değil.")
     
-    query = db.collection("shop_products")
+    # Dükkan eşleştirme
+    target_idents = None
     if shopId:
-        query = query.where("shop_id", "in", [shopId, str(shopId)])
+        target_idents = {str(shopId), shopId}
+        for m in db.collection("merchants").stream():
+            m_dict = m.to_dict() or {}
+            num_id = m_dict.get("id")
+            if num_id is None:
+                import zlib
+                num_id = zlib.crc32(m.id.encode('utf-8')) & 0x7FFFFFFF
+            if str(shopId) in {str(m.id), str(num_id)}:
+                target_idents = {str(m.id), m.id, str(num_id), num_id}
+                break
     
-    docs = query.stream()
+    docs = list(db.collection("shop_products").stream())
     products = []
     for doc in docs:
         d = doc.to_dict()
+        pkg_shop_id = d.get("shop_id")
+        if target_idents is not None:
+            if pkg_shop_id not in target_idents and str(pkg_shop_id) not in target_idents:
+                continue
+                
         prod_id = d.get("id")
         if prod_id is None:
-            try:
-                prod_id = int(doc.id)
-            except ValueError:
-                prod_id = abs(hash(doc.id)) % 2147483647
+            import zlib
+            prod_id = zlib.crc32(doc.id.encode('utf-8')) & 0x7FFFFFFF
         shop_id = d.get("shop_id")
         if shop_id is not None:
             try:
                 shop_id = int(shop_id)
             except (ValueError, TypeError):
-                shop_id = abs(hash(str(shop_id))) % 2147483647
+                import zlib
+                shop_id = zlib.crc32(str(shop_id).encode('utf-8')) & 0x7FFFFFFF
         products.append({
             "id": prod_id,
             "shop_id": shop_id,
