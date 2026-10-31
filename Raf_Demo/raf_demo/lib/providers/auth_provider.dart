@@ -18,6 +18,7 @@ class AuthProvider with ChangeNotifier {
   String? _token;
   AppUser? _user;
   int? _shopId;
+  String? _rawShopId;
   String? _shopName;
   UserType? _userType;
   bool _isLoading = false;
@@ -31,6 +32,7 @@ class AuthProvider with ChangeNotifier {
   String? get token => _token;
   AppUser? get user => _user;
   int? get shopId => _shopId;
+  String? get rawShopId => _rawShopId;
   bool get isAuthenticated => _token != null;
   UserType? get userType => _userType;
   bool get isLoading => _isLoading;
@@ -43,6 +45,10 @@ class AuthProvider with ChangeNotifier {
       if (type == UserType.customer) {
         final response = await _apiService.loginCustomer(identifier, password);
         _token = response['token'];
+        _rawShopId = response['rawShopId']?.toString() ?? response['shopId']?.toString();
+        if (_rawShopId != null && _rawShopId!.isNotEmpty) {
+          _apiService.setMerchantShopId(_rawShopId);
+        }
         _user = response['user'];
         _userType = UserType.customer;
         _shopId = null;
@@ -56,6 +62,10 @@ class AuthProvider with ChangeNotifier {
         // Dükkan sahibi market adı veya telefon numarası ile giriş yapar.
         final response = await _apiService.loginMerchant(identifier, password);
         _token = response['token'];
+        _rawShopId = response['rawShopId']?.toString() ?? response['shopId']?.toString();
+        if (_rawShopId != null && _rawShopId!.isNotEmpty) {
+          _apiService.setMerchantShopId(_rawShopId);
+        }
         _shopId = response['shopId'] is int
             ? response['shopId'] as int
             : int.tryParse(response['shopId']?.toString() ?? '0') ??
@@ -264,6 +274,10 @@ class AuthProvider with ChangeNotifier {
         _shopName = null;
         _socketService.joinCustomerRoom(_user!.id);
       } else if (_userType == UserType.merchant) {
+        _rawShopId = extractedData['rawShopId']?.toString() ?? extractedData['shopId']?.toString();
+        if (_rawShopId != null && _rawShopId!.isNotEmpty) {
+          _apiService.setMerchantShopId(_rawShopId);
+        }
         if (extractedData['shopId'] != null) {
           _shopId = extractedData['shopId'] is int
               ? extractedData['shopId'] as int
@@ -315,6 +329,7 @@ class AuthProvider with ChangeNotifier {
       'userType': _userType!.index,
       'user': _user?.toJson(),
       'shopId': _shopId,
+      'rawShopId': _rawShopId,
       'shopName': _shopName,
     };
     await prefs.setString('authData', json.encode(authData));

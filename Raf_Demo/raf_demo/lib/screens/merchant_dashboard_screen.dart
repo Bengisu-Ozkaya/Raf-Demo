@@ -28,7 +28,8 @@ class _MerchantDashboardScreenState extends State<MerchantDashboardScreen> {
   @override
   void initState() {
     super.initState();
-    final shopId = Provider.of<AuthProvider>(context, listen: false).shopId;
+    final auth = Provider.of<AuthProvider>(context, listen: false);
+    final shopId = auth.rawShopId ?? auth.shopId?.toString();
     if (shopId != null) {
       final shopProvider = Provider.of<ShopProvider>(context, listen: false);
       _fetchInitialDataFuture = Future.wait([
@@ -225,7 +226,8 @@ class _MerchantDashboardScreenState extends State<MerchantDashboardScreen> {
           color: AppColors.taupe,
           onRefresh: () async {
             final shopId =
-                Provider.of<AuthProvider>(context, listen: false).shopId;
+                Provider.of<AuthProvider>(context, listen: false).rawShopId ??
+                Provider.of<AuthProvider>(context, listen: false).shopId?.toString();
             if (shopId != null) {
               await Future.wait([
                 Provider.of<ShopProvider>(context, listen: false)

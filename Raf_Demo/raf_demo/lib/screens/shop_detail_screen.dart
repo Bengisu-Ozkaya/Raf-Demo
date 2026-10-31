@@ -50,7 +50,7 @@ class _ShopDetailScreenState extends State<ShopDetailScreen> {
     if (!_isInit) {
       final shop = _resolveShop();
       final shopProvider = Provider.of<ShopProvider>(context, listen: false);
-      _dataFuture = shopProvider.fetchPackages(shop.id);
+      _dataFuture = shopProvider.fetchPackages(shop.rawId.isNotEmpty ? shop.rawId : shop.id);
       _isInit = true;
     }
   }
@@ -60,7 +60,8 @@ class _ShopDetailScreenState extends State<ShopDetailScreen> {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.shop?.id != widget.shop?.id && widget.shop != null) {
       final shopProvider = Provider.of<ShopProvider>(context, listen: false);
-      _dataFuture = shopProvider.fetchPackages(widget.shop!.id);
+      _dataFuture = shopProvider.fetchPackages(
+          widget.shop!.rawId.isNotEmpty ? widget.shop!.rawId : widget.shop!.id);
     }
   }
 
@@ -137,7 +138,8 @@ class _ShopDetailScreenState extends State<ShopDetailScreen> {
                 child: RefreshIndicator(
                   color: AppColors.taupe,
                   onRefresh: () async {
-                    await shopProvider.fetchPackages(shop.id);
+                    await shopProvider.fetchPackages(
+                        shop.rawId.isNotEmpty ? shop.rawId : shop.id);
                   },
                   child: ListView(
                     padding: const EdgeInsets.all(12),

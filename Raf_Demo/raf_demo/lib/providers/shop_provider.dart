@@ -171,7 +171,7 @@ class ShopProvider with ChangeNotifier {
 
   // --- İŞLETMECİ ÜRÜN YÖNETİMİ ---
 
-  Future<void> fetchMerchantProducts(int shopId) async {
+  Future<void> fetchMerchantProducts(dynamic shopId) async {
     _isLoading = true;
     _merchantProducts = [];
     _errorMessage = null;
@@ -237,7 +237,7 @@ class ShopProvider with ChangeNotifier {
   // --- PAKET İŞLEMLERİ (PACKAGE STATE & METHODS) ---
 
   /// Belirli bir dükkanın paketlerini getirir.
-  Future<List<ShopPackage>> fetchPackages(int shopId) async {
+  Future<List<ShopPackage>> fetchPackages(dynamic shopId) async {
     _isLoading = true;
     notifyListeners();
     try {
@@ -254,7 +254,7 @@ class ShopProvider with ChangeNotifier {
   }
 
   /// İşletmecinin paketlerini getirir.
-  Future<void> fetchMerchantPackages(int shopId) async => fetchPackages(shopId);
+  Future<void> fetchMerchantPackages(dynamic shopId) async => fetchPackages(shopId);
 
   /// Master ürün kataloğunu getirir.
   Future<List<Product>> fetchMasterProducts(
@@ -277,7 +277,7 @@ class ShopProvider with ChangeNotifier {
 
   /// Yeni bir paket oluşturur ve dükkan listesini tazeler.
   Future<bool> createPackage({
-    required int shopId,
+    required dynamic shopId,
     required String name,
     String? description,
     String packageSize = 'Standart Paket',

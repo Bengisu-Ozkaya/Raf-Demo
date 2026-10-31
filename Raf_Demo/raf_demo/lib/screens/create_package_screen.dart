@@ -830,16 +830,7 @@ class _CreatePackageScreenState extends State<CreatePackageScreen> {
 
     final authProvider = Provider.of<AuthProvider>(context, listen: false);
     final shopProvider = Provider.of<ShopProvider>(context, listen: false);
-    final shopId = authProvider.shopId;
-
-    if (shopId == null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-            content: Text('Hata: İşletme kimliği bulunamadı.'),
-            backgroundColor: AppColors.error),
-      );
-      return;
-    }
+    final targetShopId = authProvider.rawShopId ?? authProvider.shopId?.toString() ?? '0';
 
     final packageName = _nameController.text.trim();
     final packageContent = _getFormattedContent();
@@ -872,7 +863,7 @@ class _CreatePackageScreenState extends State<CreatePackageScreen> {
     );
 
     final success = await shopProvider.createPackage(
-      shopId: shopId,
+      shopId: targetShopId,
       name: packageName,
       description: packageContent,
       packageSize:

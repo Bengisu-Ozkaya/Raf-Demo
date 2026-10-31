@@ -40,6 +40,12 @@ class ApiService {
     _token = token;
   }
 
+  String? _merchantShopId;
+  void setMerchantShopId(String? id) {
+    _merchantShopId = id;
+  }
+  String? get merchantShopId => _merchantShopId;
+
   /// Müşteri girişi yapar.
   /// Başarılı olursa 'token' ve 'user' içeren bir Map döner.
   Future<Map<String, dynamic>> loginCustomer(
@@ -128,14 +134,15 @@ class ApiService {
         data: {'identifier': identifier, 'password': password},
       );
       if (response.data['success']) {
-        final rawShopId = response.data['shopId'];
-        final int parsedShopId = rawShopId is int
-            ? rawShopId
-            : int.tryParse(rawShopId?.toString() ?? '0') ??
-                (rawShopId?.toString().hashCode.abs() ?? 0);
+        final rawShopId = response.data['shopId']?.toString() ?? '';
+        final int parsedShopId = response.data['shopId'] is int
+            ? response.data['shopId']
+            : int.tryParse(rawShopId) ?? rawShopId.hashCode.abs();
+        _merchantShopId = rawShopId;
         return {
           'token': response.data['token'],
           'shopId': parsedShopId,
+          'rawShopId': rawShopId,
           'shopName': response.data['shopName'],
           'city': response.data['city'], // YENİ: city verisini de al
         };
@@ -164,11 +171,20 @@ class ApiService {
   }
 
   /// Belirli bir dükkanın ürünlerini getirir.
-  Future<List<Product>> fetchProducts(int shopId) async {
+  Future<List<Product>> fetchProducts(dynamic shopId) async {
     try {
+      String? actualShopId;
+      if (shopId != null && shopId.toString() != '0' && shopId.toString().isNotEmpty) {
+        actualShopId = shopId.toString();
+      } else if (_merchantShopId != null && _merchantShopId!.isNotEmpty) {
+        actualShopId = _merchantShopId;
+      }
+
       final response = await _dio.get(
         '/api/products',
-        queryParameters: {'shopId': shopId},
+        queryParameters: (actualShopId != null && actualShopId.isNotEmpty)
+            ? {'shopId': actualShopId}
+            : null,
       );
       if (response.data != null) {
         return (response.data as List)
@@ -211,11 +227,20 @@ class ApiService {
   // --- İŞLETMECİ ÜRÜN YÖNETİMİ METODLARI ---
 
   /// Belirli bir dükkanın ürünlerini getirir (İşletmeci paneli için).
-  Future<List<Product>> fetchProductsForMerchant(int shopId) async {
+  Future<List<Product>> fetchProductsForMerchant(dynamic shopId) async {
     try {
+      String? actualShopId;
+      if (shopId != null && shopId.toString() != '0' && shopId.toString().isNotEmpty) {
+        actualShopId = shopId.toString();
+      } else if (_merchantShopId != null && _merchantShopId!.isNotEmpty) {
+        actualShopId = _merchantShopId;
+      }
+
       final response = await _dio.get(
         '/api/products',
-        queryParameters: {'shopId': shopId},
+        queryParameters: (actualShopId != null && actualShopId.isNotEmpty)
+            ? {'shopId': actualShopId}
+            : null,
       );
       return (response.data as List)
           .map((productJson) => Product.fromJson(productJson))
@@ -326,11 +351,20 @@ class ApiService {
   // --- PAKET İŞLEMLERİ (PACKAGE METHODS) ---
 
   /// Belirli bir dükkanın paketlerini getirir.
-  Future<List<ShopPackage>> fetchPackages(int shopId) async {
+  Future<List<ShopPackage>> fetchPackages(dynamic shopId) async {
     try {
+      String? actualShopId;
+      if (shopId != null && shopId.toString() != '0' && shopId.toString().isNotEmpty) {
+        actualShopId = shopId.toString();
+      } else if (_merchantShopId != null && _merchantShopId!.isNotEmpty) {
+        actualShopId = _merchantShopId;
+      }
+
       final response = await _dio.get(
         '/api/packages',
-        queryParameters: {'shopId': shopId},
+        queryParameters: (actualShopId != null && actualShopId.isNotEmpty)
+            ? {'shopId': actualShopId}
+            : null,
       );
       if (response.data != null && response.data['success'] == true) {
         final List list = response.data['data'] ?? [];
